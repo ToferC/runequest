@@ -7,15 +7,7 @@ import (
 )
 
 func main() {
-	c := runequest.Character{
-		Name:            "Bigby",
-		Statistics:      runequest.RuneQuestStats,
-		Abilities:       runequest.Abilities,
-		Skills:          runequest.Skills,
-		SkillCategories: runequest.SkillCategories,
-	}
-
-	fmt.Println(c)
+	c := runequest.NewCharacter("Bigby")
 
 	m := runequest.Modifier{
 		Object: c.Statistics["STR"],
@@ -24,12 +16,29 @@ func main() {
 
 	m.ModifyValue()
 
-	mAbility := runequest.Modifier{
+	// Choose Rune Values
+	mAbility1 := runequest.Modifier{
 		Object: c.Abilities["Air"],
 		Value:  60,
 	}
 
-	mAbility.ModifyValue()
+	mAbility1.ModifyValue()
+
+	mAbility2 := runequest.Modifier{
+		Object: c.Abilities["Earth"],
+		Value:  40,
+	}
+
+	mAbility2.ModifyValue()
+
+	mAbility3 := runequest.Modifier{
+		Object: c.Abilities["Fire/Sky"],
+		Value:  20,
+	}
+
+	mAbility3.ModifyValue()
+
+	c.AddRuneModifiers()
 
 	c.DetermineSkillCategoryValues()
 
