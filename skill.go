@@ -4,24 +4,30 @@ import "fmt"
 
 // Skill is a learned ability of an RPG Character
 type Skill struct {
-	Name     string
-	Base     int
-	category SkillCategory
-	Value    int
+	Name            string
+	category        string
+	TakesSubject    bool
+	Subject         string
+	Base            int
+	CategoryValue   int
+	Value           int
+	Total           int
+	Min             int
+	Max             int
+	ExperienceCheck bool
 }
 
 func (s *Skill) String() string {
-	text := fmt.Sprintf("%s %d", s.Name, s.Value)
+
+	s.Total = s.Base + s.Value + s.CategoryValue
+
+	text := ""
+
+	if s.TakesSubject {
+		text += fmt.Sprintf("%s (%s) %d%%", s.Name, s.Subject, s.Total)
+	} else {
+		text += fmt.Sprintf("%s %d%%", s.Name, s.Total)
+	}
+
 	return text
-}
-
-// SkillCategory is a grouping of skills
-type SkillCategory struct {
-	Name          string
-	StatModifiers []*statMods
-}
-
-type statMods struct {
-	statistic Statistic
-	value     map[int]int
 }

@@ -1,8 +1,9 @@
 package runequest
 
-// Culture represents a homeland and cultural learnings
-type Culture struct {
+// Cult represents a Religion in Runequest
+type Cult struct {
 	Name        string
 	Description string
 	Modifiers   []*Modifier
+	SpellList   []*Spell
 }

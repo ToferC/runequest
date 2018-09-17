@@ -4,9 +4,8 @@ package runequest
 type HitLocation struct {
 	Name     string
 	HitLoc   []int
-	Boxes    int
-	Shock    []bool
-	Kill     []bool
+	Max      int
+	Value    int
 	Armor    int
 	Disabled bool
 }
