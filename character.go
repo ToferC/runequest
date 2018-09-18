@@ -8,7 +8,7 @@ type Character struct {
 	Setting         string
 	Description     string
 	Race            *Race
-	Culture         *Culture
+	Homeland        *Homeland
 	Cult            *Cult
 	Abilities       map[string]*Ability
 	Statistics      map[string]*Statistic

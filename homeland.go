@@ -1,7 +1,7 @@
 package runequest
 
-// Culture represents a homeland and cultural learnings
-type Culture struct {
+// HomeLand represents a homeland and cultural learnings
+type Homeland struct {
 	Name        string
 	Description string
 	Modifiers   []*Modifier
