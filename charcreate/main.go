@@ -56,6 +56,8 @@ func main() {
 
 	mPassion.ModifyValue()
 
+	c.ChooseHomeland()
+
 	fmt.Println("")
 	fmt.Println(c)
 }
