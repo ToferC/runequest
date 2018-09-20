@@ -6,6 +6,7 @@ type Modifier struct {
 	Value  int
 	Set    bool
 	Modify bool
+	Base   bool
 }
 
 // Object is an interface tfor any numerical ability
@@ -23,6 +24,11 @@ func (m Modifier) ModifyValue() {
 // SetBase implements the Object interface to set a base value
 func (m Modifier) SetBase() {
 	m.Object.SetBase(m.Value)
+}
+
+// SetValue implements the Object interface to set a base value
+func (m Modifier) SetValue() {
+	m.Object.SetValue(m.Value)
 }
 
 // ModifyValue updates the Skill value
