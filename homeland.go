@@ -1,7 +1,5 @@
 package runequest
 
-import "fmt"
-
 // Homeland represents a homeland and cultural learnings
 type Homeland struct {
 	Name        string
@@ -9,6 +7,7 @@ type Homeland struct {
 	Modifiers   []*Modifier
 }
 
+// ChooseHomeland modifies a character's skills by homeland
 func (c *Character) ChooseHomeland() {
 
 	// Homelands is a map of possible homelands in Runequest
@@ -42,11 +41,12 @@ func (c *Character) ChooseHomeland() {
 					Modify: false,
 				},
 				&Modifier{
-					Object: c.Skills["Customs (Heortling)"],
-					Value:  50,
-					Base:   true,
-					Set:    true,
-					Modify: false,
+					Object:  c.Skills["Customs"],
+					Value:   50,
+					Base:    true,
+					Set:     true,
+					Modify:  false,
+					Subject: "Heortling",
 				},
 				&Modifier{
 					Object: c.Skills["Farm"],
@@ -73,7 +73,7 @@ func (c *Character) ChooseHomeland() {
 					Modify: true,
 				},
 				&Modifier{
-					Object: c.Skills["Battle Axe"],
+					Object: c.Skills["1H Axe"],
 					Value:  10,
 					Set:    false,
 					Modify: true,
@@ -89,18 +89,17 @@ func (c *Character) ChooseHomeland() {
 		// Esrolia
 	}
 
-	for _, m := range Homelands["Sartar"].Modifiers {
+	c.Homeland = Homelands["Sartar"]
+
+	for _, m := range c.Homeland.Modifiers {
 
 		switch {
 		case m.Set && m.Base:
 			m.SetBase()
-			fmt.Println("set base" + string(m.Value))
 		case m.Set && !m.Base:
 			m.SetValue()
-			fmt.Println("set value" + string(m.Value))
 		case m.Modify:
 			m.ModifyValue()
-			fmt.Println("set value" + string(m.Value))
 		}
 	}
 }

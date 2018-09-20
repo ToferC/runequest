@@ -7,9 +7,10 @@ type Character struct {
 	Name            string
 	Setting         string
 	Description     string
-	Race            *Race
-	Homeland        *Homeland
-	Cult            *Cult
+	Race            Race
+	Homeland        Homeland
+	Occupation      Occupation
+	Cult            Cult
 	Abilities       map[string]*Ability
 	Statistics      map[string]*Statistic
 	StatMap         []string
@@ -38,8 +39,18 @@ type Update struct {
 	Cost       int
 }
 
+// UpdateCharacter updates stats, runes and skills based on them
+func (c *Character) UpdateCharacter() {
+	c.AddRuneModifiers()
+	c.TotalStatistics()
+	c.DetermineSkillCategoryValues()
+}
+
 func (c Character) String() string {
 	text := c.Name
+	text += fmt.Sprintf("\nHomeland: %s", c.Homeland.Name)
+	text += fmt.Sprintf("\nOccupation: %s", c.Occupation.Name)
+	text += fmt.Sprintf("\nCult: %s", c.Cult.Name)
 
 	text += "\n\nStats:\n"
 	for _, stat := range c.Statistics {

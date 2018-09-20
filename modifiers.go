@@ -3,10 +3,11 @@ package runequest
 // Modifier is a bonus or penalty to a Character element
 type Modifier struct {
 	Object
-	Value  int
-	Set    bool
-	Modify bool
-	Base   bool
+	Value   int
+	Set     bool
+	Modify  bool
+	Base    bool
+	Subject string
 }
 
 // Object is an interface tfor any numerical ability

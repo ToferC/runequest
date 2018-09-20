@@ -21,6 +21,14 @@ func (s *Statistic) String() string {
 	return text
 }
 
+// TotalStatistics updates values for stats after being modified
+func (c *Character) TotalStatistics() {
+
+	for _, s := range c.Statistics {
+		s.Total = s.Base + s.Value
+	}
+}
+
 // RuneQuestStats is the base stats for RuneQuest
 var RuneQuestStats = map[string]*Statistic{
 	"STR": &Statistic{

@@ -1,6 +1,8 @@
 package runequest
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // Ability represents any non-Skill % ability in Runequest
 type Ability struct {
@@ -37,6 +39,32 @@ func (a *Ability) String() string {
 		text += fmt.Sprintf("%s %d%%", a.Name, a.Total)
 	}
 	return text
+}
+
+// ChooseRunes selects Runes for a Character
+func (c *Character) ChooseRunes() {
+
+	// Choose Rune Values
+	mAbility1 := Modifier{
+		Object: c.Abilities["Air"],
+		Value:  60,
+	}
+
+	mAbility1.ModifyValue()
+
+	mAbility2 := Modifier{
+		Object: c.Abilities["Earth"],
+		Value:  40,
+	}
+
+	mAbility2.ModifyValue()
+
+	mAbility3 := Modifier{
+		Object: c.Abilities["Fire/Sky"],
+		Value:  20,
+	}
+
+	mAbility3.ModifyValue()
 }
 
 // Abilities is a map of the basic abilities in Runequest
@@ -139,11 +167,20 @@ var Abilities = map[string]*Ability{
 		Base:           50,
 	},
 	// Passions
-	"Loyalty (Clan)": &Ability{
-		Name:    "Loyalty",
-		Type:    "Passion",
-		Subject: "Clan",
-		Base:    60,
-		Value:   0,
+	"Loyalty": &Ability{
+		Name:         "Loyalty",
+		Type:         "Passion",
+		TakesSubject: true,
+		Subject:      "Clan",
+		Base:         60,
+		Value:        0,
+	},
+	"Devotion": &Ability{
+		Name:         "Loyalty",
+		Type:         "Passion",
+		TakesSubject: true,
+		Subject:      "Orlanth",
+		Base:         60,
+		Value:        0,
 	},
 }

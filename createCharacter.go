@@ -9,6 +9,7 @@ func NewCharacter(name string) *Character {
 		SkillCategories: SkillCategories,
 		// Skills is a map of regular skills in Runequest
 	}
+
 	c.Skills = map[string]*Skill{
 		// Agility
 		"Boat": &Skill{
@@ -150,16 +151,11 @@ func NewCharacter(name string) *Character {
 			Base:         0,
 			category:     "Knowledge",
 		},
-		"Customs (Local)": &Skill{
-			Name:     "Customs (Local)",
-			Base:     25,
-			category: "Knowledge",
-		},
 		"Customs": &Skill{
 			Name:         "Customs",
 			TakesSubject: true,
-			Subject:      "Praxian",
-			Base:         0,
+			Subject:      "Local",
+			Base:         25,
 			category:     "Knowledge",
 		},
 		"Elder Race Lore": &Skill{
@@ -305,7 +301,7 @@ func NewCharacter(name string) *Character {
 			category: "Magic",
 		},
 		"Worship": &Skill{
-			Name:         "Meditate",
+			Name:         "Worship",
 			TakesSubject: true,
 			Subject:      "Orlanth",
 			Base:         0,

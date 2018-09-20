@@ -42,21 +42,21 @@ func (c *Character) DetermineSkillCategoryValues() {
 
 			// Map against specific values
 			switch {
-			case stat.Value <= 4:
+			case stat.Total <= 4:
 				s.Value += sm.values[4]
-			case stat.Value <= 8:
+			case stat.Total <= 8:
 				s.Value += sm.values[8]
-			case stat.Value <= 12:
+			case stat.Total <= 12:
 				s.Value += sm.values[12]
-			case stat.Value <= 16:
+			case stat.Total <= 16:
 				s.Value += sm.values[16]
-			case stat.Value <= 20:
+			case stat.Total <= 20:
 				s.Value += sm.values[20]
-			case stat.Value > 20:
+			case stat.Total > 20:
 				if sm.values[20] > 0 {
-					s.Value += sm.values[20] + ((s.Value-20)/4)*5
+					s.Value += sm.values[20] + ((stat.Value-20)/4)*5
 				} else {
-					s.Value += sm.values[20] - ((s.Value-20)/4)*5
+					s.Value += sm.values[20] - ((stat.Value-20)/4)*5
 				}
 			}
 		}
@@ -65,7 +65,7 @@ func (c *Character) DetermineSkillCategoryValues() {
 	for _, skill := range c.Skills {
 		sc := SkillCategories[skill.category]
 
-		skill.Value += sc.Value
+		skill.CategoryValue = sc.Value
 	}
 
 }
