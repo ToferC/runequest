@@ -26,11 +26,30 @@ func main() {
 
 	c.ModifyAbility(
 		runequest.Ability{
-			Name:  "Loyalty (Clan)",
+			Name:  "Loyalty (Kallyr Starbrow)",
+			Base:  60,
 			Value: 25,
+			Type:  "Passion",
 		})
 
+	c.ModifyAbility(
+		runequest.Ability{
+			Name:  "Loyalty (Kallyr Starbrow)",
+			Base:  60,
+			Value: 10,
+			Type:  "Passion",
+		})
+
+	mp := c.DetermineMagicPoints()
+	hp := c.DetermineHitPoints()
+
+	c.DerivedStats = map[string]*runequest.DerivedStat{
+		"MP": mp,
+		"HP": hp,
+	}
+
 	c.UpdateCharacter()
+
 	fmt.Println("")
 	fmt.Println(c)
 }

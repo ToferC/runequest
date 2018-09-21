@@ -1,6 +1,9 @@
 package runequest
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 // Character represents a generic RPG character
 type Character struct {
@@ -43,6 +46,7 @@ func (c *Character) UpdateCharacter() {
 	c.AddRuneModifiers()
 	c.TotalStatistics()
 	c.DetermineSkillCategoryValues()
+	c.UpdateDerivedStats()
 }
 
 func (c Character) String() string {
@@ -54,6 +58,11 @@ func (c Character) String() string {
 	text += "\n\nStats:\n"
 	for _, stat := range StatMap {
 		text += fmt.Sprintf("%s\n", c.Statistics[stat])
+	}
+
+	text += "\nDerived Stats:\n"
+	for _, ds := range c.DerivedStats {
+		text += fmt.Sprintf("%s\n", ds)
 	}
 
 	text += "\nAbilities:"
@@ -72,15 +81,22 @@ func (c Character) String() string {
 
 	text += "\n\nSkills:"
 
+	keys := make([]string, 0, len(c.Skills))
+	for k := range c.Skills {
+		keys = append(keys, k)
+	}
+
+	sort.Strings(keys)
+
 	for _, co := range CategoryOrder {
 
 		sc := c.SkillCategories[co]
 
 		text += fmt.Sprintf("%s", sc)
-		for _, skill := range c.Skills {
+		for _, skill := range keys {
 
-			if skill.Category == sc.Name {
-				text += fmt.Sprintf("\n%s", skill)
+			if c.Skills[skill].Category == sc.Name {
+				text += fmt.Sprintf("\n%s", c.Skills[skill])
 			}
 		}
 

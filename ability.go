@@ -25,6 +25,20 @@ var AbilityTypes = []string{
 	"Passion",
 }
 
+// ElementalRuneOrder sets the order for Elemental Runes
+var ElementalRuneOrder = []string{
+	"Air", "Darkness", "Earth", "Fire/Sky", "Moon", "Water",
+}
+
+// PowerRuneOrder sets the order for Power Runes
+var PowerRuneOrder = []string{
+	"Man", "Beast",
+	"Fertility", "Death",
+	"Harmony", "Disorder",
+	"Truth", "Illusion",
+	"Movement", "Stasis",
+}
+
 func (a *Ability) String() string {
 
 	var text = ""
@@ -42,18 +56,19 @@ func (c *Character) ModifyAbility(a Ability) {
 	if c.Abilities[a.Name] == nil {
 		// New Ability
 		c.Abilities[a.Name] = &Ability{
-			Name:  a.Name,
-			Base:  a.Base,
-			Value: a.Value,
+			Name: a.Name,
+			Base: a.Base,
+			Type: a.Type,
 		}
 	} else {
 		// Modify existing Ability
-		if c.Abilities[a.Name].Base != a.Base {
+		if c.Abilities[a.Name].Base == 0 {
 			// Change Ability.Base if needed
 			c.Abilities[a.Name].Base = a.Base
+		} else {
+			// Add or subtract s.Value from Ability
+			c.Abilities[a.Name].Value += a.Value
 		}
-		// Add or subtract s.Value from Ability
-		c.Abilities[a.Name].Base += a.Value
 	}
 
 	ability := c.Abilities[a.Name]
@@ -78,18 +93,18 @@ func (c *Character) ChooseRunes() {
 
 	// Choose Rune Values
 	c.ModifyAbility(Ability{
-		Name:  "Air",
-		Value: 60,
+		Name: "Air",
+		Base: 60,
 	})
 
 	c.ModifyAbility(Ability{
-		Name:  "Earth",
-		Value: 40,
+		Name: "Earth",
+		Base: 40,
 	})
 
 	c.ModifyAbility(Ability{
-		Name:  "Fire/Sky",
-		Value: 20,
+		Name: "Fire/Sky",
+		Base: 20,
 	})
 
 	c.ModifyAbility(Ability{
