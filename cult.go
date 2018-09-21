@@ -4,7 +4,7 @@ package runequest
 type Cult struct {
 	Name        string
 	Description string
-	Modifiers   []*Modifier
+	SkillList   []Skill
 	SpellList   []*Spell
 }
 
@@ -15,39 +15,33 @@ func (c *Character) ChooseCult() {
 	var Cults = map[string]Cult{
 		"Orlanth": Cult{
 			Name: "Orlanth",
-			Modifiers: []*Modifier{
-				&Modifier{
-					Object:  c.Skills["Cult Lore"],
-					Value:   15,
-					Modify:  true,
-					Subject: "Orlanth",
+			SkillList: []Skill{
+				Skill{
+					Name:     "Cult Lore (Orlanth)",
+					Value:    15,
+					Category: "Knowledge",
 				},
-				&Modifier{
-					Object: c.Skills["Worship"],
-					Value:  15,
-					Modify: true,
+				Skill{
+					Name:     "Worship (Orlanth)",
+					Value:    15,
+					Category: "Magic",
 				},
-				&Modifier{
-					Object: c.Skills["Meditate"],
-					Value:  25,
-					Modify: true,
+				Skill{
+					Name:  "Meditate",
+					Value: 25,
 				},
-				&Modifier{
-					Object: c.Skills["Orate"],
-					Value:  30,
-					Base:   false,
-					Modify: true,
+				Skill{
+					Name:  "Orate",
+					Value: 30,
 				},
-				&Modifier{
-					Object: c.Skills["Sing"],
-					Value:  10,
-					Modify: true,
+				Skill{
+					Name:  "Sing",
+					Value: 10,
 				},
-				&Modifier{
-					Object:  c.Skills["Speak Other Language"],
-					Value:   10,
-					Modify:  true,
-					Subject: "Stormspeech",
+				Skill{
+					Name:     "Speak (Stormspeech)",
+					Value:    10,
+					Category: "Communication",
 				},
 			},
 		},
@@ -56,15 +50,7 @@ func (c *Character) ChooseCult() {
 
 	c.Cult = Cults["Orlanth"]
 
-	for _, m := range c.Cult.Modifiers {
-
-		switch {
-		case m.Set && m.Base:
-			m.SetBase()
-		case m.Set && !m.Base:
-			m.SetValue()
-		case m.Modify:
-			m.ModifyValue()
-		}
+	for _, s := range c.Cult.SkillList {
+		c.ModifySkill(s)
 	}
 }

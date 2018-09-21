@@ -4,10 +4,10 @@ package runequest
 type Occupation struct {
 	Name             string
 	Description      string
-	Modifiers        []*Modifier
+	SkillList        []Skill
 	StandardOfLiving string
 	Income           int
-	Cults            []*Cult
+	Cults            []Cult
 	Passions         []string
 	Ransom           int
 	Equipment        []string
@@ -20,58 +20,48 @@ func (c *Character) ChooseOccupation() {
 	var Occupations = map[string]Occupation{
 		"Farmer": Occupation{
 			Name: "Farmer",
-			Modifiers: []*Modifier{
-				&Modifier{
-					Object: c.Skills["Homeland Lore (local)"],
-					Value:  15,
-					Modify: true,
+			SkillList: []Skill{
+				Skill{
+					Name:     "Homeland Lore (local)",
+					Value:    15,
+					Category: "Knowledge",
 				},
-				&Modifier{
-					Object: c.Skills["Jump"],
-					Value:  10,
-					Modify: true,
+				Skill{
+					Name:  "Jump",
+					Value: 10,
 				},
-				&Modifier{
-					Object: c.Skills["Farm"],
-					Value:  30,
-					Modify: true,
+				Skill{
+					Name:  "Farm",
+					Value: 30,
 				},
-				&Modifier{
-					Object:  c.Skills["Craft"],
-					Value:   15,
-					Base:    false,
-					Modify:  true,
-					Subject: "Armoury",
+				Skill{
+					Name:     "Craft (Armory)",
+					Value:    15,
+					Category: "Manipulation",
 				},
-				&Modifier{
-					Object: c.Skills["First Aid"],
-					Value:  10,
-					Modify: true,
+				Skill{
+					Name:  "First Aid",
+					Value: 10,
 				},
-				&Modifier{
-					Object: c.Skills["Scan"],
-					Value:  10,
-					Modify: true,
+				Skill{
+					Name:  "Scan",
+					Value: 10,
 				},
-				&Modifier{
-					Object: c.Skills["Herd"],
-					Value:  15,
-					Modify: true,
+				Skill{
+					Name:  "Herd",
+					Value: 15,
 				},
-				&Modifier{
-					Object: c.Skills["Manage Household"],
-					Value:  30,
-					Modify: true,
+				Skill{
+					Name:  "Manage Household",
+					Value: 30,
 				},
-				&Modifier{
-					Object: c.Skills["Medium Shield"],
-					Value:  15,
-					Modify: true,
+				Skill{
+					Name:  "Medium Shield",
+					Value: 15,
 				},
-				&Modifier{
-					Object: c.Skills["Broadsword"],
-					Value:  15,
-					Modify: true,
+				Skill{
+					Name:  "Broadsword",
+					Value: 15,
 				},
 			},
 		},
@@ -80,15 +70,7 @@ func (c *Character) ChooseOccupation() {
 
 	c.Occupation = Occupations["Farmer"]
 
-	for _, m := range c.Occupation.Modifiers {
-
-		switch {
-		case m.Set && m.Base:
-			m.SetBase()
-		case m.Set && !m.Base:
-			m.SetValue()
-		case m.Modify:
-			m.ModifyValue()
-		}
+	for _, s := range c.Occupation.SkillList {
+		c.ModifySkill(s)
 	}
 }

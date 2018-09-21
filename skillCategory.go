@@ -63,7 +63,7 @@ func (c *Character) DetermineSkillCategoryValues() {
 	}
 
 	for _, skill := range c.Skills {
-		sc := SkillCategories[skill.category]
+		sc := SkillCategories[skill.Category]
 
 		skill.CategoryValue = sc.Value
 	}

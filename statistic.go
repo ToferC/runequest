@@ -29,6 +29,21 @@ func (c *Character) TotalStatistics() {
 	}
 }
 
+// ModifyValue updates the Statistic value
+func (s *Statistic) ModifyValue(v int) {
+	s.Value += v
+}
+
+// SetBase sets a stats Base value to an integer
+func (s *Statistic) SetBase(i int) {
+	s.Base = i
+}
+
+// SetValue sets a Stats Base value to an integer
+func (s *Statistic) SetValue(i int) {
+	s.Value = i
+}
+
 // RuneQuestStats is the base stats for RuneQuest
 var RuneQuestStats = map[string]*Statistic{
 	"STR": &Statistic{

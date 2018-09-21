@@ -57,7 +57,7 @@ func (c Character) String() string {
 		text += fmt.Sprintf("%s\n", stat)
 	}
 
-	text += "\n\nAbilities:"
+	text += "\nAbilities:"
 
 	for _, at := range AbilityTypes {
 
@@ -80,7 +80,7 @@ func (c Character) String() string {
 		text += fmt.Sprintf("%s", sc)
 		for _, skill := range c.Skills {
 
-			if skill.category == sc.Name {
+			if skill.Category == sc.Name {
 				text += fmt.Sprintf("\n%s", skill)
 			}
 		}

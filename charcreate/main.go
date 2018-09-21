@@ -9,12 +9,7 @@ import (
 func main() {
 	c := runequest.NewCharacter("Harthor")
 
-	m := runequest.Modifier{
-		Object: c.Statistics["STR"],
-		Value:  3,
-	}
-
-	m.ModifyValue()
+	c.Statistics["STR"].Value += 3
 
 	c.ChooseRunes()
 	c.UpdateCharacter()
@@ -23,20 +18,19 @@ func main() {
 	c.ChooseOccupation()
 	c.ChooseCult()
 
-	mSkill := runequest.Modifier{
-		Object: c.Skills["Broadsword"],
-		Value:  25,
-	}
+	c.ModifySkill(
+		runequest.Skill{
+			Name:  "Broadsword",
+			Value: 25,
+		})
 
-	mSkill.ModifyValue()
+	c.ModifyAbility(
+		runequest.Ability{
+			Name:  "Loyalty (Clan)",
+			Value: 25,
+		})
 
-	mPassion := runequest.Modifier{
-		Object: c.Abilities["Loyalty"],
-		Value:  10,
-	}
-
-	mPassion.ModifyValue()
-
+	c.UpdateCharacter()
 	fmt.Println("")
 	fmt.Println(c)
 }

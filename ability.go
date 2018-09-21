@@ -4,12 +4,10 @@ import (
 	"fmt"
 )
 
-// Ability represents any non-Skill % ability in Runequest
+// Ability represents any non-Ability % ability in Runequest
 type Ability struct {
 	Name            string
 	Type            string
-	TakesSubject    bool
-	Subject         string
 	OpposedAbility  string
 	Base            int
 	Value           int
@@ -33,38 +31,76 @@ func (a *Ability) String() string {
 
 	a.Total = a.Base + a.Value
 
-	if a.TakesSubject {
-		text += fmt.Sprintf("%s (%s) %d%%", a.Name, a.Subject, a.Total)
-	} else {
-		text += fmt.Sprintf("%s %d%%", a.Name, a.Total)
-	}
+	text += fmt.Sprintf("%s %d%%", a.Name, a.Total)
+
 	return text
+}
+
+// ModifyAbility adds or modifies a Ability value
+func (c *Character) ModifyAbility(a Ability) {
+
+	if c.Abilities[a.Name] == nil {
+		// New Ability
+		c.Abilities[a.Name] = &Ability{
+			Name:  a.Name,
+			Base:  a.Base,
+			Value: a.Value,
+		}
+	} else {
+		// Modify existing Ability
+		if c.Abilities[a.Name].Base != a.Base {
+			// Change Ability.Base if needed
+			c.Abilities[a.Name].Base = a.Base
+		}
+		// Add or subtract s.Value from Ability
+		c.Abilities[a.Name].Base += a.Value
+	}
+
+	ability := c.Abilities[a.Name]
+
+	// Modify Opposing Rune if required
+	if ability.OpposedAbility != "" {
+		opposed := c.Abilities[ability.OpposedAbility]
+
+		ability.Total = ability.Base + ability.Value
+		opposed.Total = opposed.Base + opposed.Value
+
+		diff := ability.Total + opposed.Total
+
+		if diff > 100 {
+			opposed.Base -= diff - 100
+		}
+	}
 }
 
 // ChooseRunes selects Runes for a Character
 func (c *Character) ChooseRunes() {
 
 	// Choose Rune Values
-	mAbility1 := Modifier{
-		Object: c.Abilities["Air"],
-		Value:  60,
-	}
+	c.ModifyAbility(Ability{
+		Name:  "Air",
+		Value: 60,
+	})
 
-	mAbility1.ModifyValue()
+	c.ModifyAbility(Ability{
+		Name:  "Earth",
+		Value: 40,
+	})
 
-	mAbility2 := Modifier{
-		Object: c.Abilities["Earth"],
-		Value:  40,
-	}
+	c.ModifyAbility(Ability{
+		Name:  "Fire/Sky",
+		Value: 20,
+	})
 
-	mAbility2.ModifyValue()
+	c.ModifyAbility(Ability{
+		Name:  "Movement",
+		Value: 25,
+	})
 
-	mAbility3 := Modifier{
-		Object: c.Abilities["Fire/Sky"],
-		Value:  20,
-	}
-
-	mAbility3.ModifyValue()
+	c.ModifyAbility(Ability{
+		Name:  "Man",
+		Value: 25,
+	})
 }
 
 // Abilities is a map of the basic abilities in Runequest
@@ -168,19 +204,15 @@ var Abilities = map[string]*Ability{
 	},
 	// Passions
 	"Loyalty": &Ability{
-		Name:         "Loyalty",
-		Type:         "Passion",
-		TakesSubject: true,
-		Subject:      "Clan",
-		Base:         60,
-		Value:        0,
+		Name:  "Loyalty (Clan)",
+		Type:  "Passion",
+		Base:  60,
+		Value: 0,
 	},
 	"Devotion": &Ability{
-		Name:         "Loyalty",
-		Type:         "Passion",
-		TakesSubject: true,
-		Subject:      "Orlanth",
-		Base:         60,
-		Value:        0,
+		Name:  "Loyalty (Orlanth)",
+		Type:  "Passion",
+		Base:  60,
+		Value: 0,
 	},
 }

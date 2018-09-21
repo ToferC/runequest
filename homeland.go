@@ -1,10 +1,13 @@
 package runequest
 
+import "fmt"
+
 // Homeland represents a homeland and cultural learnings
 type Homeland struct {
 	Name        string
 	Description string
-	Modifiers   []*Modifier
+	SkillList   []Skill
+	AbilityList []Ability
 }
 
 // ChooseHomeland modifies a character's skills by homeland
@@ -14,75 +17,52 @@ func (c *Character) ChooseHomeland() {
 	var Homelands = map[string]Homeland{
 		"Sartar": Homeland{
 			Name: "Sartar",
-			Modifiers: []*Modifier{
-				&Modifier{
-					Object: c.Skills["Ride"],
-					Value:  5,
-					Set:    false,
-					Modify: true,
+			SkillList: []Skill{
+				Skill{
+					Name:  "Ride",
+					Value: 5,
 				},
-				&Modifier{
-					Object: c.Skills["Dance"],
-					Value:  5,
-					Set:    false,
-					Modify: true,
+				Skill{
+					Name:  "Dance",
+					Value: 5,
 				},
-				&Modifier{
-					Object: c.Skills["Sing"],
-					Value:  5,
-					Set:    false,
-					Modify: true,
+				Skill{
+					Name:  "Sing",
+					Value: 5,
 				},
-				&Modifier{
-					Object: c.Skills["Speak Own Language"],
-					Value:  50,
-					Base:   true,
-					Set:    true,
-					Modify: false,
+				Skill{
+					Name:     "Speak (Heortling)",
+					Base:     50,
+					Category: "Communication",
 				},
-				&Modifier{
-					Object:  c.Skills["Customs"],
-					Value:   50,
-					Base:    true,
-					Set:     true,
-					Modify:  false,
-					Subject: "Heortling",
+				Skill{
+					Name:     "Customs (Heortling)",
+					Base:     50,
+					Category: "Knowledge",
 				},
-				&Modifier{
-					Object: c.Skills["Farm"],
-					Value:  20,
-					Set:    false,
-					Modify: true,
+				Skill{
+					Name:  "Farm",
+					Value: 20,
 				},
-				&Modifier{
-					Object: c.Skills["Herd"],
-					Value:  10,
-					Set:    false,
-					Modify: true,
+				Skill{
+					Name:  "Herd",
+					Value: 10,
 				},
-				&Modifier{
-					Object: c.Skills["Spirit Combat"],
-					Value:  15,
-					Set:    false,
-					Modify: true,
+				Skill{
+					Name:  "Spirit Combat",
+					Value: 15,
 				},
-				&Modifier{
-					Object: c.Skills["Dagger"],
-					Value:  10,
-					Set:    false,
-					Modify: true,
+				Skill{
+					Name:  "Dagger",
+					Value: 10,
 				},
-				&Modifier{
-					Object: c.Skills["1H Axe"],
-					Value:  10,
-					Set:    false,
-					Modify: true,
+				Skill{
+					Name:  "1H Axe",
+					Value: 10,
 				},
-				&Modifier{
-					Object: c.Skills["1H Spear"],
-					Value:  10,
-					Set:    false,
-					Modify: true,
+				Skill{
+					Name:  "1H Spear",
+					Value: 10,
 				},
 			},
 		},
@@ -91,15 +71,8 @@ func (c *Character) ChooseHomeland() {
 
 	c.Homeland = Homelands["Sartar"]
 
-	for _, m := range c.Homeland.Modifiers {
-
-		switch {
-		case m.Set && m.Base:
-			m.SetBase()
-		case m.Set && !m.Base:
-			m.SetValue()
-		case m.Modify:
-			m.ModifyValue()
-		}
+	for _, s := range c.Homeland.SkillList {
+		fmt.Println(s.Name)
+		c.ModifySkill(s)
 	}
 }
