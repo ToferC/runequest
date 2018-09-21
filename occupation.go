@@ -35,7 +35,7 @@ func (c *Character) ChooseOccupation() {
 					Value: 30,
 				},
 				Skill{
-					Name:     "Craft (Armory)",
+					Name:     "Craft (Armor)",
 					Value:    15,
 					Category: "Manipulation",
 				},

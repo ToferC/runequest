@@ -78,6 +78,12 @@ func (c *Character) ModifyAbility(a Ability) {
 		opposed := c.Abilities[ability.OpposedAbility]
 
 		ability.Total = ability.Base + ability.Value
+
+		// Maximum of 99 in a Power Rune
+		if ability.Total > 99 {
+			ability.Total = 99
+		}
+
 		opposed.Total = opposed.Base + opposed.Value
 
 		diff := ability.Total + opposed.Total
@@ -115,6 +121,22 @@ func (c *Character) ChooseRunes() {
 	c.ModifyAbility(Ability{
 		Name:  "Man",
 		Value: 25,
+	})
+
+	// Add 50 more points
+	c.ModifyAbility(Ability{
+		Name:  "Movement",
+		Value: 10,
+	})
+
+	c.ModifyAbility(Ability{
+		Name:  "Air",
+		Value: 30,
+	})
+
+	c.ModifyAbility(Ability{
+		Name:  "Earth",
+		Value: 10,
 	})
 }
 

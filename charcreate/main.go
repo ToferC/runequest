@@ -12,6 +12,9 @@ func main() {
 	c.Statistics["STR"].Value += 3
 
 	c.ChooseRunes()
+
+	c.AddRuneModifiers()
+
 	c.UpdateCharacter()
 
 	c.ChooseHomeland()
@@ -42,10 +45,20 @@ func main() {
 
 	mp := c.DetermineMagicPoints()
 	hp := c.DetermineHitPoints()
+	hr := c.DetermineHealingRate()
+	db := c.DetermineDamageBonus()
+	sd := c.DetermineSpiritDamage()
+	dx := c.DetermineDexStrikeRank()
+	sz := c.DetermineSizStrikeRank()
 
 	c.DerivedStats = map[string]*runequest.DerivedStat{
-		"MP": mp,
-		"HP": hp,
+		"MP":    mp,
+		"HP":    hp,
+		"HR":    hr,
+		"DB":    db,
+		"SD":    sd,
+		"DEXSR": dx,
+		"SIZSR": sz,
 	}
 
 	c.UpdateCharacter()
