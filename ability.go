@@ -9,6 +9,9 @@ type Ability struct {
 	Name            string
 	Type            string
 	OpposedAbility  string
+	UserChoice      bool
+	CoreString      string
+	UserString      string
 	Base            int
 	Value           int
 	Total           int

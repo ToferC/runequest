@@ -34,6 +34,9 @@ func (c *Character) DetermineSkillCategoryValues() {
 	for _, s := range c.SkillCategories {
 		// For each category
 
+		// Reset SkillCategory Value to 0
+		s.Value = 0
+
 		for _, sm := range s.StatModifiers {
 			// For each modifier in a category
 
@@ -67,7 +70,6 @@ func (c *Character) DetermineSkillCategoryValues() {
 
 		skill.CategoryValue = sc.Value
 	}
-
 }
 
 // SkillCategories is a map of skill categories

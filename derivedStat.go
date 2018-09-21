@@ -15,6 +15,28 @@ type DerivedStat struct {
 	Text     string
 }
 
+// SetDerivedStats determines initial derived stats for the character
+func (c *Character) SetDerivedStats() {
+
+	mp := c.DetermineMagicPoints()
+	hp := c.DetermineHitPoints()
+	hr := c.DetermineHealingRate()
+	db := c.DetermineDamageBonus()
+	sd := c.DetermineSpiritDamage()
+	dx := c.DetermineDexStrikeRank()
+	sz := c.DetermineSizStrikeRank()
+
+	c.DerivedStats = map[string]*DerivedStat{
+		"MP":    mp,
+		"HP":    hp,
+		"HR":    hr,
+		"DB":    db,
+		"SD":    sd,
+		"DEXSR": dx,
+		"SIZSR": sz,
+	}
+}
+
 // UpdateDerivedStats totals base & value for DerivedStat
 func (c *Character) UpdateDerivedStats() {
 	for _, v := range c.DerivedStats {

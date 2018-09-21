@@ -81,3 +81,12 @@ func (c *Character) AddRuneModifiers() {
 	}
 
 }
+
+// ChooseRandom chooses a random element in a slice
+// when given l as len(slice)
+func ChooseRandom(l int) int {
+	s := rand.NewSource(time.Now().Unix())
+	r := rand.New(s)
+
+	return r.Intn(l)
+}

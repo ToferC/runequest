@@ -6,6 +6,9 @@ import "fmt"
 type Skill struct {
 	Name            string
 	Category        string
+	UserChoice      bool
+	CoreString      string
+	UserString      string
 	Base            int
 	CategoryValue   int
 	Value           int
@@ -13,6 +16,11 @@ type Skill struct {
 	Min             int
 	Max             int
 	ExperienceCheck bool
+}
+
+// SkillChoice is a choice between 2 or more skills
+type SkillChoice struct {
+	Skills []Skill
 }
 
 func (s *Skill) String() string {
@@ -43,6 +51,6 @@ func (c *Character) ModifySkill(s Skill) {
 			c.Skills[s.Name].Base = s.Base
 		}
 		// Add or subtract s.Value from skill
-		c.Skills[s.Name].Base += s.Value
+		c.Skills[s.Name].Value += s.Value
 	}
 }

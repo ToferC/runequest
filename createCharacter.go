@@ -37,8 +37,8 @@ func NewCharacter(name string) *Character {
 			Base:     c.Statistics["DEX"].Value * 3,
 			Category: "Agility",
 		},
-		"Ride": &Skill{
-			Name:     "Ride Horse",
+		"Ride (Horse)": &Skill{
+			Name:     "Ride (Horse)",
 			Base:     5,
 			Category: "Agility",
 		},
