@@ -13,7 +13,6 @@ type Character struct {
 	Cult            Cult
 	Abilities       map[string]*Ability
 	Statistics      map[string]*Statistic
-	StatMap         []string
 	DerivedStats    map[string]*DerivedStat
 	DerivedMap      []string
 	Skills          map[string]*Skill
@@ -25,7 +24,7 @@ type Character struct {
 	Powers          map[string]*Power
 	HitLocations    map[string]*HitLocation
 	HitLocationMap  []string
-	Gear            string
+	Gear            []string
 	PointCost       int
 	InPlay          bool
 	Updates         []*Update
