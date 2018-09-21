@@ -53,8 +53,8 @@ func (c Character) String() string {
 	text += fmt.Sprintf("\nCult: %s", c.Cult.Name)
 
 	text += "\n\nStats:\n"
-	for _, stat := range c.Statistics {
-		text += fmt.Sprintf("%s\n", stat)
+	for _, stat := range StatMap {
+		text += fmt.Sprintf("%s\n", c.Statistics[stat])
 	}
 
 	text += "\nAbilities:"

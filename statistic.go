@@ -21,6 +21,10 @@ func (s *Statistic) String() string {
 	return text
 }
 
+// StatMap gives default ordering for stats
+var StatMap = []string{
+	"STR", "DEX", "CON", "SIZ", "POW", "INT", "CHA"}
+
 // TotalStatistics updates values for stats after being modified
 func (c *Character) TotalStatistics() {
 
