@@ -13,12 +13,33 @@ func main() {
 
 	c.ChooseRunes()
 
+	// Add Modifiers to Stats
 	c.AddRuneModifiers()
 
-	c.UpdateCharacter()
+	// Calculate Derived Stats
+	c.SetDerivedStats()
 
+	for _, s := range c.Skills {
+
+		if s.UserChoice {
+			c.ModifySkill(runequest.Skill{
+				Name:       s.Name,
+				Category:   s.Category,
+				CoreString: s.CoreString,
+				UserChoice: s.UserChoice,
+				UserString: s.UserString,
+				Base:       s.Base,
+				Value:      s.Value,
+			})
+		}
+	}
+
+	c.UpdateCharacter()
+	fmt.Println("Homeland")
 	c.ChooseHomeland()
+	fmt.Println("Occupation")
 	c.ChooseOccupation()
+	fmt.Println("Cult")
 	c.ChooseCult()
 
 	c.ModifySkill(
@@ -42,26 +63,6 @@ func main() {
 			Value: 10,
 			Type:  "Passion",
 		})
-
-	mp := c.DetermineMagicPoints()
-	hp := c.DetermineHitPoints()
-	hr := c.DetermineHealingRate()
-	db := c.DetermineDamageBonus()
-	sd := c.DetermineSpiritDamage()
-	dx := c.DetermineDexStrikeRank()
-	sz := c.DetermineSizStrikeRank()
-
-	c.DerivedStats = map[string]*runequest.DerivedStat{
-		"MP":    mp,
-		"HP":    hp,
-		"HR":    hr,
-		"DB":    db,
-		"SD":    sd,
-		"DEXSR": dx,
-		"SIZSR": sz,
-	}
-
-	c.UpdateCharacter()
 
 	fmt.Println("")
 	fmt.Println(c)

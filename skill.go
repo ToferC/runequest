@@ -35,22 +35,54 @@ func (s *Skill) String() string {
 }
 
 // ModifySkill adds or modifies a Skill value
+// TODO Combine ModifySkill and SkillSpecialization
 func (c *Character) ModifySkill(s Skill) {
-	if c.Skills[s.Name] == nil {
-		// New Skill
-		c.Skills[s.Name] = &Skill{
-			Name:     s.Name,
-			Base:     s.Base,
-			Value:    s.Value,
-			Category: s.Category,
+
+	var response, skillName string
+
+	if s.UserChoice {
+
+		// Show slice of existing skills with identical CoreString
+
+		q := fmt.Sprintf("Enter a specialization for %s or hit Enter to use (%s): ",
+			s.CoreString, s.UserString)
+
+		response = UserQuery(q)
+
+		if response == "" {
+			response = s.UserString
 		}
+
+		skillName = fmt.Sprintf("%s (%s)", s.CoreString, response)
+	} else {
+		skillName = s.Name
+	}
+
+	if c.Skills[skillName] == nil {
+		// Create new Skill in map
+		c.Skills[skillName] = &Skill{
+			Name:            skillName,
+			Category:        s.Category,
+			CoreString:      s.CoreString,
+			UserChoice:      false,
+			UserString:      response,
+			Base:            s.Base,
+			CategoryValue:   s.CategoryValue,
+			Value:           s.Value,
+			Total:           s.Total,
+			Min:             s.Min,
+			Max:             s.Max,
+			ExperienceCheck: s.ExperienceCheck,
+		}
+		// Remove base skill from map
+		delete(c.Skills, s.CoreString)
 	} else {
 		// Modify existing skill
-		if c.Skills[s.Name].Base != s.Base {
-			// Change Skill.Base if needed
-			c.Skills[s.Name].Base = s.Base
+		if c.Skills[skillName].Base < s.Base {
+			// Change Skill.Base if advantageous
+			c.Skills[skillName].Base = s.Base
 		}
 		// Add or subtract s.Value from skill
-		c.Skills[s.Name].Value += s.Value
+		c.Skills[skillName].Value += s.Value
 	}
 }

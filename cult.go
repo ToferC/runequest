@@ -2,10 +2,11 @@ package runequest
 
 // Cult represents a Religion in Runequest
 type Cult struct {
-	Name        string
-	Description string
-	SkillList   []Skill
-	SpellList   []*Spell
+	Name         string
+	Description  string
+	SkillList    []Skill
+	SkillChoices []SkillChoice
+	SpellList    []*Spell
 }
 
 // ChooseCult modifies a character's skills by homeland

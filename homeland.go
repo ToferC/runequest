@@ -4,11 +4,12 @@ import "fmt"
 
 // Homeland represents a homeland and cultural learnings
 type Homeland struct {
-	Name         string
-	Description  string
-	SkillList    []Skill
-	SkillChoices []SkillChoice
-	AbilityList  []Ability
+	Name           string
+	Description    string
+	SkillList      []Skill
+	SkillChoices   []SkillChoice
+	AbilityList    []Ability
+	AbilityChoices []AbilityChoice
 }
 
 // ChooseHomeland modifies a character's skills by homeland
@@ -21,8 +22,13 @@ func (c *Character) ChooseHomeland() {
 			Name: "Sartar",
 			SkillList: []Skill{
 				Skill{
-					Name:  "Ride (Horse)",
-					Value: 5,
+					Name:       "Ride",
+					CoreString: "Ride",
+					UserChoice: true,
+					UserString: "Horse",
+					Base:       5,
+					Value:      5,
+					Category:   "Agility",
 				},
 				Skill{
 					Name:  "Dance",
@@ -68,7 +74,7 @@ func (c *Character) ChooseHomeland() {
 					Value: 15,
 				},
 				Skill{
-					Name:  "1H Axe",
+					Name:  "Battle Axe",
 					Value: 10,
 				},
 				Skill{
@@ -101,7 +107,7 @@ func (c *Character) ChooseHomeland() {
 						},
 						// Skill 2
 						Skill{
-							Name:  "Sing",
+							Name:  "Sling",
 							Value: 10,
 						},
 					},
@@ -114,7 +120,7 @@ func (c *Character) ChooseHomeland() {
 	c.Homeland = Homelands["Sartar"]
 
 	for _, s := range c.Homeland.SkillList {
-		fmt.Println(s.Name)
+		fmt.Println(s)
 		c.ModifySkill(s)
 	}
 

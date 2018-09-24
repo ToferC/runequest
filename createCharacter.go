@@ -7,9 +7,9 @@ func NewCharacter(name string) *Character {
 		Statistics:      RuneQuestStats,
 		Abilities:       Abilities,
 		SkillCategories: SkillCategories,
-		// Skills is a map of regular skills in Runequest
 	}
 
+	// Skills is a map of regular skills in Runequest
 	c.Skills = map[string]*Skill{
 		// Agility
 		"Boat": &Skill{
@@ -27,20 +27,26 @@ func NewCharacter(name string) *Character {
 			Base:     c.Statistics["DEX"].Value * 2,
 			Category: "Agility",
 		},
-		"Drive Chariot": &Skill{
-			Name:     "Drive Chariot",
-			Base:     5,
-			Category: "Agility",
+		"Drive": &Skill{
+			Name:       "Drive",
+			UserChoice: true,
+			CoreString: "Drive",
+			UserString: "Chariot",
+			Base:       5,
+			Category:   "Agility",
 		},
 		"Jump": &Skill{
 			Name:     "Jump",
 			Base:     c.Statistics["DEX"].Value * 3,
 			Category: "Agility",
 		},
-		"Ride (Horse)": &Skill{
-			Name:     "Ride (Horse)",
-			Base:     5,
-			Category: "Agility",
+		"Ride": &Skill{
+			Name:       "Ride",
+			UserChoice: true,
+			CoreString: "Ride",
+			UserString: "Horse",
+			Base:       5,
+			Category:   "Agility",
 		},
 		"Swim": &Skill{
 			Name:     "Swim",
@@ -104,10 +110,13 @@ func NewCharacter(name string) *Character {
 			Base:     10,
 			Category: "Communication",
 		},
-		"Speak (Heortling)": &Skill{
-			Name:     "Speak (Heortling)",
-			Base:     50,
-			Category: "Communication",
+		"Speak": &Skill{
+			Name:       "Speak",
+			UserChoice: true,
+			CoreString: "Speak",
+			UserString: "Heortling",
+			Base:       50,
+			Category:   "Communication",
 		},
 		// Knowledge
 		"Alchemy": &Skill{
@@ -135,20 +144,29 @@ func NewCharacter(name string) *Character {
 			Base:     5,
 			Category: "Knowledge",
 		},
-		"Cult Lore (Orlanth)": &Skill{
-			Name:     "Cult Lore (Orlanth)",
-			Base:     0,
-			Category: "Knowledge",
+		"Cult Lore": &Skill{
+			Name:       "Cult Lore",
+			UserChoice: true,
+			CoreString: "Cult Lore",
+			UserString: "Orlanth",
+			Base:       0,
+			Category:   "Knowledge",
 		},
-		"Customs (Heortling)": &Skill{
-			Name:     "Customs (Heortling)",
-			Base:     25,
-			Category: "Knowledge",
+		"Customs": &Skill{
+			Name:       "Customs",
+			UserChoice: true,
+			CoreString: "Customs",
+			UserString: "Heortling",
+			Base:       25,
+			Category:   "Knowledge",
 		},
-		"Elf Lore": &Skill{
-			Name:     "Elf Lore",
-			Base:     5,
-			Category: "Knowledge",
+		"Elder Race Lore": &Skill{
+			Name:       "Elder Race Lore",
+			UserChoice: true,
+			CoreString: "Elder Race Lore",
+			UserString: "Elves",
+			Base:       5,
+			Category:   "Knowledge",
 		},
 		"Evaluate": &Skill{
 			Name:     "Evaluate",
@@ -175,15 +193,13 @@ func NewCharacter(name string) *Character {
 			Base:     5,
 			Category: "Knowledge",
 		},
-		"Homeland Lore (local)": &Skill{
-			Name:     "Homeland Lore (local)",
-			Base:     30,
-			Category: "Knowledge",
-		},
-		"Homeland Lore (Spirits)": &Skill{
-			Name:     "Homeland Lore (Spirits)",
-			Base:     0,
-			Category: "Knowledge",
+		"Homeland Lore": &Skill{
+			Name:       "Homeland Lore",
+			UserChoice: true,
+			CoreString: "Homeland Lore",
+			UserString: "Local",
+			Base:       30,
+			Category:   "Knowledge",
 		},
 		"Library Use": &Skill{
 			Name:     "Library Use",
@@ -210,10 +226,13 @@ func NewCharacter(name string) *Character {
 			Base:     5,
 			Category: "Knowledge",
 		},
-		"Read/Write (Tarsh)": &Skill{
-			Name:     "Read/Write (Tarsh)",
-			Base:     0,
-			Category: "Knowledge",
+		"Read/Write": &Skill{
+			Name:       "Read/Write",
+			UserChoice: true,
+			CoreString: "Read/Write",
+			UserString: "Old Tarsh",
+			Base:       0,
+			Category:   "Knowledge",
 		},
 		"Shiphandling": &Skill{
 			Name:     "Shiphandling",
@@ -281,10 +300,13 @@ func NewCharacter(name string) *Character {
 			Base:     0,
 			Category: "Magic",
 		},
-		"Worship (Orlanth)": &Skill{
-			Name:     "Worship (Orlanth)",
-			Base:     0,
-			Category: "Magic",
+		"Worship": &Skill{
+			Name:       "Worship",
+			UserChoice: true,
+			CoreString: "Worship",
+			UserString: "Orlanth",
+			Base:       0,
+			Category:   "Magic",
 		},
 
 		// Manipulation
@@ -293,10 +315,13 @@ func NewCharacter(name string) *Character {
 			Base:     5,
 			Category: "Manipulation",
 		},
-		"Craft (Weapons)": &Skill{
-			Name:     "Craft (Weapons)",
-			Base:     10,
-			Category: "Manipulation",
+		"Craft": &Skill{
+			Name:       "Craft",
+			UserChoice: true,
+			CoreString: "Craft",
+			UserString: "Arms",
+			Base:       10,
+			Category:   "Manipulation",
 		},
 		"Devise": &Skill{
 			Name:     "Devise",
@@ -323,6 +348,11 @@ func NewCharacter(name string) *Character {
 		"2H Axe": &Skill{
 			Name:     "2H Axe",
 			Base:     5,
+			Category: "Manipulation",
+		},
+		"Battle Axe": &Skill{
+			Name:     "Battle Axe",
+			Base:     10,
 			Category: "Manipulation",
 		},
 		"Broadsword": &Skill{

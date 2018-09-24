@@ -5,6 +5,7 @@ type Occupation struct {
 	Name             string
 	Description      string
 	SkillList        []Skill
+	SkillChoices     []SkillChoice
 	StandardOfLiving string
 	Income           int
 	Cults            []Cult
@@ -22,22 +23,22 @@ func (c *Character) ChooseOccupation() {
 			Name: "Farmer",
 			SkillList: []Skill{
 				Skill{
-					Name:     "Homeland Lore (local)",
+					Name:     "Homeland Lore (Local)",
 					Value:    15,
 					Category: "Knowledge",
-				},
-				Skill{
-					Name:  "Jump",
-					Value: 10,
 				},
 				Skill{
 					Name:  "Farm",
 					Value: 30,
 				},
 				Skill{
-					Name:     "Craft (Armor)",
-					Value:    15,
-					Category: "Manipulation",
+					Name:       "Craft",
+					UserChoice: true,
+					CoreString: "Craft",
+					UserString: "Arms",
+					Base:       10,
+					Value:      15,
+					Category:   "Manipulation",
 				},
 				Skill{
 					Name:  "First Aid",
@@ -62,6 +63,24 @@ func (c *Character) ChooseOccupation() {
 				Skill{
 					Name:  "Broadsword",
 					Value: 15,
+				},
+			},
+			// Skill Choices
+			SkillChoices: []SkillChoice{
+				// Choice of 2 skills
+				SkillChoice{
+					Skills: []Skill{
+						// Skill 1
+						Skill{
+							Name:  "Jump",
+							Value: 10,
+						},
+						// Skill 2
+						Skill{
+							Name:  "Climb",
+							Value: 10,
+						},
+					},
 				},
 			},
 		},
