@@ -50,18 +50,22 @@ func main() {
 
 	c.ModifyAbility(
 		runequest.Ability{
-			Name:  "Loyalty (Kallyr Starbrow)",
-			Base:  60,
-			Value: 25,
-			Type:  "Passion",
+			Name:       "Loyalty (Kallyr Starbrow)",
+			CoreString: "Loyalty",
+			UserString: "Kallyr Starbrow",
+			Base:       60,
+			Value:      25,
+			Type:       "Passion",
 		})
 
 	c.ModifyAbility(
 		runequest.Ability{
-			Name:  "Loyalty (Kallyr Starbrow)",
-			Base:  60,
-			Value: 10,
-			Type:  "Passion",
+			Name:       "Loyalty (Kallyr Starbrow)",
+			CoreString: "Loyalty",
+			UserString: "Kallyr Starbrow",
+			Base:       60,
+			Value:      10,
+			Type:       "Passion",
 		})
 
 	fmt.Println("")
