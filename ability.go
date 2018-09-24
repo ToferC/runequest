@@ -20,9 +20,9 @@ type Ability struct {
 	ExperienceCheck bool
 }
 
-// AbilityChoice is a choice between 2 or more Abilities
+// AbilityChoice is a choice between 2 or more skills
 type AbilityChoice struct {
-	Abilities []Ability
+	Skills []Skill
 }
 
 // AbilityTypes is a slice of potential types for abilities
@@ -59,56 +59,27 @@ func (a *Ability) String() string {
 }
 
 // ModifyAbility adds or modifies a Ability value
-func (c *Character) ModifyAbility(s Ability) {
+func (c *Character) ModifyAbility(a Ability) {
 
-	var response, AbilityName string
-
-	if s.UserChoice {
-
-		// Show slice of existing Abilities with identical CoreString
-
-		q := fmt.Sprintf("Enter a specialization for %s or hit Enter to use (%s): ",
-			s.CoreString, s.UserString)
-
-		response = UserQuery(q)
-
-		if response == "" {
-			response = s.UserString
+	if c.Abilities[a.Name] == nil {
+		// New Ability
+		c.Abilities[a.Name] = &Ability{
+			Name: a.Name,
+			Base: a.Base,
+			Type: a.Type,
 		}
-
-		AbilityName = fmt.Sprintf("%s (%s)", s.CoreString, response)
-	} else {
-		AbilityName = s.Name
-	}
-
-	if c.Abilities[AbilityName] == nil {
-		// Create new Ability in map
-		c.Abilities[AbilityName] = &Ability{
-			Name:            AbilityName,
-			CoreString:      s.CoreString,
-			OpposedAbility:  s.OpposedAbility,
-			UserChoice:      false,
-			UserString:      response,
-			Base:            s.Base,
-			Value:           s.Value,
-			Total:           s.Total,
-			Min:             s.Min,
-			Max:             s.Max,
-			ExperienceCheck: s.ExperienceCheck,
-		}
-		// Remove base Ability from map
-		delete(c.Abilities, s.CoreString)
 	} else {
 		// Modify existing Ability
-		if c.Abilities[AbilityName].Base < s.Base {
-			// Change Ability.Base if advantageous
-			c.Abilities[AbilityName].Base = s.Base
+		if c.Abilities[a.Name].Base == 0 {
+			// Change Ability.Base if needed
+			c.Abilities[a.Name].Base = a.Base
+		} else {
+			// Add or subtract s.Value from Ability
+			c.Abilities[a.Name].Value += a.Value
 		}
-		// Add or subtract s.Value from Ability
-		c.Abilities[AbilityName].Value += s.Value
 	}
 
-	ability := c.Abilities[AbilityName]
+	ability := c.Abilities[a.Name]
 
 	// Modify Opposing Rune if required
 	if ability.OpposedAbility != "" {

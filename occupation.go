@@ -9,7 +9,7 @@ type Occupation struct {
 	StandardOfLiving string
 	Income           int
 	Cults            []Cult
-	Passions         []string
+	Passions         []Ability
 	Ransom           int
 	Equipment        []string
 }
@@ -83,6 +83,39 @@ func (c *Character) ChooseOccupation() {
 					},
 				},
 			},
+			// Passions
+			Passions: []Ability{
+				// Ability 1
+				Ability{
+					Name:       "Love (family)",
+					CoreString: "Love",
+					UserString: "family",
+					UserChoice: true,
+					Type:       "Passion",
+					Base:       60,
+					Value:      10,
+				},
+				// Ability 2
+				Ability{
+					Name:       "Loyalty (clan)",
+					CoreString: "Loyalty",
+					UserString: "clan",
+					Type:       "Passion",
+					UserChoice: true,
+					Base:       60,
+					Value:      10,
+				},
+				// Ability 3
+				Ability{
+					Name:       "Loyalty (tribe)",
+					CoreString: "Loyalty",
+					UserString: "tribe",
+					Type:       "Passion",
+					UserChoice: true,
+					Base:       60,
+					Value:      10,
+				},
+			},
 		},
 		// Esrolia
 	}
@@ -92,4 +125,17 @@ func (c *Character) ChooseOccupation() {
 	for _, s := range c.Occupation.SkillList {
 		c.ModifySkill(s)
 	}
+
+	choices := c.Occupation.Passions
+	// Find number of abilities
+	l := len(choices)
+
+	// Choose random index
+	r := ChooseRandom(l)
+
+	// Select index from Passions
+	selected := choices[r]
+
+	// Modify or add skill
+	c.ModifyAbility(selected)
 }

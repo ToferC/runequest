@@ -1,7 +1,5 @@
 package runequest
 
-import "fmt"
-
 // Homeland represents a homeland and cultural learnings
 type Homeland struct {
 	Name           string
@@ -120,7 +118,6 @@ func (c *Character) ChooseHomeland() {
 	c.Homeland = Homelands["Sartar"]
 
 	for _, s := range c.Homeland.SkillList {
-		fmt.Println(s)
 		c.ModifySkill(s)
 	}
 
