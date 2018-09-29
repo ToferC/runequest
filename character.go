@@ -10,10 +10,10 @@ type Character struct {
 	Name            string
 	Setting         string
 	Description     string
-	Race            Race
-	Homeland        Homeland
-	Occupation      Occupation
-	Cult            Cult
+	Race            *Race
+	Homeland        *Homeland
+	Occupation      *Occupation
+	Cult            *Cult
 	Abilities       map[string]*Ability
 	Statistics      map[string]*Statistic
 	DerivedStats    map[string]*DerivedStat
@@ -43,7 +43,6 @@ type Update struct {
 
 // UpdateCharacter updates stats, runes and skills based on them
 func (c *Character) UpdateCharacter() {
-	c.AddRuneModifiers()
 	c.TotalStatistics()
 	c.DetermineSkillCategoryValues()
 	c.UpdateDerivedStats()

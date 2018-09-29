@@ -2,56 +2,102 @@ package runequest
 
 // Cult represents a Religion in Runequest
 type Cult struct {
-	Name         string
-	Description  string
-	SkillList    []Skill
-	SkillChoices []SkillChoice
-	SpellList    []*Spell
+	Name           string
+	Description    string
+	Skills         []Skill
+	SkillChoices   []SkillChoice
+	Abilities      []Ability
+	AbilityChoices []AbilityChoice
+	PassionList    []Ability
+	Passions       []Ability
+	SpellList      []*Spell
+	Spells         []Spell
 }
 
-// ChooseCult modifies a character's skills by homeland
-func (c *Character) ChooseCult() {
+// ChooseCult modifies a character's skills by Cult
+func (c *Character) ChooseCult(hl *Cult) {
 
-	// Homelands is a map of possible homelands in Runequest
-	var Cults = map[string]Cult{
-		"Orlanth": Cult{
-			Name: "Orlanth",
-			SkillList: []Skill{
-				Skill{
-					Name:     "Cult Lore (Orlanth)",
-					Value:    15,
-					Category: "Knowledge",
-				},
-				Skill{
-					Name:     "Worship (Orlanth)",
-					Value:    15,
-					Category: "Magic",
-				},
-				Skill{
-					Name:  "Meditate",
-					Value: 25,
-				},
-				Skill{
-					Name:  "Orate",
-					Value: 30,
-				},
-				Skill{
-					Name:  "Sing",
-					Value: 10,
-				},
-				Skill{
-					Name:     "Speak (Stormspeech)",
-					Value:    10,
-					Category: "Communication",
-				},
-			},
-		},
-		// Esrolia
+	if c.Cult == nil {
+		// First Cult so apply all modifiers
+		c.Cult = hl
+		c.ApplyCult()
+	} else {
+		c.RemoveCult()
+		c.Cult = hl
+		c.ApplyCult()
+		// Already has a Cult & need to remove previous Cult skills
+	}
+}
+
+// ApplyCult applies a Cult Template to a character
+func (c *Character) ApplyCult() {
+
+	for _, s := range c.Cult.Skills {
+		c.ModifySkill(s)
 	}
 
-	c.Cult = Cults["Orlanth"]
+	for _, choice := range c.Cult.SkillChoices {
+		// Find number of skills
+		l := len(choice.Skills)
 
-	for _, s := range c.Cult.SkillList {
+		// Choose random index
+		r := ChooseRandom(l)
+
+		// Select index from choice.Skills
+		selected := choice.Skills[r]
+		c.Cult.Skills = append(c.Cult.Skills, selected)
+
+		// Modify or add skill
+		c.ModifySkill(selected)
+	}
+
+	passions := c.Cult.PassionList
+	// Find number of abilities
+	l := len(passions)
+
+	// Choose random index
+	r := ChooseRandom(l)
+
+	// Select index from Passions
+	selected := passions[r]
+	c.Cult.Passions = append(c.Cult.Passions, selected)
+
+	// Modify or add ability
+	c.ModifyAbility(selected)
+
+	// Same for abilities
+
+	for _, choice := range c.Cult.AbilityChoices {
+		// Find number of skills
+		l = len(choice.Abilities)
+
+		// Choose random index
+		r := ChooseRandom(l)
+
+		// Select index from choice.Abilities
+		selected := choice.Abilities[r]
+		c.Cult.Abilities = append(c.Cult.Abilities, selected)
+
+		// Modify or add skill
+		c.ModifyAbility(selected)
+	}
+}
+
+// RemoveCult removes all Cult Modifers from a character
+func (c *Character) RemoveCult() {
+
+	for _, s := range c.Cult.Skills {
+		s.Value *= -1
 		c.ModifySkill(s)
+	}
+
+	for _, p := range c.Cult.Passions {
+		p.Value *= -1
+		c.ModifyAbility(p)
+	}
+
+	for _, a := range c.Cult.Abilities {
+		a.Value *= -1
+		c.ModifyAbility(a)
 	}
 }

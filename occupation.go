@@ -4,138 +4,103 @@ package runequest
 type Occupation struct {
 	Name             string
 	Description      string
-	SkillList        []Skill
+	Skills           []Skill
 	SkillChoices     []SkillChoice
 	StandardOfLiving string
 	Income           int
-	Cults            []Cult
+	CultChoices      []Cult
+	PassionList      []Ability
 	Passions         []Ability
+	Abilities        []Ability
+	AbilityChoices   []AbilityChoice
 	Ransom           int
 	Equipment        []string
 }
 
-// ChooseOccupation modifies a character's skills by homeland
-func (c *Character) ChooseOccupation() {
+// ChooseOccupation modifies a character's skills by Occupation
+func (c *Character) ChooseOccupation(o *Occupation) {
 
-	// Homelands is a map of possible homelands in Runequest
-	var Occupations = map[string]Occupation{
-		"Farmer": Occupation{
-			Name: "Farmer",
-			SkillList: []Skill{
-				Skill{
-					Name:     "Homeland Lore (Local)",
-					Value:    15,
-					Category: "Knowledge",
-				},
-				Skill{
-					Name:  "Farm",
-					Value: 30,
-				},
-				Skill{
-					Name:       "Craft",
-					UserChoice: true,
-					CoreString: "Craft",
-					UserString: "Arms",
-					Base:       10,
-					Value:      15,
-					Category:   "Manipulation",
-				},
-				Skill{
-					Name:  "First Aid",
-					Value: 10,
-				},
-				Skill{
-					Name:  "Scan",
-					Value: 10,
-				},
-				Skill{
-					Name:  "Herd",
-					Value: 15,
-				},
-				Skill{
-					Name:  "Manage Household",
-					Value: 30,
-				},
-				Skill{
-					Name:  "Medium Shield",
-					Value: 15,
-				},
-				Skill{
-					Name:  "Broadsword",
-					Value: 15,
-				},
-			},
-			// Skill Choices
-			SkillChoices: []SkillChoice{
-				// Choice of 2 skills
-				SkillChoice{
-					Skills: []Skill{
-						// Skill 1
-						Skill{
-							Name:  "Jump",
-							Value: 10,
-						},
-						// Skill 2
-						Skill{
-							Name:  "Climb",
-							Value: 10,
-						},
-					},
-				},
-			},
-			// Passions
-			Passions: []Ability{
-				// Ability 1
-				Ability{
-					Name:       "Love (family)",
-					CoreString: "Love",
-					UserString: "family",
-					UserChoice: true,
-					Type:       "Passion",
-					Base:       60,
-					Value:      10,
-				},
-				// Ability 2
-				Ability{
-					Name:       "Loyalty (clan)",
-					CoreString: "Loyalty",
-					UserString: "clan",
-					Type:       "Passion",
-					UserChoice: true,
-					Base:       60,
-					Value:      10,
-				},
-				// Ability 3
-				Ability{
-					Name:       "Loyalty (tribe)",
-					CoreString: "Loyalty",
-					UserString: "tribe",
-					Type:       "Passion",
-					UserChoice: true,
-					Base:       60,
-					Value:      10,
-				},
-			},
-		},
-		// Esrolia
+	if c.Occupation == nil {
+		// First Occupation so apply all modifiers
+		c.Occupation = o
+		c.ApplyOccupation()
+	} else {
+		c.RemoveOccupation()
+		c.Occupation = o
+		c.ApplyOccupation()
+		// Already has a Occupation & need to remove previous Occupation skills
 	}
+}
 
-	c.Occupation = Occupations["Farmer"]
+// ApplyOccupation applies a Occupation Template to a character
+func (c *Character) ApplyOccupation() {
 
-	for _, s := range c.Occupation.SkillList {
+	for _, s := range c.Occupation.Skills {
 		c.ModifySkill(s)
 	}
 
-	choices := c.Occupation.Passions
+	for _, choice := range c.Occupation.SkillChoices {
+		// Find number of skills
+		l := len(choice.Skills)
+
+		// Choose random index
+		r := ChooseRandom(l)
+
+		// Select index from choice.Skills
+		selected := choice.Skills[r]
+		c.Occupation.Skills = append(c.Occupation.Skills, selected)
+
+		// Modify or add skill
+		c.ModifySkill(selected)
+	}
+
+	passions := c.Occupation.PassionList
 	// Find number of abilities
-	l := len(choices)
+	l := len(passions)
 
 	// Choose random index
 	r := ChooseRandom(l)
 
 	// Select index from Passions
-	selected := choices[r]
+	selected := passions[r]
+	c.Occupation.Passions = append(c.Occupation.Passions, selected)
 
-	// Modify or add skill
+	// Modify or add ability
 	c.ModifyAbility(selected)
+
+	// Same for abilities
+
+	for _, choice := range c.Occupation.AbilityChoices {
+		// Find number of skills
+		l = len(choice.Abilities)
+
+		// Choose random index
+		r := ChooseRandom(l)
+
+		// Select index from choice.Abilities
+		selected := choice.Abilities[r]
+		c.Occupation.Abilities = append(c.Occupation.Abilities, selected)
+
+		// Modify or add skill
+		c.ModifyAbility(selected)
+	}
+}
+
+// RemoveOccupation removes all Occupation Modifers from a character
+func (c *Character) RemoveOccupation() {
+
+	for _, s := range c.Occupation.Skills {
+		s.Value *= -1
+		c.ModifySkill(s)
+	}
+
+	for _, p := range c.Occupation.Passions {
+		p.Value *= -1
+		c.ModifyAbility(p)
+	}
+
+	for _, a := range c.Occupation.Abilities {
+		a.Value *= -1
+		c.ModifyAbility(a)
+	}
 }

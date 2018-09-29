@@ -22,7 +22,7 @@ type Ability struct {
 
 // AbilityChoice is a choice between 2 or more skills
 type AbilityChoice struct {
-	Skills []Skill
+	Abilities []Ability
 }
 
 // AbilityTypes is a slice of potential types for abilities

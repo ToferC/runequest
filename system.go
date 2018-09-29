@@ -1,12 +1,9 @@
 package runequest
 
 import (
-	"bufio"
 	"fmt"
 	"math/rand"
-	"os"
 	"sort"
-	"strings"
 	"time"
 )
 
@@ -83,24 +80,4 @@ func (c *Character) AddRuneModifiers() {
 		c.Statistics["POW"].Value++
 	}
 
-}
-
-// ChooseRandom chooses a random element in a slice
-// when given l as len(slice)
-func ChooseRandom(l int) int {
-	s := rand.NewSource(time.Now().Unix())
-	r := rand.New(s)
-
-	return r.Intn(l)
-}
-
-// UserQuery creates and question and returns the User's input as a string
-func UserQuery(q string) string {
-	question := bufio.NewReader(os.Stdin)
-	fmt.Print(q)
-	r, _ := question.ReadString('\n')
-
-	input := strings.Trim(r, " \n")
-
-	return input
 }

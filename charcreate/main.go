@@ -36,7 +36,7 @@ func main() {
 
 	c.UpdateCharacter()
 	fmt.Println("Homeland")
-	c.ChooseHomeland()
+	c.ChooseHomeland(runequest.Homelands["Sartar"])
 	fmt.Println("Occupation")
 	c.ChooseOccupation()
 	fmt.Println("Cult")
