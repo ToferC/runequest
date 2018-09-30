@@ -17,7 +17,7 @@ func main() {
 	c.AddRuneModifiers()
 
 	// Calculate Derived Stats
-	c.SetDerivedStats()
+	c.SetAttributes()
 
 	for _, s := range c.Skills {
 
@@ -38,9 +38,9 @@ func main() {
 	fmt.Println("Homeland")
 	c.ChooseHomeland(runequest.Homelands["Sartar"])
 	fmt.Println("Occupation")
-	c.ChooseOccupation()
+	c.ChooseOccupation(runequest.Occupations["Farmer"])
 	fmt.Println("Cult")
-	c.ChooseCult()
+	c.ChooseCult(runequest.Cults["Orlanth"])
 
 	c.ModifySkill(
 		runequest.Skill{
