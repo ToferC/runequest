@@ -10,6 +10,7 @@ type Homeland struct {
 	// Options for skills
 	Abilities      []Ability
 	AbilityChoices []AbilityChoice
+	AbilityList    []Ability
 	PassionList    []Ability
 	Passions       []Ability
 }
@@ -52,34 +53,23 @@ func (c *Character) ApplyHomeland() {
 	}
 
 	passions := c.Homeland.PassionList
+
+	// Homelands grant 3 base passions
 	// Find number of abilities
-	l := len(passions)
 
-	// Choose random index
-	r := ChooseRandom(l)
-
-	// Select index from Passions
-	selected := passions[r]
-	c.Homeland.Passions = append(c.Homeland.Passions, selected)
-
-	// Modify or add ability
-	c.ModifyAbility(selected)
-
-	// Same for abilities
-
-	for _, choice := range c.Homeland.AbilityChoices {
-		// Find number of skills
-		l = len(choice.Abilities)
-
-		// Choose random index
-		r := ChooseRandom(l)
-
-		// Select index from choice.Abilities
-		selected := choice.Abilities[r]
-		c.Homeland.Abilities = append(c.Homeland.Abilities, selected)
-
-		// Modify or add skill
+	for _, selected := range passions {
+		c.Homeland.Passions = append(c.Homeland.Passions, selected)
 		c.ModifyAbility(selected)
+	}
+
+	// Homeland grants a bonus to a rune affinity
+
+	for _, ability := range c.Homeland.AbilityList {
+
+		c.Homeland.Abilities = append(c.Homeland.Abilities, ability)
+
+		// Modify or add ability
+		c.ModifyAbility(ability)
 	}
 }
 
@@ -87,17 +77,29 @@ func (c *Character) ApplyHomeland() {
 func (c *Character) RemoveHomeland() {
 
 	for _, s := range c.Homeland.Skills {
-		s.Value *= -1
+		s.HomelandValue = 0
+
+		if s.Base > 0 {
+			s.Base += s.Base * -1
+		}
 		c.ModifySkill(s)
 	}
 
 	for _, p := range c.Homeland.Passions {
-		p.Value *= -1
+		p.HomelandValue = 0
+
+		if p.Base > 0 {
+			p.Base += p.Base * -1
+		}
 		c.ModifyAbility(p)
 	}
 
 	for _, a := range c.Homeland.Abilities {
-		a.Value *= -1
+		a.HomelandValue = 0
+
+		if a.Base > 0 {
+			a.Base += a.Base * -1
+		}
 		c.ModifyAbility(a)
 	}
 }

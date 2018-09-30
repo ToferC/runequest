@@ -6,23 +6,33 @@ import (
 
 // Ability represents any non-Ability % ability in Runequest
 type Ability struct {
-	Name            string
-	Type            string
-	OpposedAbility  string
-	UserChoice      bool
-	CoreString      string
-	UserString      string
-	Base            int
-	Value           int
-	Total           int
-	Max             int
-	Min             int
-	ExperienceCheck bool
+	Name               string
+	Type               string
+	OpposedAbility     string
+	UserChoice         bool
+	CoreString         string
+	UserString         string
+	Base               int
+	HomelandValue      int
+	OccupationValue    int
+	CultValue          int
+	CreationBonusValue int
+	Value              int
+	InPlayXPValue      int
+	Total              int
+	Max                int
+	Min                int
+	ExperienceCheck    bool
 }
 
 // AbilityChoice is a choice between 2 or more skills
 type AbilityChoice struct {
 	Abilities []Ability
+}
+
+// UpdateAbility totals skill values based on input
+func (a *Ability) UpdateAbility() {
+	a.Total = a.Base + a.HomelandValue + a.OccupationValue + a.CultValue + a.CreationBonusValue + a.InPlayXPValue + a.Value
 }
 
 // AbilityTypes is a slice of potential types for abilities
@@ -49,9 +59,9 @@ var PowerRuneOrder = []string{
 
 func (a *Ability) String() string {
 
-	var text = ""
+	a.UpdateAbility()
 
-	a.Total = a.Base + a.Value
+	var text = ""
 
 	text += fmt.Sprintf("%s %d%%", a.Name, a.Total)
 
@@ -70,12 +80,19 @@ func (c *Character) ModifyAbility(a Ability) {
 		}
 	} else {
 		// Modify existing Ability
-		if c.Abilities[a.Name].Base == 0 {
+		ab := c.Abilities[a.Name]
+
+		if ab.Base == 0 {
 			// Change Ability.Base if needed
-			c.Abilities[a.Name].Base = a.Base
+			ab.Base = a.Base
 		} else {
 			// Add or subtract s.Value from Ability
-			c.Abilities[a.Name].Value += a.Value
+			ab.Value += a.Value
+			ab.HomelandValue += a.HomelandValue
+			ab.OccupationValue += a.OccupationValue
+			ab.CultValue += a.CultValue
+			ab.CreationBonusValue += a.CreationBonusValue
+			ab.InPlayXPValue += a.InPlayXPValue
 		}
 	}
 
@@ -246,18 +263,5 @@ var Abilities = map[string]*Ability{
 		Type:           "Power Rune",
 		OpposedAbility: "Stasis",
 		Base:           50,
-	},
-	// Passions
-	"Loyalty": &Ability{
-		Name:  "Loyalty (Clan)",
-		Type:  "Passion",
-		Base:  60,
-		Value: 0,
-	},
-	"Devotion": &Ability{
-		Name:  "Loyalty (Orlanth)",
-		Type:  "Passion",
-		Base:  60,
-		Value: 0,
 	},
 }

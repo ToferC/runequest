@@ -4,18 +4,23 @@ import "fmt"
 
 // Skill is a learned ability of an RPG Character
 type Skill struct {
-	Name            string
-	Category        string
-	UserChoice      bool
-	CoreString      string
-	UserString      string
-	Base            int
-	CategoryValue   int
-	Value           int
-	Total           int
-	Min             int
-	Max             int
-	ExperienceCheck bool
+	Name               string
+	Category           string
+	UserChoice         bool
+	CoreString         string
+	UserString         string
+	Base               int
+	CategoryValue      int
+	HomelandValue      int
+	OccupationValue    int
+	CultValue          int
+	CreationBonusValue int
+	Value              int
+	InPlayXPValue      int
+	Total              int
+	Min                int
+	Max                int
+	ExperienceCheck    bool
 }
 
 // SkillChoice is a choice between 2 or more skills
@@ -23,9 +28,14 @@ type SkillChoice struct {
 	Skills []Skill
 }
 
+// UpdateSkill totals skill values based on input
+func (s *Skill) UpdateSkill() {
+	s.Total = s.Base + s.CategoryValue + s.HomelandValue + s.OccupationValue + s.CultValue + s.CreationBonusValue + s.InPlayXPValue + s.Value
+}
+
 func (s *Skill) String() string {
 
-	s.Total = s.Base + s.Value + s.CategoryValue
+	s.UpdateSkill()
 
 	text := ""
 
@@ -35,7 +45,6 @@ func (s *Skill) String() string {
 }
 
 // ModifySkill adds or modifies a Skill value
-// TODO Combine ModifySkill and SkillSpecialization
 func (c *Character) ModifySkill(s Skill) {
 
 	var response, skillName string
@@ -61,28 +70,39 @@ func (c *Character) ModifySkill(s Skill) {
 	if c.Skills[skillName] == nil {
 		// Create new Skill in map
 		c.Skills[skillName] = &Skill{
-			Name:            skillName,
-			Category:        s.Category,
-			CoreString:      s.CoreString,
-			UserChoice:      false,
-			UserString:      response,
-			Base:            s.Base,
-			CategoryValue:   s.CategoryValue,
-			Value:           s.Value,
-			Total:           s.Total,
-			Min:             s.Min,
-			Max:             s.Max,
-			ExperienceCheck: s.ExperienceCheck,
+			Name:               skillName,
+			Category:           s.Category,
+			CoreString:         s.CoreString,
+			UserChoice:         false,
+			UserString:         response,
+			Base:               s.Base,
+			CategoryValue:      s.CategoryValue,
+			HomelandValue:      s.HomelandValue,
+			OccupationValue:    s.OccupationValue,
+			CultValue:          s.CultValue,
+			CreationBonusValue: s.CreationBonusValue,
+			InPlayXPValue:      s.InPlayXPValue,
+			Value:              s.Value,
+			Total:              s.Total,
+			Min:                s.Min,
+			Max:                s.Max,
+			ExperienceCheck:    s.ExperienceCheck,
 		}
 		// Remove base skill from map
 		delete(c.Skills, s.CoreString)
 	} else {
+		sk := c.Skills[skillName]
 		// Modify existing skill
-		if c.Skills[skillName].Base < s.Base {
+		if sk.Base < s.Base {
 			// Change Skill.Base if advantageous
-			c.Skills[skillName].Base = s.Base
+			sk.Base = s.Base
 		}
-		// Add or subtract s.Value from skill
-		c.Skills[skillName].Value += s.Value
+		// Add or subtract s.XXValue from skill
+		sk.Value += s.Value
+		sk.HomelandValue += s.HomelandValue
+		sk.OccupationValue += s.OccupationValue
+		sk.CultValue += s.CultValue
+		sk.CreationBonusValue += s.CreationBonusValue
+		sk.InPlayXPValue += s.InPlayXPValue
 	}
 }

@@ -16,7 +16,7 @@ type Character struct {
 	Cult            *Cult
 	Abilities       map[string]*Ability
 	Statistics      map[string]*Statistic
-	DerivedStats    map[string]*DerivedStat
+	Attributes      map[string]*Attribute
 	DerivedMap      []string
 	Skills          map[string]*Skill
 	SkillMap        []string
@@ -45,7 +45,7 @@ type Update struct {
 func (c *Character) UpdateCharacter() {
 	c.TotalStatistics()
 	c.DetermineSkillCategoryValues()
-	c.UpdateDerivedStats()
+	c.UpdateAttributes()
 }
 
 func (c Character) String() string {
@@ -60,7 +60,7 @@ func (c Character) String() string {
 	}
 
 	text += "\nDerived Stats:\n"
-	for _, ds := range c.DerivedStats {
+	for _, ds := range c.Attributes {
 		text += fmt.Sprintf("%s\n", ds)
 	}
 

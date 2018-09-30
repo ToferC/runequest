@@ -87,17 +87,32 @@ func (c *Character) ApplyCult() {
 func (c *Character) RemoveCult() {
 
 	for _, s := range c.Cult.Skills {
-		s.Value *= -1
+		s.HomelandValue = 0
+
+		if s.Base > 0 {
+			s.Base += s.Base * -1
+		}
+
 		c.ModifySkill(s)
 	}
 
 	for _, p := range c.Cult.Passions {
-		p.Value *= -1
+		p.HomelandValue = 0
+
+		if p.Base > 0 {
+			p.Base += p.Base * -1
+		}
+
 		c.ModifyAbility(p)
 	}
 
 	for _, a := range c.Cult.Abilities {
-		a.Value *= -1
+		a.HomelandValue = 0
+
+		if a.Base > 0 {
+			a.Base += a.Base * -1
+		}
+
 		c.ModifyAbility(a)
 	}
 }

@@ -7,5 +7,5 @@ type Spell struct {
 	Range       int
 	Duration    string
 	Cost        int
-	Source      *DerivedStat
+	Source      *Attribute
 }

@@ -2,8 +2,8 @@ package runequest
 
 import "fmt"
 
-// DerivedStat is a Character element that is based off other elements
-type DerivedStat struct {
+// Attribute is a Character element that is based off other elements
+type Attribute struct {
 	Name     string
 	MaxValue int
 	Value    int
@@ -15,8 +15,8 @@ type DerivedStat struct {
 	Text     string
 }
 
-// SetDerivedStats determines initial derived stats for the character
-func (c *Character) SetDerivedStats() {
+// SetAttributes determines initial derived stats for the character
+func (c *Character) SetAttributes() {
 
 	mp := c.DetermineMagicPoints()
 	hp := c.DetermineHitPoints()
@@ -26,7 +26,7 @@ func (c *Character) SetDerivedStats() {
 	dx := c.DetermineDexStrikeRank()
 	sz := c.DetermineSizStrikeRank()
 
-	c.DerivedStats = map[string]*DerivedStat{
+	c.Attributes = map[string]*Attribute{
 		"MP":    mp,
 		"HP":    hp,
 		"HR":    hr,
@@ -37,14 +37,14 @@ func (c *Character) SetDerivedStats() {
 	}
 }
 
-// UpdateDerivedStats totals base & value for DerivedStat
-func (c *Character) UpdateDerivedStats() {
-	for _, v := range c.DerivedStats {
+// UpdateAttributes totals base & value for Attribute
+func (c *Character) UpdateAttributes() {
+	for _, v := range c.Attributes {
 		v.Total = v.Base + v.Value
 	}
 }
 
-func (d *DerivedStat) String() string {
+func (d *Attribute) String() string {
 
 	d.Total = d.Base + d.Value
 
@@ -59,8 +59,8 @@ func (d *DerivedStat) String() string {
 }
 
 // DetermineMagicPoints calculates magic points for a Character
-func (c *Character) DetermineMagicPoints() *DerivedStat {
-	mp := &DerivedStat{
+func (c *Character) DetermineMagicPoints() *Attribute {
+	mp := &Attribute{
 		Name:     "Magic Points",
 		MaxValue: 21,
 	}
@@ -76,9 +76,9 @@ func (c *Character) DetermineMagicPoints() *DerivedStat {
 }
 
 // DetermineHitPoints calculates hit points for a Character
-func (c *Character) DetermineHitPoints() *DerivedStat {
+func (c *Character) DetermineHitPoints() *Attribute {
 
-	hp := &DerivedStat{
+	hp := &Attribute{
 		Name:     "Hit Points",
 		MaxValue: 21,
 	}
@@ -148,9 +148,9 @@ func (c *Character) DetermineHitPoints() *DerivedStat {
 }
 
 // DetermineHealingRate determines the Character's healingrate based on Con
-func (c *Character) DetermineHealingRate() *DerivedStat {
+func (c *Character) DetermineHealingRate() *Attribute {
 
-	healingRate := &DerivedStat{
+	healingRate := &Attribute{
 		Name: "Healing Rate",
 		Max:  21,
 	}
@@ -175,9 +175,9 @@ func (c *Character) DetermineHealingRate() *DerivedStat {
 }
 
 // DetermineDamageBonus determines the Character's healingrate based on Con
-func (c *Character) DetermineDamageBonus() *DerivedStat {
+func (c *Character) DetermineDamageBonus() *Attribute {
 
-	damageBonus := &DerivedStat{
+	damageBonus := &Attribute{
 		Name: "Damage Bonus",
 		Max:  21,
 		Dice: 1,
@@ -221,9 +221,9 @@ func (c *Character) DetermineDamageBonus() *DerivedStat {
 }
 
 // DetermineSpiritDamage determines the Character's healingrate based on Con
-func (c *Character) DetermineSpiritDamage() *DerivedStat {
+func (c *Character) DetermineSpiritDamage() *Attribute {
 
-	damage := &DerivedStat{
+	damage := &Attribute{
 		Name: "Spirit Damage",
 		Max:  21,
 		Dice: 1,
@@ -271,9 +271,9 @@ func (c *Character) DetermineSpiritDamage() *DerivedStat {
 }
 
 // DetermineDexStrikeRank determines the Character's healingrate based on Con
-func (c *Character) DetermineDexStrikeRank() *DerivedStat {
+func (c *Character) DetermineDexStrikeRank() *Attribute {
 
-	dexSR := &DerivedStat{
+	dexSR := &Attribute{
 		Name: "DEX Strike Rank",
 		Max:  5,
 	}
@@ -300,9 +300,9 @@ func (c *Character) DetermineDexStrikeRank() *DerivedStat {
 }
 
 // DetermineSizStrikeRank determines the Character's healingrate based on Con
-func (c *Character) DetermineSizStrikeRank() *DerivedStat {
+func (c *Character) DetermineSizStrikeRank() *Attribute {
 
-	sizSR := &DerivedStat{
+	sizSR := &Attribute{
 		Name: "SIZ Strike Rank",
 		Max:  5,
 	}

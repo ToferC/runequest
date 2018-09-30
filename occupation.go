@@ -90,17 +90,32 @@ func (c *Character) ApplyOccupation() {
 func (c *Character) RemoveOccupation() {
 
 	for _, s := range c.Occupation.Skills {
-		s.Value *= -1
+		s.HomelandValue = 0
+
+		if s.Base > 0 {
+			s.Base += s.Base * -1
+		}
+
 		c.ModifySkill(s)
 	}
 
 	for _, p := range c.Occupation.Passions {
-		p.Value *= -1
+		p.HomelandValue = 0
+
+		if p.Base > 0 {
+			p.Base += p.Base * -1
+		}
+
 		c.ModifyAbility(p)
 	}
 
 	for _, a := range c.Occupation.Abilities {
-		a.Value *= -1
+		a.HomelandValue = 0
+
+		if a.Base > 0 {
+			a.Base += a.Base * -1
+		}
+
 		c.ModifyAbility(a)
 	}
 }
