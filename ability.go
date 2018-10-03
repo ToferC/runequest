@@ -57,6 +57,12 @@ var PowerRuneOrder = []string{
 	"Movement", "Stasis",
 }
 
+// PassionTypes represents different passions in Glorantha
+var PassionTypes = []string{
+	"Devotion", "Fear", "Hate", "Honor",
+	"Loyalty", "Love",
+}
+
 func (a *Ability) String() string {
 
 	a.UpdateAbility()
