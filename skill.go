@@ -30,6 +30,16 @@ type SkillChoice struct {
 
 // UpdateSkill totals skill values based on input
 func (s *Skill) UpdateSkill() {
+
+	var n string
+
+	if s.UserChoice {
+		n = fmt.Sprintf("%s (%s)", s.CoreString, s.UserString)
+	} else {
+		n = s.CoreString
+	}
+
+	s.Name = n
 	s.Total = s.Base + s.CategoryValue + s.HomelandValue + s.OccupationValue + s.CultValue + s.CreationBonusValue + s.InPlayXPValue + s.Value
 }
 

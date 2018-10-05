@@ -201,11 +201,13 @@ var Occupations = map[string]*Occupation{
 					// Skill 1
 					Skill{
 						Name:            "Jump",
+						CoreString:      "Jump",
 						OccupationValue: 10,
 					},
 					// Skill 2
 					Skill{
 						Name:            "Climb",
+						CoreString:      "Climb",
 						OccupationValue: 10,
 					},
 				},
