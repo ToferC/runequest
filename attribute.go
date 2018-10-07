@@ -4,15 +4,17 @@ import "fmt"
 
 // Attribute is a Character element that is based off other elements
 type Attribute struct {
-	Name     string
-	MaxValue int
-	Value    int
-	Base     int
-	Total    int
-	Dice     int
-	Max      int
-	Min      int
-	Text     string
+	Name            string
+	MaxValue        int
+	Value           int
+	Base            int
+	Updates         []*Update
+	Total           int
+	Dice            int
+	Max             int
+	Min             int
+	Text            string
+	ExperienceCheck bool
 }
 
 // SetAttributes determines initial derived stats for the character

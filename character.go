@@ -35,10 +35,9 @@ type Character struct {
 
 // Update tracks live changes to Character
 type Update struct {
-	Date       string
-	ChangeFrom string
-	ChangeTo   string
-	Cost       int
+	Date  string
+	Event string
+	Value int
 }
 
 // UpdateCharacter updates stats, runes and skills based on them

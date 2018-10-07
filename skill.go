@@ -15,6 +15,7 @@ type Skill struct {
 	OccupationValue    int
 	CultValue          int
 	CreationBonusValue int
+	Updates            []*Update
 	Value              int
 	InPlayXPValue      int
 	Total              int
