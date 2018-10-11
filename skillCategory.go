@@ -22,7 +22,7 @@ func (sc SkillCategory) String() string {
 }
 
 // CategoryOrder sets the order of skills in Runequest
-var CategoryOrder = []string{"Agility", "Communication", "Knowledge", "Magic", "Manipulation", "Perception", "Stealth"}
+var CategoryOrder = []string{"Agility", "Communication", "Knowledge", "Magic", "Manipulation", "Perception", "Stealth", "Weapon"}
 
 type statMods struct {
 	statistic string
@@ -211,6 +211,52 @@ var SkillCategories = map[string]*SkillCategory{
 	// Manipulation
 	"Manipulation": &SkillCategory{
 		Name: "Manipulation",
+		StatModifiers: []statMods{
+			statMods{
+				statistic: "STR",
+				values: map[int]int{
+					4:  -5,
+					8:  0,
+					12: 0,
+					16: 0,
+					20: 5,
+				},
+			},
+			statMods{
+				statistic: "DEX",
+				values: map[int]int{
+					4:  -10,
+					8:  -5,
+					12: 0,
+					16: 5,
+					20: 10,
+				},
+			},
+			statMods{
+				statistic: "INT",
+				values: map[int]int{
+					4:  -10,
+					8:  -5,
+					12: 0,
+					16: 5,
+					20: 10,
+				},
+			},
+			statMods{
+				statistic: "POW",
+				values: map[int]int{
+					4:  -5,
+					8:  0,
+					12: 0,
+					16: 0,
+					20: 5,
+				},
+			},
+		},
+	},
+	// Weapon
+	"Weapon": &SkillCategory{
+		Name: "Weapon",
 		StatModifiers: []statMods{
 			statMods{
 				statistic: "STR",

@@ -5,6 +5,7 @@ type Occupation struct {
 	Name             string
 	Description      string
 	Skills           []Skill
+	Weapons          map[string]Skill
 	SkillChoices     []SkillChoice
 	StandardOfLiving string
 	Income           int
