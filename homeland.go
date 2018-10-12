@@ -34,6 +34,7 @@ func (c *Character) ChooseHomeland(hl *Homeland) {
 func (c *Character) ApplyHomeland() {
 
 	for _, s := range c.Homeland.Skills {
+		s.generateName()
 		c.ModifySkill(s)
 	}
 

@@ -320,190 +320,190 @@ var Skills = map[string]*Skill{
 		Category:   "Manipulation",
 	},
 
-	// Melee Weapons
+	// Melee Melees
 	"1H Axe": &Skill{
 		CoreString: "1H Axe",
 		Base:       10,
-		Category:   "Weapon",
+		Category:   "Melee",
 	},
 	"2H Axe": &Skill{
 		CoreString: "2H Axe",
 		Base:       5,
-		Category:   "Weapon",
+		Category:   "Melee",
 	},
 	"Battle Axe": &Skill{
 		CoreString: "Battle Axe",
 		Base:       10,
-		Category:   "Weapon",
+		Category:   "Melee",
 	},
 	"Broadsword": &Skill{
 		CoreString: "Broadsword",
 		Base:       10,
-		Category:   "Weapon",
+		Category:   "Melee",
 	},
 	"Dagger": &Skill{
 		CoreString: "Dagger",
 		Base:       15,
-		Category:   "Weapon",
+		Category:   "Melee",
 	},
 	"Fist": &Skill{
 		CoreString: "Fist",
 		Base:       25,
-		Category:   "Weapon",
+		Category:   "Melee",
 	},
 	"Grapple": &Skill{
 		CoreString: "Grapple",
 		Base:       25,
-		Category:   "Weapon",
+		Category:   "Melee",
 	},
 	"1H Hammer": &Skill{
 		CoreString: "1H Hammer",
 		Base:       10,
-		Category:   "Weapon",
+		Category:   "Melee",
 	},
 	"2H Hammer": &Skill{
 		CoreString: "2H Hammer",
 		Base:       5,
-		Category:   "Weapon",
+		Category:   "Melee",
 	},
 	"Kick": &Skill{
 		CoreString: "Kick",
 		Base:       15,
-		Category:   "Weapon",
+		Category:   "Melee",
 	},
 	"Kopis": &Skill{
 		CoreString: "Kopis",
 		Base:       10,
-		Category:   "Weapon",
+		Category:   "Melee",
 	},
 	"1H Mace": &Skill{
 		CoreString: "1H Mace",
 		Base:       15,
-		Category:   "Weapon",
+		Category:   "Melee",
 	},
 	"2H Mace": &Skill{
 		CoreString: "2H Mace",
 		Base:       10,
-		Category:   "Weapon",
+		Category:   "Melee",
 	},
 	"Pike": &Skill{
 		CoreString: "Pike",
 		Base:       15,
-		Category:   "Weapon",
+		Category:   "Melee",
 	},
 	"Quarterstaff": &Skill{
 		CoreString: "Quarterstaff",
 		Base:       15,
-		Category:   "Weapon",
+		Category:   "Melee",
 	},
 	"Rapier": &Skill{
 		CoreString: "Rapier",
 		Base:       5,
-		Category:   "Weapon",
+		Category:   "Melee",
 	},
 	"Shortsword": &Skill{
 		CoreString: "Shortsword",
 		Base:       10,
-		Category:   "Weapon",
+		Category:   "Melee",
 	},
 	"1H Spear": &Skill{
 		CoreString: "1H Spear",
 		Base:       05,
-		Category:   "Weapon",
+		Category:   "Melee",
 	},
 	"2H Spear": &Skill{
 		CoreString: "2H Spear",
 		Base:       15,
-		Category:   "Weapon",
+		Category:   "Melee",
 	},
 
 	// Missile Weapons
 	"Arbalest": &Skill{
 		CoreString: "Arbalest",
 		Base:       10,
-		Category:   "Weapon",
+		Category:   "Ranged",
 	},
 	"Axe, Throwing": &Skill{
 		CoreString: "Axe, Throwing",
 		Base:       10,
-		Category:   "Weapon",
+		Category:   "Ranged",
 	},
 	"Composite Bow": &Skill{
 		CoreString: "Composite Bow",
 		Base:       5,
-		Category:   "Weapon",
+		Category:   "Ranged",
 	},
 	"Crossbows": &Skill{
 		CoreString: "Crossbows",
 		Base:       25,
-		Category:   "Weapon",
+		Category:   "Ranged",
 	},
 	"Dagger, Throwing": &Skill{
 		CoreString: "Dagger, Throwing",
 		Base:       5,
-		Category:   "Weapon",
+		Category:   "Ranged",
 	},
 	"Elf Bow": &Skill{
 		CoreString: "Elf Bow",
 		Base:       5,
-		Category:   "Weapon",
+		Category:   "Ranged",
 	},
 	"Javelin": &Skill{
 		CoreString: "Javelin",
 		Base:       10,
-		Category:   "Weapon",
+		Category:   "Ranged",
 	},
 	"Pole Lasso": &Skill{
 		CoreString: "Pole Lasso",
 		Base:       5,
-		Category:   "Weapon",
+		Category:   "Ranged",
 	},
 	"Rock": &Skill{
 		CoreString: "Rock",
 		Base:       15,
-		Category:   "Weapon",
+		Category:   "Ranged",
 	},
 	"Self Bow": &Skill{
 		CoreString: "Self Bow",
 		Base:       5,
-		Category:   "Weapon",
+		Category:   "Ranged",
 	},
 	"Sling": &Skill{
 		CoreString: "Sling",
 		Base:       5,
-		Category:   "Weapon",
+		Category:   "Ranged",
 	},
 	"Staff Sling": &Skill{
 		CoreString: "Staff Sling",
 		Base:       10,
-		Category:   "Weapon",
+		Category:   "Ranged",
 	},
 	"Thrown Axe": &Skill{
 		CoreString: "Thrown Axe",
 		Base:       10,
-		Category:   "Weapon",
+		Category:   "Ranged",
 	},
 	"Throwing Dagger": &Skill{
 		CoreString: "Throwing Dagger",
 		Base:       10,
-		Category:   "Weapon",
+		Category:   "Ranged",
 	},
 
 	// Shields
 	"Large Shield": &Skill{
 		CoreString: "Large Shield",
 		Base:       15,
-		Category:   "Weapon",
+		Category:   "Shield",
 	},
 	"Medium Shield": &Skill{
 		CoreString: "Medium Shield",
 		Base:       15,
-		Category:   "Weapon",
+		Category:   "Shield",
 	},
 	"Small Shield": &Skill{
 		CoreString: "Small Shield",
 		Base:       15,
-		Category:   "Weapon",
+		Category:   "Shield",
 	},
 
 	// Perception

@@ -35,6 +35,7 @@ func main() {
 	}
 
 	c.UpdateCharacter()
+
 	fmt.Println("Homeland")
 	c.ChooseHomeland(runequest.Homelands["Sartar"])
 	fmt.Println("Occupation")
@@ -44,13 +45,13 @@ func main() {
 
 	c.ModifySkill(
 		runequest.Skill{
-			Name:  "Broadsword",
-			Value: 25,
+			CoreString: "Broadsword",
+			Value:      25,
 		})
 
 	c.ModifyAbility(
 		runequest.Ability{
-			Name:       "Loyalty (Kallyr Starbrow)",
+			Name:       "Loyalty",
 			CoreString: "Loyalty",
 			UserString: "Kallyr Starbrow",
 			Base:       60,
@@ -60,7 +61,7 @@ func main() {
 
 	c.ModifyAbility(
 		runequest.Ability{
-			Name:       "Loyalty (Kallyr Starbrow)",
+			Name:       "Loyalty",
 			CoreString: "Loyalty",
 			UserString: "Kallyr Starbrow",
 			Base:       60,

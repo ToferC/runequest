@@ -5,7 +5,7 @@ type Occupation struct {
 	Name             string
 	Description      string
 	Skills           []Skill
-	Weapons          map[string]Skill
+	Weapons          []WeaponSelection
 	SkillChoices     []SkillChoice
 	StandardOfLiving string
 	Income           int
@@ -16,6 +16,12 @@ type Occupation struct {
 	AbilityChoices   []AbilityChoice
 	Ransom           int
 	Equipment        []string
+}
+
+// WeaponSelection represents a Weapon Choice under Occupation
+type WeaponSelection struct {
+	Description string
+	Value       int
 }
 
 // ChooseOccupation modifies a character's skills by Occupation
@@ -32,6 +38,9 @@ func (c *Character) ChooseOccupation(o *Occupation) {
 		// Already has a Occupation & need to remove previous Occupation skills
 	}
 }
+
+// WeaponCategories is an array of weapon choices for occupations
+var WeaponCategories = []string{"Any", "Melee", "Ranged", "Shield", "Cultural"}
 
 // ApplyOccupation applies a Occupation Template to a character
 func (c *Character) ApplyOccupation() {

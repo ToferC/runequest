@@ -16,66 +16,71 @@ var Homelands = map[string]*Homeland{
 				Category:      "Agility",
 			},
 			Skill{
-				Name:          "Dance",
+				CoreString:    "Dance",
 				HomelandValue: 5,
 			},
 			Skill{
-				Name:          "Sing",
+				CoreString:    "Sing",
 				HomelandValue: 10,
 			},
 			Skill{
-				Name:     "Speak (Heortling)",
-				Base:     50,
-				Category: "Communication",
+				Name:       "Speak",
+				CoreString: "Speak",
+				UserString: "Heortling",
+				Base:       50,
+				Category:   "Communication",
 			},
 			Skill{
-				Name:          "Speak (Tradetalk)",
+				Name:          "Speak",
+				UserString:    "Tradetalk",
 				HomelandValue: 10,
 				Category:      "Communication",
 			},
 			Skill{
-				Name:     "Customs (Heortling)",
-				Base:     25,
-				Category: "Knowledge",
+				Name:       "Customs",
+				CoreString: "Customs",
+				UserString: "Heortling",
+				Base:       25,
+				Category:   "Knowledge",
 			},
 			Skill{
-				Name:          "Farm",
+				CoreString:    "Farm",
 				HomelandValue: 20,
 			},
 			Skill{
-				Name:          "Herd",
+				CoreString:    "Herd",
 				HomelandValue: 10,
 			},
 			Skill{
-				Name:          "Spirit Combat",
+				CoreString:    "Spirit Combat",
 				HomelandValue: 15,
 			},
 			Skill{
-				Name:          "Dagger",
+				CoreString:    "Dagger",
 				HomelandValue: 10,
 			},
 			Skill{
-				Name:          "Broadsword",
+				CoreString:    "Broadsword",
 				HomelandValue: 15,
 			},
 			Skill{
-				Name:          "Battle Axe",
+				CoreString:    "Battle Axe",
 				HomelandValue: 10,
 			},
 			Skill{
-				Name:          "1H Spear",
+				CoreString:    "1H Spear",
 				HomelandValue: 10,
 			},
 			Skill{
-				Name:          "Javelin",
+				CoreString:    "Javelin",
 				HomelandValue: 10,
 			},
 			Skill{
-				Name:          "Medium Shield",
+				CoreString:    "Medium Shield",
 				HomelandValue: 15,
 			},
 			Skill{
-				Name:          "Large Shield",
+				CoreString:    "Large Shield",
 				HomelandValue: 10,
 			},
 		},
@@ -86,13 +91,13 @@ var Homelands = map[string]*Homeland{
 				Skills: []Skill{
 					// Skill 1
 					Skill{
-						Name:          "Composite Bow",
+						CoreString:    "Composite Bow",
 						Base:          5,
 						HomelandValue: 10,
 					},
 					// Skill 2
 					Skill{
-						Name:          "Sling",
+						CoreString:    "Sling",
 						HomelandValue: 10,
 					},
 				},
@@ -112,7 +117,7 @@ var Homelands = map[string]*Homeland{
 		PassionList: []Ability{
 			// Ability 1
 			Ability{
-				Name:          "Loyalty (Sartar)",
+				Name:          "Loyalty",
 				CoreString:    "Loyalty",
 				UserString:    "Sartar",
 				UserChoice:    true,
@@ -122,7 +127,7 @@ var Homelands = map[string]*Homeland{
 			},
 			// Ability 2
 			Ability{
-				Name:          "Loyalty (clan)",
+				Name:          "Loyalty",
 				CoreString:    "Loyalty",
 				UserString:    "clan",
 				Type:          "Passion",
@@ -132,7 +137,7 @@ var Homelands = map[string]*Homeland{
 			},
 			// Ability 3
 			Ability{
-				Name:          "Loyalty (tribe)",
+				Name:          "Loyalty",
 				CoreString:    "Loyalty",
 				UserString:    "tribe",
 				Type:          "Passion",
@@ -151,12 +156,15 @@ var Occupations = map[string]*Occupation{
 		Name: "Farmer",
 		Skills: []Skill{
 			Skill{
-				Name:            "Occupation Lore (Local)",
+				Name:            "Occupation Lore",
+				CoreString:      "Occupation Lore",
+				UserString:      "Local",
+				UserChoice:      true,
 				OccupationValue: 15,
 				Category:        "Knowledge",
 			},
 			Skill{
-				Name:            "Farm",
+				CoreString:      "Farm",
 				OccupationValue: 30,
 			},
 			Skill{
@@ -169,27 +177,27 @@ var Occupations = map[string]*Occupation{
 				Category:        "Manipulation",
 			},
 			Skill{
-				Name:            "First Aid",
+				CoreString:      "First Aid",
 				OccupationValue: 10,
 			},
 			Skill{
-				Name:            "Scan",
+				CoreString:      "Scan",
 				OccupationValue: 10,
 			},
 			Skill{
-				Name:            "Herd",
+				CoreString:      "Herd",
 				OccupationValue: 15,
 			},
 			Skill{
-				Name:            "Manage Household",
+				CoreString:      "Manage Household",
 				OccupationValue: 30,
 			},
 			Skill{
-				Name:            "Medium Shield",
+				CoreString:      "Medium Shield",
 				OccupationValue: 15,
 			},
 			Skill{
-				Name:            "Broadsword",
+				CoreString:      "Broadsword",
 				OccupationValue: 15,
 			},
 		},
@@ -217,7 +225,7 @@ var Occupations = map[string]*Occupation{
 		PassionList: []Ability{
 			// Ability 1
 			Ability{
-				Name:            "Love (family)",
+				Name:            "Love",
 				CoreString:      "Love",
 				UserString:      "family",
 				UserChoice:      true,
@@ -227,7 +235,7 @@ var Occupations = map[string]*Occupation{
 			},
 			// Ability 2
 			Ability{
-				Name:            "Loyalty (clan)",
+				Name:            "Loyalty",
 				CoreString:      "Loyalty",
 				UserString:      "clan",
 				Type:            "Passion",
@@ -237,7 +245,7 @@ var Occupations = map[string]*Occupation{
 			},
 			// Ability 3
 			Ability{
-				Name:            "Loyalty (tribe)",
+				Name:            "Loyalty",
 				CoreString:      "Loyalty",
 				UserString:      "tribe",
 				Type:            "Passion",
@@ -256,38 +264,40 @@ var Cults = map[string]*Cult{
 		Name: "Orlanth",
 		Skills: []Skill{
 			Skill{
-				Name:      "Cult Lore (Orlanth)",
-				CultValue: 15,
-				Category:  "Knowledge",
+				CoreString: "Cult Lore",
+				CultValue:  15,
+				Category:   "Knowledge",
 			},
 			Skill{
-				Name:      "Worship (Orlanth)",
-				CultValue: 15,
-				Category:  "Magic",
+				CoreString: "Worship",
+				CultValue:  15,
+				Category:   "Magic",
 			},
 			Skill{
-				Name:      "Meditate",
-				CultValue: 25,
+				CoreString: "Meditate",
+				CultValue:  25,
 			},
 			Skill{
-				Name:      "Orate",
-				CultValue: 30,
+				CoreString: "Orate",
+				CultValue:  30,
 			},
 			Skill{
-				Name:      "Sing",
-				CultValue: 10,
+				CoreString: "Sing",
+				CultValue:  10,
 			},
 			Skill{
-				Name:      "Speak (Stormspeech)",
-				CultValue: 10,
-				Category:  "Communication",
+				CoreString: "Speak",
+				UserString: "Stormspeech",
+				UserChoice: true,
+				CultValue:  10,
+				Category:   "Communication",
 			},
 		},
 		// Passions
 		PassionList: []Ability{
 			// Ability 1
 			Ability{
-				Name:       "Devotion (Orlanth)",
+				Name:       "Devotion",
 				CoreString: "Devotion",
 				UserString: "Orlanth",
 				UserChoice: true,
@@ -297,7 +307,7 @@ var Cults = map[string]*Cult{
 			},
 			// Ability 2
 			Ability{
-				Name:       "Hate (Chaos)",
+				Name:       "Hate",
 				CoreString: "Hate",
 				UserString: "Chaos",
 				Type:       "Passion",
@@ -307,7 +317,7 @@ var Cults = map[string]*Cult{
 			},
 			// Ability 3
 			Ability{
-				Name:       "Loyalty (temple)",
+				Name:       "Loyalty",
 				CoreString: "Loyalty",
 				UserString: "temple",
 				Type:       "Passion",

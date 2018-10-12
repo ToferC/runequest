@@ -32,16 +32,22 @@ type SkillChoice struct {
 // UpdateSkill totals skill values based on input
 func (s *Skill) UpdateSkill() {
 
+	s.generateName()
+
+	s.Total = s.Base + s.CategoryValue + s.HomelandValue + s.OccupationValue + s.CultValue + s.CreationBonusValue + s.InPlayXPValue + s.Value
+}
+
+// generateName sets the skill map name
+func (s *Skill) generateName() {
+
 	var n string
 
-	if s.UserChoice {
+	if s.UserString != "" {
 		n = fmt.Sprintf("%s (%s)", s.CoreString, s.UserString)
 	} else {
 		n = s.CoreString
 	}
-
 	s.Name = n
-	s.Total = s.Base + s.CategoryValue + s.HomelandValue + s.OccupationValue + s.CultValue + s.CreationBonusValue + s.InPlayXPValue + s.Value
 }
 
 func (s *Skill) String() string {
@@ -58,7 +64,7 @@ func (s *Skill) String() string {
 // ModifySkill adds or modifies a Skill value
 func (c *Character) ModifySkill(s Skill) {
 
-	var response, skillName string
+	var response string
 
 	if s.UserChoice {
 
@@ -72,16 +78,15 @@ func (c *Character) ModifySkill(s Skill) {
 		if response == "" {
 			response = s.UserString
 		}
-
-		skillName = fmt.Sprintf("%s (%s)", s.CoreString, response)
-	} else {
-		skillName = s.Name
+		s.UserString = response
 	}
 
-	if c.Skills[skillName] == nil {
+	s.generateName()
+
+	if c.Skills[s.Name] == nil {
 		// Create new Skill in map
-		c.Skills[skillName] = &Skill{
-			Name:               skillName,
+		c.Skills[s.Name] = &Skill{
+			Name:               s.Name,
 			Category:           s.Category,
 			CoreString:         s.CoreString,
 			UserChoice:         false,
@@ -102,8 +107,8 @@ func (c *Character) ModifySkill(s Skill) {
 		// Remove base skill from map
 		delete(c.Skills, s.CoreString)
 	} else {
-		sk := c.Skills[skillName]
 		// Modify existing skill
+		sk := c.Skills[s.Name]
 		if sk.Base < s.Base {
 			// Change Skill.Base if advantageous
 			sk.Base = s.Base

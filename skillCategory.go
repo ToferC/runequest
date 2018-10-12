@@ -22,7 +22,8 @@ func (sc SkillCategory) String() string {
 }
 
 // CategoryOrder sets the order of skills in Runequest
-var CategoryOrder = []string{"Agility", "Communication", "Knowledge", "Magic", "Manipulation", "Perception", "Stealth", "Weapon"}
+var CategoryOrder = []string{"Agility", "Communication", "Knowledge", "Magic", "Manipulation", "Perception", "Stealth", "Melee",
+	"Ranged", "Shield"}
 
 type statMods struct {
 	statistic string
@@ -70,6 +71,50 @@ func (c *Character) DetermineSkillCategoryValues() {
 
 		skill.CategoryValue = sc.Value
 	}
+}
+
+// Common SkillCategory for combat skills & manipulation
+var manipulationMods = []statMods{
+	statMods{
+		statistic: "STR",
+		values: map[int]int{
+			4:  -5,
+			8:  0,
+			12: 0,
+			16: 0,
+			20: 5,
+		},
+	},
+	statMods{
+		statistic: "DEX",
+		values: map[int]int{
+			4:  -10,
+			8:  -5,
+			12: 0,
+			16: 5,
+			20: 10,
+		},
+	},
+	statMods{
+		statistic: "INT",
+		values: map[int]int{
+			4:  -10,
+			8:  -5,
+			12: 0,
+			16: 5,
+			20: 10,
+		},
+	},
+	statMods{
+		statistic: "POW",
+		values: map[int]int{
+			4:  -5,
+			8:  0,
+			12: 0,
+			16: 0,
+			20: 5,
+		},
+	},
 }
 
 // SkillCategories is a map of skill categories
@@ -210,95 +255,21 @@ var SkillCategories = map[string]*SkillCategory{
 	},
 	// Manipulation
 	"Manipulation": &SkillCategory{
-		Name: "Manipulation",
-		StatModifiers: []statMods{
-			statMods{
-				statistic: "STR",
-				values: map[int]int{
-					4:  -5,
-					8:  0,
-					12: 0,
-					16: 0,
-					20: 5,
-				},
-			},
-			statMods{
-				statistic: "DEX",
-				values: map[int]int{
-					4:  -10,
-					8:  -5,
-					12: 0,
-					16: 5,
-					20: 10,
-				},
-			},
-			statMods{
-				statistic: "INT",
-				values: map[int]int{
-					4:  -10,
-					8:  -5,
-					12: 0,
-					16: 5,
-					20: 10,
-				},
-			},
-			statMods{
-				statistic: "POW",
-				values: map[int]int{
-					4:  -5,
-					8:  0,
-					12: 0,
-					16: 0,
-					20: 5,
-				},
-			},
-		},
+		Name:          "Manipulation",
+		StatModifiers: manipulationMods,
 	},
-	// Weapon
-	"Weapon": &SkillCategory{
-		Name: "Weapon",
-		StatModifiers: []statMods{
-			statMods{
-				statistic: "STR",
-				values: map[int]int{
-					4:  -5,
-					8:  0,
-					12: 0,
-					16: 0,
-					20: 5,
-				},
-			},
-			statMods{
-				statistic: "DEX",
-				values: map[int]int{
-					4:  -10,
-					8:  -5,
-					12: 0,
-					16: 5,
-					20: 10,
-				},
-			},
-			statMods{
-				statistic: "INT",
-				values: map[int]int{
-					4:  -10,
-					8:  -5,
-					12: 0,
-					16: 5,
-					20: 10,
-				},
-			},
-			statMods{
-				statistic: "POW",
-				values: map[int]int{
-					4:  -5,
-					8:  0,
-					12: 0,
-					16: 0,
-					20: 5,
-				},
-			},
-		},
+	// Weapons
+	"Melee": &SkillCategory{
+		Name:          "Melee",
+		StatModifiers: manipulationMods,
+	},
+	"Ranged": &SkillCategory{
+		Name:          "Ranged",
+		StatModifiers: manipulationMods,
+	},
+	"Shield": &SkillCategory{
+		Name:          "Shield",
+		StatModifiers: manipulationMods,
 	},
 	// Perception
 	"Perception": &SkillCategory{
