@@ -18,7 +18,7 @@ type Occupation struct {
 	Equipment        []string
 }
 
-// WeaponSelection represents a Weapon Choice under Occupation
+// WeaponSelection represents a Weapon Choice under Occupationg
 type WeaponSelection struct {
 	Description string
 	Value       int
@@ -41,6 +41,9 @@ func (c *Character) ChooseOccupation(o *Occupation) {
 
 // WeaponCategories is an array of weapon choices for occupations
 var WeaponCategories = []string{"Any", "Melee", "Ranged", "Shield", "Cultural"}
+
+// Standards is an array with options for Standards of Living
+var Standards = []string{"Destitute", "Poor", "Free", "Noble"}
 
 // ApplyOccupation applies a Occupation Template to a character
 func (c *Character) ApplyOccupation() {

@@ -190,6 +190,13 @@ var Skills = map[string]*Skill{
 		Base:       0,
 		Category:   "Knowledge",
 	},
+	"Lore": &Skill{
+		CoreString: "Lore",
+		UserChoice: true,
+		UserString: "Local",
+		Base:       0,
+		Category:   "Knowledge",
+	},
 	"Manage Household": &Skill{
 		CoreString: "Manage Household",
 		Base:       10,
@@ -507,8 +514,10 @@ var Skills = map[string]*Skill{
 	},
 
 	// Perception
-	"Insight (species)": &Skill{
-		CoreString: "Insight (species)",
+	"Insight": &Skill{
+		CoreString: "Insight",
+		UserChoice: true,
+		UserString: "Species",
 		Base:       20,
 		Category:   "Perception",
 	},
