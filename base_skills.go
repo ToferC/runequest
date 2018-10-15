@@ -265,6 +265,13 @@ var Skills = map[string]*Skill{
 		Base:       0,
 		Category:   "Magic",
 	},
+	"Sorcery": &Skill{
+		CoreString: "Sorcery",
+		UserChoice: true,
+		UserString: "Spell",
+		Base:       0,
+		Category:   "Magic",
+	},
 	"Spirit Combat": &Skill{
 		CoreString: "Spirit Combat",
 		Base:       20,

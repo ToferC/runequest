@@ -4,14 +4,18 @@ package runequest
 type Cult struct {
 	Name           string
 	Description    string
+	SubCult        bool
+	Runes          []string
 	Skills         []Skill
 	SkillChoices   []SkillChoice
 	Abilities      []Ability
 	AbilityChoices []AbilityChoice
+	Weapons        []WeaponSelection
 	PassionList    []Ability
 	Passions       []Ability
-	SpellList      []*Spell
-	Spells         []Spell
+	RuneSpells     []Spell
+	SpiritMagic    []Spell
+	SubCults       []Cult
 }
 
 // ChooseCult modifies a character's skills by Cult
