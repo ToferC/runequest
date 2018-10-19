@@ -8,6 +8,7 @@ type Homeland struct {
 	// Base Skill List
 	SkillChoices []SkillChoice
 	// Options for skills
+	RuneBonus      string
 	Abilities      []Ability
 	AbilityChoices []AbilityChoice
 	AbilityList    []Ability

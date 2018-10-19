@@ -35,7 +35,7 @@ var RuneSpells = []Spell{
 		Cost:        1,
 	},
 	Spell{
-		CoreString:  "Analyxe Magic",
+		CoreString:  "Analyze Magic",
 		Description: "",
 		Domain:      "Rune",
 		Source:      "Sky/Wind",
