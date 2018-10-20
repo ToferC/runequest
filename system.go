@@ -38,10 +38,8 @@ func (c *Character) AddRuneModifiers() {
 
 	var runes []*Ability
 
-	for _, a := range c.Abilities {
-		if a.Type == "Elemental Rune" {
-			runes = append(runes, a)
-		}
+	for _, a := range c.ElementalRunes {
+		runes = append(runes, a)
 	}
 
 	// Sort Runes

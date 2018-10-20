@@ -79,6 +79,20 @@ func (c Character) String() string {
 		}
 	}
 
+	text += "\nElemental Runes:"
+
+	for _, ability := range c.ElementalRunes {
+
+		text += fmt.Sprintf("\n%s", ability)
+	}
+
+	text += "\nPower Runes:"
+
+	for _, ability := range c.ElementalRunes {
+
+		text += fmt.Sprintf("\n%s", ability)
+	}
+
 	text += "\n\nSkills:"
 
 	keys := make([]string, 0, len(c.Skills))
