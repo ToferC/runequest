@@ -7,6 +7,8 @@ type Statistic struct {
 	Name            string
 	Value           int
 	Base            int
+	RuneBonus       int
+	Updates         []*Update
 	Total           int
 	Max             int
 	Min             int
@@ -29,7 +31,14 @@ var StatMap = []string{
 func (c *Character) TotalStatistics() {
 
 	for _, s := range c.Statistics {
-		s.Total = s.Base + s.Value
+
+		updates := 0
+
+		for _, u := range s.Updates {
+			updates += u.Value
+		}
+
+		s.Total = s.Base + s.Value + s.RuneBonus + updates
 	}
 }
 

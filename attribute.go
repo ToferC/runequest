@@ -42,7 +42,14 @@ func (c *Character) SetAttributes() {
 // UpdateAttributes totals base & value for Attribute
 func (c *Character) UpdateAttributes() {
 	for _, v := range c.Attributes {
-		v.Total = v.Base + v.Value
+
+		updates := 0
+
+		for _, u := range v.Updates {
+			updates += u.Value
+		}
+
+		v.Total = v.Base + v.Value + updates
 	}
 }
 

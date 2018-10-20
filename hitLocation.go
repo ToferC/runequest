@@ -8,6 +8,7 @@ type HitLocation struct {
 	HitLoc   []int
 	Max      int
 	Value    int
+	Updates  []*Update
 	Wounds   []bool
 	Armor    int
 	Disabled bool

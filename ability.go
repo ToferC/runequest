@@ -36,7 +36,13 @@ func (a *Ability) UpdateAbility() {
 
 	a.generateName()
 
-	a.Total = a.Base + a.HomelandValue + a.OccupationValue + a.CultValue + a.CreationBonusValue + a.InPlayXPValue + a.Value
+	updates := 0
+
+	for _, u := range a.Updates {
+		updates += u.Value
+	}
+
+	a.Total = a.Base + a.HomelandValue + a.OccupationValue + a.CultValue + a.CreationBonusValue + a.InPlayXPValue + a.Value + updates
 }
 
 // generateName sets the ability map name
