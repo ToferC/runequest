@@ -15,6 +15,8 @@ type Character struct {
 	Occupation      *Occupation
 	Cult            *Cult
 	Abilities       map[string]*Ability
+	ElementalRunes  map[string]*Ability
+	PowerRunes      map[string]*Ability
 	Statistics      map[string]*Statistic
 	Attributes      map[string]*Attribute
 	DerivedMap      []string

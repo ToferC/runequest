@@ -6,6 +6,8 @@ func NewCharacter(name string) *Character {
 		Name:            name,
 		Statistics:      RuneQuestStats,
 		Abilities:       Abilities,
+		PowerRunes:      PowerRunes,
+		ElementalRunes:  ElementalRunes,
 		SkillCategories: SkillCategories,
 	}
 

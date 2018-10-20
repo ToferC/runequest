@@ -199,6 +199,10 @@ var Abilities = map[string]*Ability{
 		Type:       "Base",
 		Value:      5,
 	},
+}
+
+// ElementalRunes is a map of Rune abilities
+var ElementalRunes = map[string]*Ability{
 	// Elemental Runes
 	"Fire": &Ability{
 		CoreString: "Fire",
@@ -230,6 +234,10 @@ var Abilities = map[string]*Ability{
 		Type:       "Elemental Rune",
 		Value:      0,
 	},
+}
+
+// PowerRunes is a map of Power Runes
+var PowerRunes = map[string]*Ability{
 	// Power Runes
 	"Man": &Ability{
 		CoreString:     "Man",
