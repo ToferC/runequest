@@ -8,7 +8,7 @@ func NewCharacter(name string) *Character {
 		Abilities:       Abilities,
 		PowerRunes:      PowerRunes,
 		ElementalRunes:  ElementalRunes,
-		SkillCategories: SkillCategories,
+		SkillCategories: map[string]*SkillCategory{},
 	}
 
 	// Skills is a map of regular skills in Runequest

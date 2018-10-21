@@ -97,6 +97,28 @@ func (a *Ability) String() string {
 	return text
 }
 
+// ModifyElementalRune adds or modifies a Ability value
+func (c *Character) ModifyElementalRune(a Ability) {
+
+	a.generateName()
+
+	// Modify existing Ability
+	ab := c.ElementalRunes[a.Name]
+
+	if ab.Base == 0 {
+		// Change Ability.Base if needed
+		ab.Base = a.Base
+	} else {
+		// Add or subtract s.Value from Ability
+		ab.Value += a.Value
+		ab.HomelandValue += a.HomelandValue
+		ab.OccupationValue += a.OccupationValue
+		ab.CultValue += a.CultValue
+		ab.CreationBonusValue += a.CreationBonusValue
+		ab.InPlayXPValue += a.InPlayXPValue
+	}
+}
+
 // ModifyAbility adds or modifies a Ability value
 func (c *Character) ModifyAbility(a Ability) {
 

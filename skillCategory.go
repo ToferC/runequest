@@ -4,9 +4,8 @@ import "fmt"
 
 // SkillCategory is a grouping of skills
 type SkillCategory struct {
-	Name          string
-	StatModifiers []statMods
-	Value         int
+	Name  string
+	Value int
 }
 
 func (sc SkillCategory) String() string {
@@ -32,17 +31,31 @@ type statMods struct {
 
 // DetermineSkillCategoryValues figures out base values for skill categories based on stats
 func (c *Character) DetermineSkillCategoryValues() {
-	for _, s := range c.SkillCategories {
+
+	for _, sc := range CategoryOrder {
+
+		c.SkillCategories[sc] = &SkillCategory{}
+
+		c.SkillCategories[sc].Name = sc
+		c.SkillCategories[sc].Value = 0
+	}
+
+	for k, sc := range RQSkillCategories {
 		// For each category
 
-		// Reset SkillCategory Value to 0
-		s.Value = 0
-
-		for _, sm := range s.StatModifiers {
+		for _, sm := range sc {
 			// For each modifier in a category
 
-			stat := c.Statistics[sm.statistic]
+			fmt.Println(sm)
+			fmt.Println("StatModifier Stat: " + sm.statistic)
+
 			// Identify the stat
+			stat := c.Statistics[sm.statistic]
+
+			// Match to SkillCategory
+			s := c.SkillCategories[k]
+
+			fmt.Println(stat)
 
 			// Map against specific values
 			switch {
@@ -67,280 +80,160 @@ func (c *Character) DetermineSkillCategoryValues() {
 	}
 
 	for _, skill := range c.Skills {
-		sc := SkillCategories[skill.Category]
+		sc := c.SkillCategories[skill.Category]
 
 		skill.CategoryValue = sc.Value
 	}
+}
+
+var minorPositive = map[int]int{
+	4:  -5,
+	8:  0,
+	12: 0,
+	16: 0,
+	20: 5,
+}
+
+var majorPositive = map[int]int{
+	4:  -10,
+	8:  -5,
+	12: 0,
+	16: 5,
+	20: 10,
+}
+
+var minorNegative = map[int]int{
+	4:  5,
+	8:  0,
+	12: 0,
+	16: 0,
+	20: -5,
+}
+
+var majorNegative = map[int]int{
+	4:  10,
+	8:  5,
+	12: 0,
+	16: -5,
+	20: -10,
 }
 
 // Common SkillCategory for combat skills & manipulation
 var manipulationMods = []statMods{
 	statMods{
 		statistic: "STR",
-		values: map[int]int{
-			4:  -5,
-			8:  0,
-			12: 0,
-			16: 0,
-			20: 5,
-		},
+		values:    minorPositive,
 	},
 	statMods{
 		statistic: "DEX",
-		values: map[int]int{
-			4:  -10,
-			8:  -5,
-			12: 0,
-			16: 5,
-			20: 10,
-		},
+		values:    majorPositive,
 	},
 	statMods{
 		statistic: "INT",
-		values: map[int]int{
-			4:  -10,
-			8:  -5,
-			12: 0,
-			16: 5,
-			20: 10,
-		},
+		values:    majorPositive,
 	},
 	statMods{
 		statistic: "POW",
-		values: map[int]int{
-			4:  -5,
-			8:  0,
-			12: 0,
-			16: 0,
-			20: 5,
-		},
+		values:    minorPositive,
 	},
 }
 
-// SkillCategories is a map of skill categories
-var SkillCategories = map[string]*SkillCategory{
+// RQSkillCategories is a map of skill categories
+var RQSkillCategories = map[string][]statMods{
 	// Agility
-	"Agility": &SkillCategory{
-		Name: "Agility",
-		StatModifiers: []statMods{
-			statMods{
-				statistic: "STR",
-				values: map[int]int{
-					4:  -5,
-					8:  0,
-					12: 0,
-					16: 0,
-					20: 5,
-				},
-			},
-			statMods{
-				statistic: "SIZ",
-				values: map[int]int{
-					4:  5,
-					8:  0,
-					12: 0,
-					16: 0,
-					20: -5,
-				},
-			},
-			statMods{
-				statistic: "DEX",
-				values: map[int]int{
-					4:  -10,
-					8:  -5,
-					12: 0,
-					16: 5,
-					20: 10,
-				},
-			},
-			statMods{
-				statistic: "POW",
-				values: map[int]int{
-					4:  -5,
-					8:  0,
-					12: 0,
-					16: 0,
-					20: 5,
-				},
-			},
+	"Agility": []statMods{
+		statMods{
+			statistic: "STR",
+			values:    minorPositive,
+		},
+		statMods{
+			statistic: "SIZ",
+			values:    minorNegative,
+		},
+		statMods{
+			statistic: "DEX",
+			values:    majorPositive,
+		},
+		statMods{
+			statistic: "POW",
+			values:    minorPositive,
 		},
 	},
 	// Communication
-	"Communication": &SkillCategory{
-		Name: "Communication",
-		StatModifiers: []statMods{
-			statMods{
-				statistic: "INT",
-				values: map[int]int{
-					4:  -5,
-					8:  0,
-					12: 0,
-					16: 0,
-					20: 5,
-				},
-			},
-			statMods{
-				statistic: "POW",
-				values: map[int]int{
-					4:  -5,
-					8:  0,
-					12: 0,
-					16: 0,
-					20: 5,
-				},
-			},
-			statMods{
-				statistic: "CHA",
-				values: map[int]int{
-					4:  -10,
-					8:  -5,
-					12: 0,
-					16: 5,
-					20: 10,
-				},
-			},
+	"Communication": []statMods{
+		statMods{
+			statistic: "INT",
+			values:    minorPositive,
+		},
+		statMods{
+			statistic: "POW",
+			values:    minorPositive,
+		},
+		statMods{
+			statistic: "CHA",
+			values:    majorPositive,
 		},
 	},
 	// Knowledge
-	"Knowledge": &SkillCategory{
-		Name: "Knowledge",
-		StatModifiers: []statMods{
-			statMods{
-				statistic: "INT",
-				values: map[int]int{
-					4:  -10,
-					8:  -5,
-					12: 0,
-					16: 5,
-					20: 10,
-				},
-			},
-			statMods{
-				statistic: "POW",
-				values: map[int]int{
-					4:  -5,
-					8:  0,
-					12: 0,
-					16: 0,
-					20: 5,
-				},
-			},
+	"Knowledge": []statMods{
+		statMods{
+			statistic: "INT",
+			values:    majorPositive,
+		},
+		statMods{
+			statistic: "POW",
+			values:    minorPositive,
 		},
 	},
 	// Magic
-	"Magic": &SkillCategory{
-		Name: "Magic",
-		StatModifiers: []statMods{
-			statMods{
-				statistic: "POW",
-				values: map[int]int{
-					4:  -10,
-					8:  -5,
-					12: 0,
-					16: 5,
-					20: 10,
-				},
-			},
-			statMods{
-				statistic: "CHA",
-				values: map[int]int{
-					4:  -5,
-					8:  0,
-					12: 0,
-					16: 0,
-					20: 5,
-				},
-			},
+	"Magic": []statMods{
+		statMods{
+			statistic: "POW",
+			values:    majorPositive,
+		},
+		statMods{
+			statistic: "CHA",
+			values:    minorPositive,
 		},
 	},
 	// Manipulation
-	"Manipulation": &SkillCategory{
-		Name:          "Manipulation",
-		StatModifiers: manipulationMods,
-	},
+	"Manipulation": manipulationMods,
+
 	// Weapons
-	"Melee": &SkillCategory{
-		Name:          "Melee",
-		StatModifiers: manipulationMods,
-	},
-	"Ranged": &SkillCategory{
-		Name:          "Ranged",
-		StatModifiers: manipulationMods,
-	},
-	"Shield": &SkillCategory{
-		Name:          "Shield",
-		StatModifiers: manipulationMods,
-	},
+	"Melee": manipulationMods,
+
+	"Ranged": manipulationMods,
+
+	"Shield": manipulationMods,
+
 	// Perception
-	"Perception": &SkillCategory{
-		Name: "Perception",
-		StatModifiers: []statMods{
-			statMods{
-				statistic: "INT",
-				values: map[int]int{
-					4:  -10,
-					8:  -5,
-					12: 0,
-					16: 5,
-					20: 10,
-				},
-			},
-			statMods{
-				statistic: "POW",
-				values: map[int]int{
-					4:  -5,
-					8:  0,
-					12: 0,
-					16: 0,
-					20: 5,
-				},
-			},
+	"Perception": []statMods{
+		statMods{
+			statistic: "INT",
+			values:    majorPositive,
+		},
+		statMods{
+			statistic: "POW",
+			values:    minorPositive,
 		},
 	},
 	// Stealth
-	"Stealth": &SkillCategory{
-		Name: "Stealth",
-		StatModifiers: []statMods{
-			statMods{
-				statistic: "SIZ",
-				values: map[int]int{
-					4:  10,
-					8:  5,
-					12: 0,
-					16: -5,
-					20: -10,
-				},
-			},
-			statMods{
-				statistic: "DEX",
-				values: map[int]int{
-					4:  -10,
-					8:  -5,
-					12: 0,
-					16: 5,
-					20: 10,
-				},
-			},
-			statMods{
-				statistic: "INT",
-				values: map[int]int{
-					4:  -10,
-					8:  -5,
-					12: 0,
-					16: 5,
-					20: 10,
-				},
-			},
-			statMods{
-				statistic: "POW",
-				values: map[int]int{
-					4:  5,
-					8:  0,
-					12: 0,
-					16: 0,
-					20: -5,
-				},
-			},
+	"Stealth": []statMods{
+		statMods{
+			statistic: "SIZ",
+			values:    majorNegative,
+		},
+		statMods{
+			statistic: "DEX",
+			values:    majorPositive,
+		},
+		statMods{
+			statistic: "INT",
+			values:    majorPositive,
+		},
+		statMods{
+			statistic: "POW",
+			values:    minorNegative,
 		},
 	},
 }

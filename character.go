@@ -44,6 +44,7 @@ type Update struct {
 
 // UpdateCharacter updates stats, runes and skills based on them
 func (c *Character) UpdateCharacter() {
+	c.AddRuneModifiers()
 	c.TotalStatistics()
 	c.DetermineSkillCategoryValues()
 	c.UpdateAttributes()
