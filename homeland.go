@@ -46,12 +46,7 @@ func (c *Character) ApplyHomeland() {
 		// Choose random index
 		r := ChooseRandom(l)
 
-		// Select index from choice.Skills
-		selected := choice.Skills[r]
-		c.Homeland.Skills = append(c.Homeland.Skills, selected)
-
-		// Modify or add skill
-		c.ModifySkill(selected)
+		c.ApplySkillChoice(choice, r)
 	}
 
 	passions := c.Homeland.PassionList
@@ -66,13 +61,7 @@ func (c *Character) ApplyHomeland() {
 
 	// Homeland grants a bonus to a rune affinity
 
-	for _, ability := range c.Homeland.AbilityList {
-
-		c.Homeland.Abilities = append(c.Homeland.Abilities, ability)
-
-		// Modify or add ability
-		c.ModifyAbility(ability)
-	}
+	c.ElementalRunes[c.Homeland.RuneBonus].HomelandValue += 10
 }
 
 // RemoveHomeland removes all Homeland Modifers from a character
@@ -104,4 +93,6 @@ func (c *Character) RemoveHomeland() {
 		}
 		c.ModifyAbility(a)
 	}
+
+	c.ElementalRunes[c.Homeland.RuneBonus].HomelandValue = 0
 }

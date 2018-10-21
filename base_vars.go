@@ -4,7 +4,8 @@ package runequest
 var Homelands = map[string]*Homeland{
 	// Sartar
 	"Sartar": &Homeland{
-		Name: "Sartar",
+		Name:      "Sartar",
+		RuneBonus: "Air",
 		Skills: []Skill{
 			Skill{
 				Name:          "Ride",

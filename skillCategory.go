@@ -46,16 +46,11 @@ func (c *Character) DetermineSkillCategoryValues() {
 		for _, sm := range sc {
 			// For each modifier in a category
 
-			fmt.Println(sm)
-			fmt.Println("StatModifier Stat: " + sm.statistic)
-
 			// Identify the stat
 			stat := c.Statistics[sm.statistic]
 
 			// Match to SkillCategory
 			s := c.SkillCategories[k]
-
-			fmt.Println(stat)
 
 			// Map against specific values
 			switch {

@@ -70,22 +70,24 @@ func (s *Skill) String() string {
 // ModifySkill adds or modifies a Skill value
 func (c *Character) ModifySkill(s Skill) {
 
-	var response string
+	/*
+		var response string
 
-	if s.UserChoice {
+		if s.UserChoice {
 
-		// Show slice of existing skills with identical CoreString
+			// Show slice of existing skills with identical CoreString
 
-		q := fmt.Sprintf("Enter a specialization for %s or hit Enter to use (%s): ",
-			s.CoreString, s.UserString)
+			q := fmt.Sprintf("Enter a specialization for %s or hit Enter to use (%s): ",
+				s.CoreString, s.UserString)
 
-		response = UserQuery(q)
+			response = UserQuery(q)
 
-		if response == "" {
-			response = s.UserString
+			if response == "" {
+				response = s.UserString
+			}
+			s.UserString = response
 		}
-		s.UserString = response
-	}
+	*/
 
 	s.generateName()
 
@@ -96,7 +98,7 @@ func (c *Character) ModifySkill(s Skill) {
 			Category:           s.Category,
 			CoreString:         s.CoreString,
 			UserChoice:         false,
-			UserString:         response,
+			UserString:         s.UserString,
 			Base:               s.Base,
 			CategoryValue:      s.CategoryValue,
 			HomelandValue:      s.HomelandValue,
@@ -127,4 +129,14 @@ func (c *Character) ModifySkill(s Skill) {
 		sk.CreationBonusValue += s.CreationBonusValue
 		sk.InPlayXPValue += s.InPlayXPValue
 	}
+}
+
+// ApplySkillChoice executes the skill choice on a character
+func (c *Character) ApplySkillChoice(sc SkillChoice, r int) {
+
+	// Select index from choice.Skills
+	selected := sc.Skills[r]
+
+	// Modify or add skill
+	c.ModifySkill(selected)
 }

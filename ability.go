@@ -105,17 +105,51 @@ func (c *Character) ModifyElementalRune(a Ability) {
 	// Modify existing Ability
 	ab := c.ElementalRunes[a.Name]
 
-	if ab.Base == 0 {
-		// Change Ability.Base if needed
-		ab.Base = a.Base
-	} else {
-		// Add or subtract s.Value from Ability
-		ab.Value += a.Value
-		ab.HomelandValue += a.HomelandValue
-		ab.OccupationValue += a.OccupationValue
-		ab.CultValue += a.CultValue
-		ab.CreationBonusValue += a.CreationBonusValue
-		ab.InPlayXPValue += a.InPlayXPValue
+	// Add or subtract s.Value from Ability
+	ab.Value += a.Value
+	ab.HomelandValue += a.HomelandValue
+	ab.OccupationValue += a.OccupationValue
+	ab.CultValue += a.CultValue
+	ab.CreationBonusValue += a.CreationBonusValue
+	ab.InPlayXPValue += a.InPlayXPValue
+
+	a.UpdateAbility()
+}
+
+// ModifyPowerRune adds or modifies a Ability value
+func (c *Character) ModifyPowerRune(a Ability) {
+
+	a.generateName()
+
+	// Modify existing Ability
+	ab := c.PowerRunes[a.Name]
+
+	// Add or subtract s.Value from Ability
+	ab.Value += a.Value
+	ab.HomelandValue += a.HomelandValue
+	ab.OccupationValue += a.OccupationValue
+	ab.CultValue += a.CultValue
+	ab.CreationBonusValue += a.CreationBonusValue
+	ab.InPlayXPValue += a.InPlayXPValue
+
+	// Modify Opposing Rune if required
+	if ab.OpposedAbility != "" {
+		opposed := c.PowerRunes[ab.OpposedAbility]
+
+		ab.UpdateAbility()
+
+		// Maximum of 99 in a Power Rune
+		if ab.Total > 99 {
+			ab.Total = 99
+		}
+
+		opposed.Total = opposed.Base + opposed.Value
+
+		diff := ab.Total + opposed.Total
+
+		if diff > 100 {
+			opposed.Base -= diff - 100
+		}
 	}
 }
 
@@ -150,28 +184,7 @@ func (c *Character) ModifyAbility(a Ability) {
 			ab.InPlayXPValue += a.InPlayXPValue
 		}
 	}
-
-	ability := c.Abilities[a.Name]
-
-	// Modify Opposing Rune if required
-	if ability.OpposedAbility != "" {
-		opposed := c.Abilities[ability.OpposedAbility]
-
-		ability.Total = ability.Base + ability.Value
-
-		// Maximum of 99 in a Power Rune
-		if ability.Total > 99 {
-			ability.Total = 99
-		}
-
-		opposed.Total = opposed.Base + opposed.Value
-
-		diff := ability.Total + opposed.Total
-
-		if diff > 100 {
-			opposed.Base -= diff - 100
-		}
-	}
+	a.UpdateAbility()
 }
 
 // ChooseRunes selects Runes for a Character
