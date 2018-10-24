@@ -122,12 +122,13 @@ func (c *Character) ModifySkill(s Skill) {
 			sk.Base = s.Base
 		}
 		// Add or subtract s.XXValue from skill
-		sk.Value += s.Value
-		sk.HomelandValue += s.HomelandValue
-		sk.OccupationValue += s.OccupationValue
-		sk.CultValue += s.CultValue
-		sk.CreationBonusValue += s.CreationBonusValue
-		sk.InPlayXPValue += s.InPlayXPValue
+		// This doesn't work
+		sk.Value = s.Value
+		sk.HomelandValue = s.HomelandValue
+		sk.OccupationValue = s.OccupationValue
+		sk.CultValue = s.CultValue
+		sk.CreationBonusValue = s.CreationBonusValue
+		sk.InPlayXPValue = s.InPlayXPValue
 	}
 }
 
