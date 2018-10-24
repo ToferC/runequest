@@ -132,6 +132,11 @@ func (c *Character) ModifyPowerRune(a Ability) {
 	ab.CreationBonusValue += a.CreationBonusValue
 	ab.InPlayXPValue += a.InPlayXPValue
 
+	c.UpdateOpposedRune(ab)
+}
+
+// UpdateOpposedRune determines the opposing rune value
+func (c *Character) UpdateOpposedRune(ab *Ability) {
 	// Modify Opposing Rune if required
 	if ab.OpposedAbility != "" {
 		opposed := c.PowerRunes[ab.OpposedAbility]
@@ -143,7 +148,7 @@ func (c *Character) ModifyPowerRune(a Ability) {
 			ab.Total = 99
 		}
 
-		opposed.Total = opposed.Base + opposed.Value
+		opposed.UpdateAbility()
 
 		diff := ab.Total + opposed.Total
 
