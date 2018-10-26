@@ -78,6 +78,7 @@ func (c *Character) DetermineSkillCategoryValues() {
 		sc := c.SkillCategories[skill.Category]
 
 		skill.CategoryValue = sc.Value
+		skill.UpdateSkill()
 	}
 }
 

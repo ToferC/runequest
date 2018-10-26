@@ -42,6 +42,11 @@ func (c *Character) AddRuneModifiers() {
 		runes = append(runes, a)
 	}
 
+	// Reset Rune Bonuses
+	for _, v := range c.Statistics {
+		v.RuneBonus = 0
+	}
+
 	// Sort Runes
 	sort.Sort(ByValue(runes))
 	fmt.Println(runes)
