@@ -14,6 +14,8 @@ type Cult struct {
 	PassionList     []Ability
 	Passions        []Ability
 	RuneSpells      []Spell
+	NumRunePoints   int
+	NumSpiritMagic  int
 	SpiritMagic     []Spell
 	SubCults        []Cult
 	AssociatedCults []Cult
