@@ -29,7 +29,7 @@ type Character struct {
 	Powers          map[string]*Power
 	HitLocations    map[string]*HitLocation
 	HitLocationMap  []string
-	Gear            []string
+	Equipment       []string
 	PointCost       int
 	InPlay          bool
 	Updates         []*Update
