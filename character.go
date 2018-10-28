@@ -25,7 +25,8 @@ type Character struct {
 	SkillCategories map[string]*SkillCategory
 	Advantages      map[string]*Advantage
 	AdvantageMap    []string
-	Spells          map[string]*Spell
+	RuneSpells      map[string]*Spell
+	SpiritMagic     map[string]*Spell
 	Powers          map[string]*Power
 	HitLocations    map[string]*HitLocation
 	HitLocationMap  []string

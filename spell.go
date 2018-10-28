@@ -27,3 +27,16 @@ func (s *Spell) String() string {
 
 	return text
 }
+
+// GenerateName sets the skill map name
+func (s *Spell) GenerateName() {
+
+	var n string
+
+	if s.UserString != "" {
+		n = fmt.Sprintf("%s (%s)", s.CoreString, s.UserString)
+	} else {
+		n = s.CoreString
+	}
+	s.Name = n
+}
