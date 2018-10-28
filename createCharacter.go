@@ -3,11 +3,14 @@ package runequest
 // NewCharacter generates a random starting character in Runequest
 func NewCharacter(name string) *Character {
 	c := Character{
-		Name:            name,
-		Statistics:      RuneQuestStats,
-		Abilities:       Abilities,
-		PowerRunes:      PowerRunes,
-		ElementalRunes:  ElementalRunes,
+		Name:           name,
+		Statistics:     RuneQuestStats,
+		Abilities:      Abilities,
+		PowerRunes:     PowerRunes,
+		ElementalRunes: ElementalRunes,
+		RuneSpells:     map[string]*Spell{},
+		SpiritMagic:    map[string]*Spell{},
+
 		SkillCategories: map[string]*SkillCategory{},
 	}
 
