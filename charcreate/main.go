@@ -9,7 +9,7 @@ import (
 func main() {
 	c := runequest.NewCharacter("Harthor")
 
-	c.Statistics["STR"].Value += 3
+	c.Statistics["STR"].Base += 3
 
 	c.ChooseRunes()
 
