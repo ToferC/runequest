@@ -62,7 +62,7 @@ func (s *Skill) String() string {
 
 	text := ""
 
-	text += fmt.Sprintf("%s (%d)%d%%", s.Name, s.Base, s.Total)
+	text += fmt.Sprintf("%s (%d) %d%%", s.Name, s.Base, s.Total)
 
 	return text
 }
