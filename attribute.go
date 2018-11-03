@@ -55,8 +55,6 @@ func (c *Character) UpdateAttributes() {
 
 func (d *Attribute) String() string {
 
-	d.Total = d.Base + d.Value
-
 	var text string
 
 	if d.Text == "" {

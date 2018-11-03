@@ -48,7 +48,7 @@ func (c *Character) UpdateCharacter() {
 	c.AddRuneModifiers()
 	c.TotalStatistics()
 	c.DetermineSkillCategoryValues()
-	c.UpdateAttributes()
+	c.SetAttributes()
 }
 
 func (c Character) String() string {
