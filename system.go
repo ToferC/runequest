@@ -36,13 +36,19 @@ func (a ByTotal) Less(i, j int) bool { return a[i].Total > a[j].Total }
 // DetermineRuneModifiers adds stat modifiers based on runes
 func (c *Character) DetermineRuneModifiers() []string {
 
-	// Set empty array for sorting
 	var runes []*Ability
 
-	// Add abilities to array
+	var runeModifiers []string
+
+	// Add abilities to array for sorting
 	for _, a := range c.ElementalRunes {
 		a.UpdateAbility()
 		runes = append(runes, a)
+	}
+
+	// Reset Rune Bonuses
+	for _, v := range c.Statistics {
+		v.RuneBonus = 0
 	}
 
 	// Sort Runes
@@ -51,6 +57,35 @@ func (c *Character) DetermineRuneModifiers() []string {
 
 	primary, secondary := runes[0].Name, runes[1].Name
 
-	return []string{primary, secondary}
+	switch {
+	case primary == "Air":
+		runeModifiers = append(runeModifiers, "STR")
+	case primary == "Earth":
+		runeModifiers = append(runeModifiers, "CON")
+	case primary == "Darkness":
+		runeModifiers = append(runeModifiers, "SIZ")
+	case primary == "Fire/Sky":
+		runeModifiers = append(runeModifiers, "INT")
+	case primary == "Water":
+		runeModifiers = append(runeModifiers, "DEX")
+	case primary == "Moon":
+		runeModifiers = append(runeModifiers, "POW")
+	}
 
+	switch {
+	case secondary == "Air":
+		runeModifiers = append(runeModifiers, "STR")
+	case secondary == "Earth":
+		runeModifiers = append(runeModifiers, "CON")
+	case secondary == "Darkness":
+		runeModifiers = append(runeModifiers, "SIZ")
+	case secondary == "Fire/Sky":
+		runeModifiers = append(runeModifiers, "INT")
+	case secondary == "Water":
+		runeModifiers = append(runeModifiers, "DEX")
+	case secondary == "Moon":
+		runeModifiers = append(runeModifiers, "POW")
+	}
+
+	return runeModifiers
 }
