@@ -13,9 +13,6 @@ func main() {
 
 	c.ChooseRunes()
 
-	// Add Modifiers to Stats
-	c.AddRuneModifiers()
-
 	// Calculate Derived Stats
 	c.SetAttributes()
 
