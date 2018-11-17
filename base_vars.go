@@ -14,6 +14,10 @@ var HomeLandStats = map[string]*StatisticFrame{
 		Dice:     3,
 		Modifier: 0,
 	},
+	"POW": &StatisticFrame{
+		Dice:     3,
+		Modifier: 0,
+	},
 	"SIZ": &StatisticFrame{
 		Dice:     2,
 		Modifier: 6,
