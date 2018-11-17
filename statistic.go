@@ -7,6 +7,7 @@ type Statistic struct {
 	Name            string
 	Base            int
 	RuneBonus       int
+	HomelandBonus   int
 	Updates         []*Update
 	Total           int
 	Max             int
