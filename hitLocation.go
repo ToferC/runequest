@@ -15,6 +15,11 @@ type HitLocation struct {
 	Disabled bool
 }
 
+// HitLocationMap is the set order for Hit Locations
+var HitLocationMap = []string{
+	"Head", "L Arm", "R Arm", "Chest", "Abdomen", "L Leg", "R Leg",
+}
+
 // Strings
 func (l HitLocation) String() string {
 	text := fmt.Sprintf("(%s) - %s\n",
