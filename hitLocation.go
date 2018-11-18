@@ -7,6 +7,7 @@ type HitLocation struct {
 	Name     string
 	HitLoc   []int
 	Base     int
+	Min      int
 	Max      int
 	Value    int
 	Updates  []*Update
