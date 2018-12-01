@@ -1716,7 +1716,7 @@ var RuneSpells = []*Spell{
 }
 
 // SpiritMagic&Spells represents spirit magic
-var SpiritMagic&Spells = []&Spell{
+var SpiritMagicSpells = []*Spell{
 	&Spell{
 		CoreString:  "Befuddle",
 		Description: "",
