@@ -18,7 +18,6 @@ type Cult struct {
 	NumRunePoints   int
 	NumSpiritMagic  int
 	SpiritMagic     []Spell
-	SubCults        []*Cult
 	ParentCult      *Cult
 	AssociatedCults []Cult
 }
