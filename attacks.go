@@ -8,6 +8,7 @@ type Attack struct {
 	StrikeRank       int
 	BaseDamage       *DieCode
 	AdditionalDamage []*DieCode
+	DamageString     string
 	StrengthDamage   bool
 	Special          string
 }

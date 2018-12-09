@@ -16,6 +16,7 @@ type Weapon struct {
 	STR       int
 	DEX       int
 	Damage    string
+	STRDamage bool
 	HP        int
 	CurrentHP int
 	ENC       int
@@ -75,6 +76,7 @@ func loadWeapons() []*Weapon {
 				Name:      record[0],
 				Type:      "melee",
 				SR:        sSR,
+				STRDamage: true,
 				Damage:    record[3],
 				HP:        sHP,
 				CurrentHP: sHP,
