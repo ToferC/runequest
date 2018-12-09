@@ -83,15 +83,16 @@ func (c *Character) UpdateCharacter() {
 
 // CreationStatus tracks the completion of character creation
 var CreationStatus = map[string]bool{
-	"Base Choices":     false,
-	"Personal History": false,
-	"Rune Affinities":  false,
-	"Roll Stats":       false,
-	"Apply Homeland":   false,
-	"Apply Occupation": false,
-	"Apply Cult":       false,
-	"Personal Skills":  false,
-	"Complete":         false,
+	"Base Choices":      false,
+	"Personal History":  false,
+	"Rune Affinities":   false,
+	"Roll Stats":        false,
+	"Apply Homeland":    false,
+	"Apply Occupation":  false,
+	"Apply Cult":        false,
+	"Personal Skills":   false,
+	"Finishing Touches": false,
+	"Complete":          false,
 }
 
 func (c Character) String() string {
