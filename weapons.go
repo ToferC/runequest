@@ -19,7 +19,7 @@ type Weapon struct {
 	STRDamage bool
 	HP        int
 	CurrentHP int
-	ENC       int
+	ENC       string
 	Length    float64
 	SR        int
 	Type      string
@@ -77,8 +77,9 @@ func loadWeapons() []*Weapon {
 
 			weapons = append(weapons, &Weapon{
 				Name:      record[0],
-				Type:      "melee",
+				Type:      "Melee",
 				SR:        sSR,
+				ENC:       record[4],
 				STRDamage: true,
 				Damage:    record[3],
 				HP:        sHP,
@@ -89,8 +90,9 @@ func loadWeapons() []*Weapon {
 			r, _ := strconv.Atoi(record[6])
 			weapons = append(weapons, &Weapon{
 				Name:      record[0],
-				Type:      "missile",
+				Type:      "Ranged",
 				Range:     r,
+				ENC:       record[4],
 				Damage:    record[3],
 				HP:        sHP,
 				CurrentHP: sHP,
