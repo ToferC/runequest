@@ -1,10 +1,7 @@
 package runequest
 
 import (
-	"bufio"
-	"encoding/csv"
 	"fmt"
-	"io"
 	"log"
 	"os"
 	"path/filepath"
@@ -64,18 +61,11 @@ func loadWeapons() []*Weapon {
 	}
 	fmt.Println(dir)
 
-	f, err := os.Open("../weapons.csv")
-	if err != nil {
-		fmt.Println(err)
-	}
-	defer f.Close()
+	url := "https://raw.githubusercontent.com/ToferC/runequest/master/weapons.csv"
 
-	r := csv.NewReader(bufio.NewReader(f))
-	for {
-		record, err := r.Read()
-		if err == io.EOF {
-			break
-		}
+	data, err := readCSVFromURL(url)
+
+	for _, record := range data {
 
 		sHP, _ := strconv.Atoi(record[5])
 
