@@ -3,8 +3,11 @@ package runequest
 import (
 	"bufio"
 	"encoding/csv"
+	"fmt"
 	"io"
+	"log"
 	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 )
@@ -55,7 +58,17 @@ func loadWeapons() []*Weapon {
 
 	weapons := []*Weapon{}
 
-	f, _ := os.Open("weapons.csv")
+	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(dir)
+
+	f, err := os.Open("../weapons.csv")
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer f.Close()
 
 	r := csv.NewReader(bufio.NewReader(f))
 	for {
@@ -66,7 +79,7 @@ func loadWeapons() []*Weapon {
 
 		sHP, _ := strconv.Atoi(record[5])
 
-		if record[2] == "melee" {
+		if record[1] == "melee" {
 			sSR, err := strconv.Atoi(record[2])
 			if err != nil {
 				sSR = 0
