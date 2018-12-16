@@ -15,6 +15,7 @@ type Character struct {
 	Homeland    *Homeland
 	Occupation  *Occupation
 	Cult        *Cult
+	ExtraCults  []*Cult
 	Age         int
 	Clan        string
 	Tribe       string
@@ -28,6 +29,7 @@ type Character struct {
 	CurrentHP        int
 	CurrentMP        int
 	CurrentRP        int
+	Move             int
 	DerivedMap       []string
 	Skills           map[string]*Skill
 	SkillMap         []string
@@ -45,7 +47,6 @@ type Character struct {
 	Lunars           int
 	Ransom           int
 	StandardofLiving string
-	PointCost        int
 	InPlay           bool
 	Updates          []*Update
 	CreationSteps    map[string]bool
@@ -55,9 +56,12 @@ type Character struct {
 var CharacterRoles = []string{
 	"Player Character",
 	"Non-Player Character",
+	"Animal",
+	"Chaos",
 	"Creature",
-	"Spirit",
+	"Demon",
 	"Elemental",
+	"Spirit",
 }
 
 // Update tracks live changes to Character
