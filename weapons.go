@@ -29,7 +29,7 @@ type Weapon struct {
 // BaseWeapons is an array of runequest weapons
 var BaseWeapons = loadWeapons()
 
-func translateDieCode(s string) *DieCode {
+func TranslateDieCode(s string) *DieCode {
 	// translates a string like 1d6+1 into a DieCode
 
 	var dice, mod, max int
