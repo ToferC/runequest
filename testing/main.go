@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/toferc/runequest"
 )
 
 func main() {
 
-	weapons := runequest.BaseWeapons
-	for _, w := range weapons {
-		fmt.Println(w)
-	}
+	c := runequest.NewCharacter("Default")
+	hl := runequest.SortLocations(c.HitLocations)
+	fmt.Println(hl)
+
 }
