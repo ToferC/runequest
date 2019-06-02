@@ -15,8 +15,8 @@ func NewCharacter(name string) *Character {
 		Homeland:       &Homeland{},
 		Occupation:     &Occupation{},
 		Cult:           &Cult{},
-		LocationForm:   "Humanoid",
-		HitLocations:   LocationForms["Humanoid"],
+		LocationForm:   "Humanoids",
+		HitLocations:   LocationForms["Humanoids"],
 		HitLocationMap: GenerateHitLocationMap(LocationForms["Humanoid"]),
 		CreationSteps:  CreationStatus,
 
