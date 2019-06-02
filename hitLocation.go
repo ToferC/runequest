@@ -42,6 +42,9 @@ var LocationForms = map[string]map[string]*HitLocation{
 	"Centaurs":            CentaurLocations,
 	"Dragons/Manticores":  DragonHitLocations,
 	"Four-Legged Animals": FourLeggedAnimalsHitLocations,
+	"Serpents":            SerpentLocations,
+	"Birds, Flying":       BirdsFlyingHitLocations,
+	"Birds, Running":      BirdsRunningHitLocations,
 }
 
 // HumanoidLocations is a base map of hit locations
@@ -74,6 +77,74 @@ var HumanoidLocations = map[string]*HitLocation{
 	"R Arm": &HitLocation{
 		Name:   "R Arm",
 		HitLoc: []int{13, 14, 15},
+		Base:   -1,
+	},
+	"Head": &HitLocation{
+		Name:   "Head",
+		HitLoc: []int{19, 20},
+		Base:   0,
+	},
+}
+
+// SerpentLocations is a base map of hit locations
+var SerpentLocations = map[string]*HitLocation{
+	"Tail": &HitLocation{
+		Name:   "Tail",
+		HitLoc: []int{1, 2, 3, 4, 5, 6},
+		Base:   0,
+	},
+	"Body": &HitLocation{
+		Name:   "Body",
+		HitLoc: []int{7, 8, 9, 10, 11, 12, 13, 14},
+		Base:   1,
+	},
+	"Head": &HitLocation{
+		Name:   "Head",
+		HitLoc: []int{15, 16, 17, 18, 19, 20},
+		Base:   0,
+	},
+}
+
+// HumanoidWingedLocations is a base map of hit locations
+var HumanoidWingedLocations = map[string]*HitLocation{
+	"R Leg": &HitLocation{
+		Name:   "R Leg",
+		HitLoc: []int{1, 2, 3},
+		Base:   0,
+	},
+	"L Leg": &HitLocation{
+		Name:   "L Leg",
+		HitLoc: []int{4, 5, 6},
+		Base:   0,
+	},
+	"Abdomen": &HitLocation{
+		Name:   "Abdomen",
+		HitLoc: []int{7, 8, 9},
+		Base:   0,
+	},
+	"Chest": &HitLocation{
+		Name:   "Chest",
+		HitLoc: []int{10},
+		Base:   1,
+	},
+	"R Wing": &HitLocation{
+		Name:   "R Wing",
+		HitLoc: []int{11, 12},
+		Base:   -1,
+	},
+	"L Wing": &HitLocation{
+		Name:   "L Wing",
+		HitLoc: []int{13, 14},
+		Base:   -1,
+	},
+	"R Arm": &HitLocation{
+		Name:   "R Arm",
+		HitLoc: []int{15, 16},
+		Base:   -1,
+	},
+	"L Arm": &HitLocation{
+		Name:   "L Arm",
+		HitLoc: []int{17, 18},
 		Base:   -1,
 	},
 	"Head": &HitLocation{
@@ -118,6 +189,89 @@ var FourLeggedAnimalsHitLocations = map[string]*HitLocation{
 	"Head": &HitLocation{
 		Name:   "Head",
 		HitLoc: []int{17, 18, 19, 20},
+		Base:   0,
+	},
+}
+
+// BirdsFlyingHitLocations is a base map of hit locations
+var BirdsFlyingHitLocations = map[string]*HitLocation{
+	"Tail": &HitLocation{
+		Name:   "Tail",
+		HitLoc: []int{1},
+		Base:   -2,
+	},
+	"R Hind Leg": &HitLocation{
+		Name:   "R Hind Leg",
+		HitLoc: []int{2, 3, 4},
+		Base:   -1,
+	},
+	"L Hind Leg": &HitLocation{
+		Name:   "L Hind Leg",
+		HitLoc: []int{5, 6, 7},
+		Base:   -1,
+	},
+	"Abdomen": &HitLocation{
+		Name:   "Abdomen",
+		HitLoc: []int{8, 9},
+		Base:   0,
+	},
+	"Chest": &HitLocation{
+		Name:   "Chest",
+		HitLoc: []int{10, 11, 12},
+		Base:   1,
+	},
+	"R Wing": &HitLocation{
+		Name:   "R Wing",
+		HitLoc: []int{13, 14},
+		Base:   0,
+	},
+	"L Wing": &HitLocation{
+		Name:   "L Wing",
+		HitLoc: []int{15, 16},
+		Base:   0,
+	},
+	"Head": &HitLocation{
+		Name:   "Head",
+		HitLoc: []int{17, 18, 19, 20},
+		Base:   0,
+	},
+}
+
+// BirdsRunningHitLocations is a base map of hit locations
+var BirdsRunningHitLocations = map[string]*HitLocation{
+	"R Hind Leg": &HitLocation{
+		Name:   "R Hind Leg",
+		HitLoc: []int{1, 2, 3, 4},
+		Base:   0,
+	},
+	"L Hind Leg": &HitLocation{
+		Name:   "L Hind Leg",
+		HitLoc: []int{5, 6, 7, 8},
+		Base:   0,
+	},
+	"Abdomen": &HitLocation{
+		Name:   "Abdomen",
+		HitLoc: []int{9, 10},
+		Base:   0,
+	},
+	"Chest": &HitLocation{
+		Name:   "Chest",
+		HitLoc: []int{11, 12, 13},
+		Base:   1,
+	},
+	"R Wing": &HitLocation{
+		Name:   "R Wing",
+		HitLoc: []int{14, 15},
+		Base:   -1,
+	},
+	"L Wing": &HitLocation{
+		Name:   "L Wing",
+		HitLoc: []int{16, 17},
+		Base:   -1,
+	},
+	"Head": &HitLocation{
+		Name:   "Head",
+		HitLoc: []int{18, 19, 20},
 		Base:   0,
 	},
 }
