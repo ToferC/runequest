@@ -20,7 +20,7 @@ type HitLocation struct {
 // GenerateHitLocationMap takes a HitLocation map and generates an array of strings
 func GenerateHitLocationMap(hlForm map[string]*HitLocation) []string {
 	m := []string{}
-	for k, v := range hlForm {
+	for k := range hlForm {
 		m = append(m, k)
 	}
 	return m
