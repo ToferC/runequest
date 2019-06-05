@@ -7,7 +7,6 @@ func NewCharacter(name string) *Character {
 		Role:           "Player Character",
 		Statistics:     RuneQuestStats,
 		Abilities:      Abilities,
-		Skills:         Skills,
 		PowerRunes:     PowerRunes,
 		ElementalRunes: ElementalRunes,
 		ConditionRunes: ConditionRunes,
@@ -29,6 +28,10 @@ func NewCharacter(name string) *Character {
 
 	// Skills is a map of regular skills in Runequest
 	c.Skills = map[string]*Skill{}
+
+	for k, v := range Skills {
+		c.Skills[k] = &v
+	}
 
 	//c.Skills["Dodge"].Base = c.Statistics["DEX"].Value * 2
 	//c.Skills["Jump"].Base = c.Statistics["DEX"].Value * 3
