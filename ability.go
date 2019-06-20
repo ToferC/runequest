@@ -105,6 +105,110 @@ func (a *Ability) String() string {
 	return text
 }
 
+// ModifyElementalRune adds or modifies a Ability value
+func (c *Character) ModifyElementalRune(a Ability) {
+
+	a.generateName()
+
+	// Modify existing Ability
+	ab := c.ElementalRunes[a.Name]
+
+	// Add or subtract s.Value from Ability
+	ab.Value += a.Value
+	ab.HomelandValue += a.HomelandValue
+	ab.OccupationValue += a.OccupationValue
+	ab.CultValue += a.CultValue
+	ab.CreationBonusValue += a.CreationBonusValue
+	ab.InPlayXPValue += a.InPlayXPValue
+
+	a.UpdateAbility()
+}
+
+// ModifyPowerRune adds or modifies a Ability value
+func (c *Character) ModifyPowerRune(a Ability) {
+
+	a.generateName()
+
+	// Modify existing Ability
+	ab := c.PowerRunes[a.Name]
+
+	// Add or subtract s.Value from Ability
+	ab.Value += a.Value
+	ab.HomelandValue += a.HomelandValue
+	ab.OccupationValue += a.OccupationValue
+	ab.CultValue += a.CultValue
+	ab.CreationBonusValue += a.CreationBonusValue
+	ab.InPlayXPValue += a.InPlayXPValue
+
+	c.UpdateOpposedRune(ab)
+}
+
+// UpdateOpposedRune determines the opposing rune value
+func (c *Character) UpdateOpposedRune(ab *Ability) {
+	// Modify Opposing Rune if required
+	if ab.OpposedAbility != "" {
+		opposed := c.PowerRunes[ab.OpposedAbility]
+
+		ab.UpdateAbility()
+
+		// Maximum of 99 in a Power Rune
+		if ab.Total > 99 {
+			ab.Total = 99
+		}
+
+		opposed.UpdateAbility()
+
+		diff := ab.Total + opposed.Total
+
+		if diff > 100 {
+			opposed.Base -= diff - 100
+		}
+	}
+}
+
+// ModifyAbility adds or modifies a Ability value
+func (c *Character) ModifyAbility(a Ability) {
+
+	a.generateName()
+
+	if c.Abilities[a.Name] == nil {
+		// New Ability
+		c.Abilities[a.Name] = &Ability{
+			Name:       a.Name,
+			CoreString: a.CoreString,
+			UserString: a.UserString,
+			Base:       a.Base,
+			Type:       a.Type,
+			Updates:    []*Update{},
+		}
+	} else {
+		// Modify existing Ability
+		ab := c.Abilities[a.Name]
+
+		// Add or subtract s.Value from Ability
+		if a.HomelandValue > 0 {
+			ab.HomelandValue = a.HomelandValue
+		}
+
+		if a.OccupationValue > 0 {
+			ab.OccupationValue = a.OccupationValue
+		}
+
+		if a.CultValue > 0 {
+			ab.CultValue = a.CultValue
+		}
+
+		if a.CreationBonusValue > 0 {
+			ab.CreationBonusValue = a.CreationBonusValue
+		}
+
+		if a.InPlayXPValue > 0 {
+			ab.InPlayXPValue = a.InPlayXPValue
+		}
+	}
+	a.UpdateAbility()
+}
+
 // Abilities is a map of the basic abilities in Runequest
 var Abilities = map[string]*Ability{
 	"Reputation": &Ability{
