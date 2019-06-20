@@ -65,7 +65,14 @@ func (c *Character) IDCoreRunes() {
 	// Sort Runes
 	sort.Sort(ByTotal(runes))
 
-	for _, r := range runes[:3] {
+	// Return max of 3 runes
+	l := len(runes)
+
+	if l > 3 {
+		l = 3
+	}
+
+	for _, r := range runes[:l] {
 		c.CoreRunes = append(c.CoreRunes, r)
 	}
 }
