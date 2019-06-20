@@ -33,6 +33,34 @@ func (a ByTotal) Len() int           { return len(a) }
 func (a ByTotal) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 func (a ByTotal) Less(i, j int) bool { return a[i].Total > a[j].Total }
 
+// IDCoreRunes returns the top 3 runes for the character
+func (c *Character) IDCoreRunes() {
+
+	var runes []*Ability
+
+	for _, e := range c.ElementalRunes {
+		e.UpdateAbility()
+		runes = append(runes, e)
+	}
+
+	for _, p := range c.PowerRunes {
+		p.UpdateAbility()
+		runes = append(runes, p)
+	}
+
+	for _, c := range c.ConditionRunes {
+		c.UpdateAbility()
+		runes = append(runes, c)
+	}
+
+	// Sort Runes
+	sort.Sort(ByTotal(runes))
+
+	for _, r := range runes[:3] {
+		c.CoreRunes = append(c.CoreRunes, r)
+	}
+}
+
 // DetermineRuneModifiers adds stat modifiers based on runes
 func (c *Character) DetermineRuneModifiers() []string {
 
