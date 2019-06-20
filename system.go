@@ -36,6 +36,9 @@ func (a ByTotal) Less(i, j int) bool { return a[i].Total > a[j].Total }
 // IDCoreRunes returns the top 3 runes for the character
 func (c *Character) IDCoreRunes() {
 
+	// Reset CoreRunes
+	c.CoreRunes = []*Ability{}
+
 	var runes []*Ability
 
 	for _, e := range c.ElementalRunes {
