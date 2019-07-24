@@ -27,4 +27,5 @@ type StatisticFrame struct {
 	Name     string
 	Dice     int
 	Modifier int
+	Max      int
 }
