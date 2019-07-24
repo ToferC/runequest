@@ -42,6 +42,7 @@ var LocationForms = map[string]map[string]*HitLocation{
 	"Humanoids, Winged":           HumanoidWingedLocations,
 	"Centaurs":                    CentaurLocations,
 	"Dragons/Manticores":          DragonHitLocations,
+	"Dragonewts":                  DragonewtHitLocations,
 	"Four-Legged Animals":         FourLeggedAnimalsHitLocations,
 	"Four-Legged Animals, Winged": FourLeggedAnimalsWingedHitLocations,
 	"Serpents":                    SerpentLocations,
@@ -603,6 +604,50 @@ var DragonHitLocations = map[string]*HitLocation{
 		Name:   "R Foreleg",
 		HitLoc: []int{17, 18},
 		Base:   0,
+	},
+	"Head": &HitLocation{
+		Name:   "Head",
+		HitLoc: []int{19, 20},
+		Base:   0,
+	},
+}
+
+// DragonewtHitLocations is a base map of hit locations
+var DragonewtHitLocations = map[string]*HitLocation{
+	"Tail": &HitLocation{
+		Name:   "Tail",
+		HitLoc: []int{1, 2},
+		Base:   0,
+	},
+	"R Leg": &HitLocation{
+		Name:   "R Leg",
+		HitLoc: []int{3, 4, 5},
+		Base:   0,
+	},
+	"L Leg": &HitLocation{
+		Name:   "L Leg",
+		HitLoc: []int{6, 7, 8},
+		Base:   0,
+	},
+	"Abdomen": &HitLocation{
+		Name:   "Abdomen",
+		HitLoc: []int{9, 10, 11},
+		Base:   0,
+	},
+	"Chest": &HitLocation{
+		Name:   "Chest",
+		HitLoc: []int{12},
+		Base:   1,
+	},
+	"L Arm": &HitLocation{
+		Name:   "L Arm",
+		HitLoc: []int{16, 17, 18},
+		Base:   -1,
+	},
+	"R Arm": &HitLocation{
+		Name:   "R Arm",
+		HitLoc: []int{13, 14, 15},
+		Base:   -1,
 	},
 	"Head": &HitLocation{
 		Name:   "Head",

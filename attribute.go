@@ -23,16 +23,30 @@ func (c *Character) SetAttributes() {
 
 	var hp, hr, sz, db, dx, sd, mp *Attribute
 
-	mp = c.DetermineMagicPoints()
-	if c.Statistics["CON"].Base > 0 && c.Statistics["SIZ"].Base > 0 {
+	if c.Statistics["CON"].Total > 0 && c.Statistics["SIZ"].Total > 0 {
 		hp = c.DetermineHitPoints()
 		hr = c.DetermineHealingRate()
 		sz = c.DetermineSizStrikeRank()
 		db = c.DetermineDamageBonus()
+	} else {
+		hp.Text = "N/A"
+		hr.Text = "N/A"
+		sz.Text = "N/A"
+		db.Text = "N/A"
 	}
-	sd = c.DetermineSpiritDamage()
-	if c.Statistics["DEX"].Base > 0 {
+
+	if c.Statistics["POW"].Total > 0 {
+		sd = c.DetermineSpiritDamage()
+		mp = c.DetermineMagicPoints()
+	} else {
+		sd.Text = "N/A"
+		mp.Text = "N/A"
+	}
+
+	if c.Statistics["DEX"].Total > 0 {
 		dx = c.DetermineDexStrikeRank()
+	} else {
+		dx.Text = "N/A"
 	}
 
 	c.Attributes = map[string]*Attribute{
