@@ -53,6 +53,7 @@ var LocationForms = map[string]map[string]*HitLocation{
 	"Wyverns":                     WyvernsHitLocations,
 	"Spiders, Giant":              SpidersGiantHitLocations,
 	"Mammoths/Mastodons":          MammothsHitLocations,
+	"Spirits":                     SpiritHitLocations,
 }
 
 // HumanoidLocations is a base map of hit locations
@@ -706,6 +707,15 @@ var CentaurLocations = map[string]*HitLocation{
 	"Head": &HitLocation{
 		Name:   "Head",
 		HitLoc: []int{19, 20},
+		Base:   0,
+	},
+}
+
+// SpiritHitLocations is a base map of hit locations
+var SpiritHitLocations = map[string]*HitLocation{
+	"Spirit": &HitLocation{
+		Name:   "Spirit",
+		HitLoc: []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20},
 		Base:   0,
 	},
 }
