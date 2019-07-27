@@ -1,11 +1,14 @@
 package runequest
 
+import "fmt"
+
 // Movement represents a movement type and value
 type Movement struct {
 	Name  string
 	Value int
 }
 
-def (m Movement) String() {
-	fmt.Sprintf("%s: %d", m.Name, m.Value)
+func (m Movement) String() string {
+	text := fmt.Sprintf("%s: %d", m.Name, m.Value)
+	return text
 }

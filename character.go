@@ -3,8 +3,6 @@ package runequest
 import (
 	"fmt"
 	"sort"
-
-	"github.com/toferc/runequest"
 )
 
 // Character represents a generic RPG character
@@ -33,7 +31,7 @@ type Character struct {
 	CurrentHP        int
 	CurrentMP        int
 	CurrentRP        int
-	Move             []runequest.Movement
+	Move             []Movement
 	DerivedMap       []string
 	Skills           map[string]*Skill
 	SkillMap         []string
