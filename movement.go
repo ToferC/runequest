@@ -8,7 +8,7 @@ type Movement struct {
 	Value int
 }
 
-func (m Movement) String() string {
+func (m *Movement) String() string {
 	text := fmt.Sprintf("%s: %d", m.Name, m.Value)
 	return text
 }

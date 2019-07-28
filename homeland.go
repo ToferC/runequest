@@ -20,7 +20,7 @@ type Homeland struct {
 	Advantages     []Advantage
 	Weapons        []*Weapon
 	LocationForm   string
-	Move           []Movement
+	Movement       []Movement
 }
 
 // StatisticFrame represents stat modifiers to a character

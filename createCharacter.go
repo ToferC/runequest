@@ -25,8 +25,8 @@ func NewCharacter(name string) *Character {
 
 		SkillCategories: map[string]*SkillCategory{},
 
-		Move: []Movement{
-			Movement{
+		Movement: []*Movement{
+			&Movement{
 				Name:  "Ground",
 				Value: 8,
 			},

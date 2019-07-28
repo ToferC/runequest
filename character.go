@@ -31,7 +31,7 @@ type Character struct {
 	CurrentHP        int
 	CurrentMP        int
 	CurrentRP        int
-	Move             []Movement
+	Movement         []*Movement
 	DerivedMap       []string
 	Skills           map[string]*Skill
 	SkillMap         []string
