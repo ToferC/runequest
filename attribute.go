@@ -213,7 +213,6 @@ func (c *Character) DetermineDamageBonus() *Attribute {
 
 	damageBonus := &Attribute{
 		Name: "Damage Bonus",
-		Max:  21,
 		Dice: 1,
 	}
 
@@ -262,7 +261,6 @@ func (c *Character) DetermineSpiritDamage() *Attribute {
 
 	damage := &Attribute{
 		Name: "Spirit Damage",
-		Max:  21,
 		Dice: 1,
 	}
 
