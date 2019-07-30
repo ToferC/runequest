@@ -234,6 +234,13 @@ func (c Character) String() string {
 		}
 	}
 
+	if len(c.Powers) > 0 {
+		text += "\nPowers:"
+		for _, p := range c.Powers {
+			text += fmt.Sprintf("%s: %s\n", p.Name, p.Description)
+		}
+	}
+
 	if len(c.MeleeAttacks) > 0 {
 		text += "\n\nMelee Attacks:\n"
 		for _, m := range c.MeleeAttacks {
