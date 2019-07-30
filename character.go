@@ -117,7 +117,7 @@ var CreationStatus = map[string]bool{
 }
 
 func (c Character) String() string {
-	text := c.Name
+	text := fmt.Sprintf("\n--- %s ---\n", c.Name)
 
 	text += fmt.Sprintf("\nType: %s", c.Role)
 
@@ -132,7 +132,7 @@ func (c Character) String() string {
 	if len(c.Statistics) > 0 {
 		text += "\n\nStats:\n"
 		for _, stat := range StatMap {
-			text += fmt.Sprintf("%s %d%%\n", c.Statistics[stat],
+			text += fmt.Sprintf("%s (%d%%)\n", c.Statistics[stat],
 				c.Statistics[stat].Total*5)
 		}
 	}
@@ -160,7 +160,7 @@ func (c Character) String() string {
 	}
 
 	if c.Cult != nil {
-		text += fmt.Sprintf("\n**Cults:\n%s - %s Rune Points: %d", c.Cult.Name, c.Cult.Rank, c.Cult.NumRunePoints)
+		text += fmt.Sprintf("\n\n**Cults:\n%s - %s - Rune Points: %d", c.Cult.Name, c.Cult.Rank, c.Cult.NumRunePoints)
 	}
 
 	if len(c.ExtraCults) > 0 {

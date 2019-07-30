@@ -22,7 +22,7 @@ type HitLocation struct {
 
 // Strings
 func (l HitLocation) String() string {
-	text := fmt.Sprintf("(%s) - %s\n",
+	text := fmt.Sprintf("(%s) - %s",
 		TrimSliceBrackets(l.HitLoc),
 		l.Name,
 	)
@@ -31,7 +31,7 @@ func (l HitLocation) String() string {
 		text += fmt.Sprintf("Armor: %d ", l.Armor)
 	}
 
-	text += fmt.Sprintf(" HP: %d/%d", l.Value, l.Max)
+	text += fmt.Sprintf(" HP: %d/%d\n", l.Value, l.Max)
 
 	return text
 }
