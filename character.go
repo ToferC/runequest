@@ -242,14 +242,14 @@ func (c Character) String() string {
 	}
 
 	if len(c.MeleeAttacks) > 0 {
-		text += "\n\nMelee Attacks:\n"
+		text += "\nMelee Attacks:\n"
 		for _, m := range c.MeleeAttacks {
 			text += fmt.Sprintf("%s\n", m)
 		}
 	}
 
 	if len(c.RangedAttacks) > 0 {
-		text += "\n\nRanged Attacks:\n"
+		text += "\nRanged Attacks:\n"
 		for _, r := range c.RangedAttacks {
 			text += fmt.Sprintf("%s\n", r)
 		}
