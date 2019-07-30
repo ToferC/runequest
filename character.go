@@ -256,7 +256,7 @@ func (c Character) String() string {
 	}
 
 	if len(c.Equipment) > 0 {
-		text += "\nEquipment\n"
+		text += "\n\nEquipment\n"
 		for _, e := range c.Equipment {
 			text += fmt.Sprintf("%s\n", e)
 		}
