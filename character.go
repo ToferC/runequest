@@ -235,7 +235,7 @@ func (c Character) String() string {
 	}
 
 	if len(c.Powers) > 0 {
-		text += "\nPowers:"
+		text += "\n\nPowers:\n"
 		for _, p := range c.Powers {
 			text += fmt.Sprintf("%s: %s\n", p.Name, p.Description)
 		}
