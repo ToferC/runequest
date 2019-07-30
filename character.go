@@ -181,7 +181,7 @@ func (c Character) String() string {
 	if len(c.PowerRunes) > 0 {
 		text += "\n\nPower Runes:"
 
-		for _, ability := range c.ElementalRunes {
+		for _, ability := range c.PowerRunes {
 
 			text += fmt.Sprintf("\n%s", ability)
 		}
@@ -223,14 +223,14 @@ func (c Character) String() string {
 	if len(c.SpiritMagic) > 0 {
 		text += "\nSpirit Magic:"
 		for _, sm := range c.SpiritMagic {
-			text += fmt.Sprintf("%s\n", sm)
+			text += fmt.Sprintf("%s", sm)
 		}
 	}
 
 	if len(c.RuneSpells) > 0 {
 		text += "\nRune Spells:"
 		for _, rs := range c.RuneSpells {
-			text += fmt.Sprintf("%s\n", rs)
+			text += fmt.Sprintf("%s", rs)
 		}
 	}
 
