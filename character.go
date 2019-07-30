@@ -127,7 +127,7 @@ func (c Character) String() string {
 		text += fmt.Sprintf("\n%s of Cult: %s", c.Cult.Rank, c.Cult.Name)
 	}
 
-	text += fmt.Sprintf("\nDescription:\n%s", c.Description)
+	text += fmt.Sprintf("\n\nDescription:\n%s", c.Description)
 
 	if len(c.Statistics) > 0 {
 		text += "\n\nStats:\n"
