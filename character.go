@@ -127,12 +127,13 @@ func (c Character) String() string {
 		text += fmt.Sprintf("\n%s of Cult: %s", c.Cult.Rank, c.Cult.Name)
 	}
 
-	text += fmt.Sprintf("Description:\n%s", c.Description)
+	text += fmt.Sprintf("\nDescription:\n%s", c.Description)
 
 	if len(c.Statistics) > 0 {
 		text += "\n\nStats:\n"
 		for _, stat := range StatMap {
-			text += fmt.Sprintf("%s\n", c.Statistics[stat])
+			text += fmt.Sprintf("%s %d%%\n", c.Statistics[stat],
+				c.Statistics[stat].Total*5)
 		}
 	}
 
@@ -153,31 +154,23 @@ func (c Character) String() string {
 	if len(c.Abilities) > 0 {
 		text += "\nPassions & Reputations:"
 
-		for _, at := range AbilityTypes {
-
-			text += fmt.Sprintf("\n\n**%s**", at)
-
-			for _, ability := range c.Abilities {
-
-				if ability.Type == at {
-					text += fmt.Sprintf("\n%s", ability)
-				}
-			}
+		for _, ability := range c.Abilities {
+			text += fmt.Sprintf("\n%s", ability)
 		}
 	}
 
 	if c.Cult != nil {
-		text += fmt.Sprintf("\nCults:\n%s - %s Rune Points: %d", c.Cult.Name, c.Cult.Rank, c.Cult.NumRunePoints)
+		text += fmt.Sprintf("\n**Cults:\n%s - %s Rune Points: %d", c.Cult.Name, c.Cult.Rank, c.Cult.NumRunePoints)
 	}
 
 	if len(c.ExtraCults) > 0 {
 		for _, ec := range c.ExtraCults {
-			text += fmt.Sprintf("\nCults:\n%s - %s Rune Points: %d", ec.Name, ec.Rank, ec.RunePoints)
+			text += fmt.Sprintf("\n%s - %s Rune Points: %d", ec.Name, ec.Rank, ec.RunePoints)
 		}
 	}
 
 	if len(c.ElementalRunes) > 0 {
-		text += "\nElemental Runes:"
+		text += "\n\nElemental Runes:"
 
 		for _, ability := range c.ElementalRunes {
 
@@ -186,7 +179,7 @@ func (c Character) String() string {
 	}
 
 	if len(c.PowerRunes) > 0 {
-		text += "\nPower Runes:"
+		text += "\n\nPower Runes:"
 
 		for _, ability := range c.ElementalRunes {
 
@@ -195,7 +188,7 @@ func (c Character) String() string {
 	}
 
 	if len(ConditionRunes) > 0 {
-		text += "\nCondition Runes:"
+		text += "\n\nCondition Runes:"
 
 		for _, ability := range c.ConditionRunes {
 
@@ -217,7 +210,7 @@ func (c Character) String() string {
 
 			sc := c.SkillCategories[co]
 
-			text += fmt.Sprintf("\n**%s**\n", sc)
+			text += fmt.Sprintf("\n\n**%s**", sc)
 			for _, skill := range keys {
 
 				if c.Skills[skill].Category == sc.Name {
@@ -265,7 +258,7 @@ func (c Character) String() string {
 	if len(c.Equipment) > 0 {
 		text += "\nEquipment\n"
 		for _, e := range c.Equipment {
-			text += fmt.Sprintf("%s", e)
+			text += fmt.Sprintf("%s\n", e)
 		}
 	}
 
