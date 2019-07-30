@@ -11,7 +11,6 @@ type Character struct {
 	Role string
 	// Type of Character - Player, NPC, Creature, etc.
 	Description string
-	Race        *Race
 	Homeland    *Homeland
 	Occupation  *Occupation
 	Cult        *Cult
@@ -119,69 +118,156 @@ var CreationStatus = map[string]bool{
 
 func (c Character) String() string {
 	text := c.Name
-	text += fmt.Sprintf("\nHomeland: %s", c.Homeland.Name)
-	text += fmt.Sprintf("\nOccupation: %s", c.Occupation.Name)
-	text += fmt.Sprintf("\n%s of Cult: %s", c.Cult.Rank, c.Cult.Name)
 
-	text += "\n\nStats:\n"
-	for _, stat := range StatMap {
-		text += fmt.Sprintf("%s\n", c.Statistics[stat])
+	text += fmt.Sprintf("Type: %s", c.Role)
+
+	if c.Role == "Player Character" {
+		text += fmt.Sprintf("\nHomeland: %s", c.Homeland.Name)
+		text += fmt.Sprintf("\nOccupation: %s", c.Occupation.Name)
+		text += fmt.Sprintf("\n%s of Cult: %s", c.Cult.Rank, c.Cult.Name)
 	}
 
-	text += "\nDerived Stats:\n"
-	for _, ds := range c.Attributes {
-		text += fmt.Sprintf("%s\n", ds)
+	text += fmt.Sprintf("Description:\n%s", c.Description)
+
+	if len(c.Statistics) > 0 {
+		text += "\n\nStats:\n"
+		for _, stat := range StatMap {
+			text += fmt.Sprintf("%s\n", c.Statistics[stat])
+		}
 	}
 
-	text += "\nAbilities:"
+	if len(c.Attributes) > 0 {
+		text += "\nDerived Stats:\n"
+		for _, ds := range c.Attributes {
+			text += fmt.Sprintf("%s\n", ds)
+		}
+	}
 
-	for _, at := range AbilityTypes {
+	if len(c.Movement) > 0 {
+		text += "\nMovement:\n"
+		for _, m := range c.Movement {
+			text += fmt.Sprintf("%s\n", m)
+		}
+	}
 
-		text += fmt.Sprintf("\n\n**%s**", at)
+	if len(c.Abilities) > 0 {
+		text += "\nPassions & Reputations:"
 
-		for _, ability := range c.Abilities {
+		for _, at := range AbilityTypes {
 
-			if ability.Type == at {
-				text += fmt.Sprintf("\n%s", ability)
+			text += fmt.Sprintf("\n\n**%s**", at)
+
+			for _, ability := range c.Abilities {
+
+				if ability.Type == at {
+					text += fmt.Sprintf("\n%s", ability)
+				}
 			}
 		}
 	}
 
-	text += "\nElemental Runes:"
-
-	for _, ability := range c.ElementalRunes {
-
-		text += fmt.Sprintf("\n%s", ability)
+	if c.Cult != nil {
+		text += fmt.Sprintf("Cults:\n%s - %s Rune Points: %d", c.Cult.Name, c.Cult.Rank, c.Cult.NumRunePoints)
 	}
 
-	text += "\nPower Runes:"
-
-	for _, ability := range c.ElementalRunes {
-
-		text += fmt.Sprintf("\n%s", ability)
+	if len(c.ExtraCults) > 0 {
+		for _, ec := range c.ExtraCults {
+			text += fmt.Sprintf("Cults:\n%s - %s Rune Points: %d", ec.Name, ec.Rank, ec.RunePoints)
+		}
 	}
 
-	text += "\n\nSkills:"
+	if len(c.ElementalRunes) > 0 {
+		text += "\nElemental Runes:"
 
-	keys := make([]string, 0, len(c.Skills))
-	for k := range c.Skills {
-		keys = append(keys, k)
+		for _, ability := range c.ElementalRunes {
+
+			text += fmt.Sprintf("\n%s", ability)
+		}
 	}
 
-	sort.Strings(keys)
+	if len(c.PowerRunes) > 0 {
+		text += "\nPower Runes:"
 
-	for _, co := range CategoryOrder {
+		for _, ability := range c.ElementalRunes {
 
-		sc := c.SkillCategories[co]
+			text += fmt.Sprintf("\n%s", ability)
+		}
+	}
 
-		text += fmt.Sprintf("%s", sc)
-		for _, skill := range keys {
+	if len(ConditionRunes) > 0 {
+		text += "\nCondition Runes:"
 
-			if c.Skills[skill].Category == sc.Name {
-				text += fmt.Sprintf("\n%s", c.Skills[skill])
-			}
+		for _, ability := range c.ConditionRunes {
+
+			text += fmt.Sprintf("\n%s", ability)
+		}
+	}
+
+	if len(c.Skills) > 0 {
+		text += "\n\nSkills:"
+
+		keys := make([]string, 0, len(c.Skills))
+		for k := range c.Skills {
+			keys = append(keys, k)
 		}
 
+		sort.Strings(keys)
+
+		for _, co := range CategoryOrder {
+
+			sc := c.SkillCategories[co]
+
+			text += fmt.Sprintf("%s\n", sc)
+			for _, skill := range keys {
+
+				if c.Skills[skill].Category == sc.Name {
+					text += fmt.Sprintf("\n%s", c.Skills[skill])
+				}
+			}
+		}
 	}
+
+	if len(c.SpiritMagic) > 0 {
+		text += "\nSpirit Magic:"
+		for _, sm := range c.SpiritMagic {
+			text += fmt.Sprintf("%s\n", sm)
+		}
+	}
+
+	if len(c.RuneSpells) > 0 {
+		text += "\nRune Spells:"
+		for _, rs := range c.RuneSpells {
+			text += fmt.Sprintf("%s\n", rs)
+		}
+	}
+
+	if len(c.MeleeAttacks) > 0 {
+		text += "Melee Attacks:\n"
+		for _, m := range c.MeleeAttacks {
+			text += fmt.Sprintf("%s\n", m)
+		}
+	}
+
+	if len(c.RangedAttacks) > 0 {
+		text += "Melee Attacks:\n"
+		for _, r := range c.RangedAttacks {
+			text += fmt.Sprintf("%s\n", r)
+		}
+	}
+
+	if len(c.HitLocations) > 0 {
+		text += "Hit Locations:\n"
+		for _, v := range c.HitLocations {
+			text += fmt.Sprintf("%s", v)
+		}
+	}
+
+	if len(c.Equipment) > 0 {
+		text += "Equipment\n"
+		for _, e := range c.Equipment {
+			text += fmt.Sprintf("%s", e)
+		}
+	}
+
 	return text
 }
