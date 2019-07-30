@@ -210,11 +210,11 @@ func (c Character) String() string {
 
 			sc := c.SkillCategories[co]
 
-			text += fmt.Sprintf("\n\n**%s**", sc)
+			text += fmt.Sprintf("\n**%s**\n", sc)
 			for _, skill := range keys {
 
 				if c.Skills[skill].Category == sc.Name {
-					text += fmt.Sprintf("\n%s", c.Skills[skill])
+					text += fmt.Sprintf("%s\n", c.Skills[skill])
 				}
 			}
 		}
@@ -242,14 +242,14 @@ func (c Character) String() string {
 	}
 
 	if len(c.RangedAttacks) > 0 {
-		text += "\nMelee Attacks:\n"
+		text += "\nRanged Attacks:\n"
 		for _, r := range c.RangedAttacks {
 			text += fmt.Sprintf("%s\n", r)
 		}
 	}
 
 	if len(c.HitLocations) > 0 {
-		text += "\nHit Locations:\n"
+		text += "\n\nHit Locations:\n"
 		for _, hlm := range c.HitLocationMap {
 			for k, v := range c.HitLocations {
 				if k == hlm {
