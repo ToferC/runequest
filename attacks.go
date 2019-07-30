@@ -25,11 +25,17 @@ type DieCode struct {
 }
 
 func (a *Attack) String() string {
-	text := fmt.Sprintf("%s %d %s SR %d %s",
+	text := fmt.Sprintf("%s %d %s SR %d %d/%d %s",
 		a.Weapon.Name,
 		a.Skill.Total,
 		a.DamageString,
 		a.StrikeRank,
+		a.Weapon.CurrentHP,
+		a.Weapon.HP,
 		a.Special)
+
+	if a.Range > 0 {
+		text += fmt.Sprintf("Rng %d", a.Weapon.Range)
+	}
 	return text
 }
