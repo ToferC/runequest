@@ -249,7 +249,7 @@ func (c Character) String() string {
 	}
 
 	if len(c.HitLocations) > 0 {
-		text += "\n\nHit Locations:\n"
+		text += "\nHit Locations:\n"
 		for _, hlm := range c.HitLocationMap {
 			for k, v := range c.HitLocations {
 				if k == hlm {
