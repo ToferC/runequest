@@ -221,21 +221,21 @@ func (c Character) String() string {
 	}
 
 	if len(c.SpiritMagic) > 0 {
-		text += "\nSpirit Magic:"
+		text += "\nSpirit Magic:\n"
 		for _, sm := range c.SpiritMagic {
-			text += fmt.Sprintf("%s", sm)
+			text += fmt.Sprintf("%s\n", sm)
 		}
 	}
 
 	if len(c.RuneSpells) > 0 {
-		text += "\nRune Spells:"
+		text += "\nRune Spells:\n"
 		for _, rs := range c.RuneSpells {
-			text += fmt.Sprintf("%s", rs)
+			text += fmt.Sprintf("%s\n", rs)
 		}
 	}
 
 	if len(c.Powers) > 0 {
-		text += "\n\nPowers:\n"
+		text += "\nPowers:\n"
 		for _, p := range c.Powers {
 			text += fmt.Sprintf("%s: %s\n", p.Name, p.Description)
 		}
