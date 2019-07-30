@@ -221,28 +221,28 @@ func (c Character) String() string {
 	}
 
 	if len(c.SpiritMagic) > 0 {
-		text += "\nSpirit Magic:"
+		text += "\nSpirit Magic:\n"
 		for _, sm := range c.SpiritMagic {
 			text += fmt.Sprintf("%s\n", sm)
 		}
 	}
 
 	if len(c.RuneSpells) > 0 {
-		text += "\nRune Spells:"
+		text += "\nRune Spells:\n"
 		for _, rs := range c.RuneSpells {
 			text += fmt.Sprintf("%s\n", rs)
 		}
 	}
 
 	if len(c.MeleeAttacks) > 0 {
-		text += "\nMelee Attacks:\n"
+		text += "\n\nMelee Attacks:\n"
 		for _, m := range c.MeleeAttacks {
 			text += fmt.Sprintf("%s\n", m)
 		}
 	}
 
 	if len(c.RangedAttacks) > 0 {
-		text += "\nRanged Attacks:\n"
+		text += "\n\nRanged Attacks:\n"
 		for _, r := range c.RangedAttacks {
 			text += fmt.Sprintf("%s\n", r)
 		}
