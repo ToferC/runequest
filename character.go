@@ -119,7 +119,7 @@ var CreationStatus = map[string]bool{
 func (c Character) String() string {
 	text := c.Name
 
-	text += fmt.Sprintf("Type: %s", c.Role)
+	text += fmt.Sprintf("\nType: %s", c.Role)
 
 	if c.Role == "Player Character" {
 		text += fmt.Sprintf("\nHomeland: %s", c.Homeland.Name)
@@ -167,12 +167,12 @@ func (c Character) String() string {
 	}
 
 	if c.Cult != nil {
-		text += fmt.Sprintf("Cults:\n%s - %s Rune Points: %d", c.Cult.Name, c.Cult.Rank, c.Cult.NumRunePoints)
+		text += fmt.Sprintf("\nCults:\n%s - %s Rune Points: %d", c.Cult.Name, c.Cult.Rank, c.Cult.NumRunePoints)
 	}
 
 	if len(c.ExtraCults) > 0 {
 		for _, ec := range c.ExtraCults {
-			text += fmt.Sprintf("Cults:\n%s - %s Rune Points: %d", ec.Name, ec.Rank, ec.RunePoints)
+			text += fmt.Sprintf("\nCults:\n%s - %s Rune Points: %d", ec.Name, ec.Rank, ec.RunePoints)
 		}
 	}
 
@@ -217,7 +217,7 @@ func (c Character) String() string {
 
 			sc := c.SkillCategories[co]
 
-			text += fmt.Sprintf("%s\n", sc)
+			text += fmt.Sprintf("\n**%s**\n", sc)
 			for _, skill := range keys {
 
 				if c.Skills[skill].Category == sc.Name {
@@ -242,28 +242,28 @@ func (c Character) String() string {
 	}
 
 	if len(c.MeleeAttacks) > 0 {
-		text += "Melee Attacks:\n"
+		text += "\nMelee Attacks:\n"
 		for _, m := range c.MeleeAttacks {
 			text += fmt.Sprintf("%s\n", m)
 		}
 	}
 
 	if len(c.RangedAttacks) > 0 {
-		text += "Melee Attacks:\n"
+		text += "\nMelee Attacks:\n"
 		for _, r := range c.RangedAttacks {
 			text += fmt.Sprintf("%s\n", r)
 		}
 	}
 
 	if len(c.HitLocations) > 0 {
-		text += "Hit Locations:\n"
+		text += "\nHit Locations:\n"
 		for _, v := range c.HitLocations {
 			text += fmt.Sprintf("%s", v)
 		}
 	}
 
 	if len(c.Equipment) > 0 {
-		text += "Equipment\n"
+		text += "\nEquipment\n"
 		for _, e := range c.Equipment {
 			text += fmt.Sprintf("%s", e)
 		}
