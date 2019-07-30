@@ -223,14 +223,14 @@ func (c Character) String() string {
 	if len(c.SpiritMagic) > 0 {
 		text += "\nSpirit Magic:"
 		for _, sm := range c.SpiritMagic {
-			text += fmt.Sprintf("%s", sm)
+			text += fmt.Sprintf("%s\n", sm)
 		}
 	}
 
 	if len(c.RuneSpells) > 0 {
 		text += "\nRune Spells:"
 		for _, rs := range c.RuneSpells {
-			text += fmt.Sprintf("%s", rs)
+			text += fmt.Sprintf("%s\n", rs)
 		}
 	}
 
