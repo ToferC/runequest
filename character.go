@@ -250,13 +250,17 @@ func (c Character) String() string {
 
 	if len(c.HitLocations) > 0 {
 		text += "\nHit Locations:\n"
-		for _, v := range c.HitLocations {
-			text += fmt.Sprintf("%s", v)
+		for _, hlm := range c.HitLocationMap {
+			for k, v := range c.HitLocations {
+				if k == hlm {
+					text += fmt.Sprintf("%s", v)
+				}
+			}
 		}
 	}
 
 	if len(c.Equipment) > 0 {
-		text += "\n\nEquipment\n"
+		text += "\nEquipment:\n"
 		for _, e := range c.Equipment {
 			text += fmt.Sprintf("%s\n", e)
 		}
