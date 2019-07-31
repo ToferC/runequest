@@ -39,3 +39,38 @@ func (a *Attack) String() string {
 	}
 	return text
 }
+
+// UpdateAttacks reviews and updates weapon data on save
+func (c *Character) UpdateAttacks() {
+
+	db := c.Attributes["DB"]
+	dbString := ""
+	throwDB := ""
+
+	if c.Attributes["DB"].Text != "-" {
+		dbString = db.Text
+
+		if db.Base > 0 {
+			throwDB = fmt.Sprintf("+%dD%d", db.Dice, db.Base/2)
+		} else {
+			throwDB = fmt.Sprintf("-%dD%d", db.Dice, db.Base/2)
+		}
+	}
+
+	for _, m := range c.MeleeAttacks {
+		m.Skill = c.Skills[m.Skill.Name]
+		m.DamageString = m.Weapon.Damage + dbString
+		StrikeRank:   c.Attributes["DEXSR"].Base + c.Attributes["SIZSR"].Base + m.Weapon.SR,
+	}
+
+	for _, r := range c.RangedAttacks {
+		r.Skill = c.Skills[r.Skill.Name]
+		r.StrikeRank = c.Attributes["DEXSR"].Base
+
+		if r.Weapon.Thrown {
+			r.DamageString = r.Weapon.Damage + throwDB
+		} else {
+			r.DamageString = r.Weapon.Damage
+		}
+	}
+}
