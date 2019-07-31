@@ -50,7 +50,7 @@ func (c *Character) UpdateAttacks() {
 	dbString := ""
 	throwDB := ""
 
-	if c.Attributes["DB"].Text != "-" {
+	if db.Text != "-" {
 		dbString = db.Text
 
 		if db.Base > 0 {
@@ -73,15 +73,18 @@ func (c *Character) UpdateAttacks() {
 		if strings.Contains(r.Weapon.Name, "Thrown") {
 			throw = true
 		}
-
-		r.Skill = c.Skills[r.Skill.Name]
-		r.StrikeRank = c.Attributes["DEXSR"].Base
 		r.Weapon.Thrown = throw
 
+		damage := ""
+
 		if r.Weapon.Thrown {
-			r.DamageString = r.Weapon.Damage + throwDB
+			damage = r.Weapon.Damage + throwDB
 		} else {
-			r.DamageString = r.Weapon.Damage
+			damage = r.Weapon.Damage
 		}
+
+		r.Skill = c.Skills[r.Skill.Name]
+		r.DamageString = damage
+		r.StrikeRank = c.Attributes["DEXSR"].Base
 	}
 }
