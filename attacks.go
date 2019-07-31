@@ -60,7 +60,7 @@ func (c *Character) UpdateAttacks() {
 	for _, m := range c.MeleeAttacks {
 		m.Skill = c.Skills[m.Skill.Name]
 		m.DamageString = m.Weapon.Damage + dbString
-		StrikeRank:   c.Attributes["DEXSR"].Base + c.Attributes["SIZSR"].Base + m.Weapon.SR,
+		m.StrikeRank = c.Attributes["DEXSR"].Base + c.Attributes["SIZSR"].Base + m.Weapon.SR
 	}
 
 	for _, r := range c.RangedAttacks {
