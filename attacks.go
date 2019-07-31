@@ -1,6 +1,9 @@
 package runequest
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 // Attack represents an offensive ability in Runequest
 type Attack struct {
@@ -64,8 +67,16 @@ func (c *Character) UpdateAttacks() {
 	}
 
 	for _, r := range c.RangedAttacks {
+
+		throw := false
+
+		if strings.Contains(r.Weapon.Name, "Thrown") {
+			throw = true
+		}
+
 		r.Skill = c.Skills[r.Skill.Name]
 		r.StrikeRank = c.Attributes["DEXSR"].Base
+		r.Weapon.Thrown = throw
 
 		if r.Weapon.Thrown {
 			r.DamageString = r.Weapon.Damage + throwDB
