@@ -53,7 +53,7 @@ func (c *Character) UpdateAttacks() {
 	if db.Text != "-" {
 		dbString = db.Text
 
-		if db.Base > 0 {
+		if db.Base != 0 {
 			throwDB = fmt.Sprintf("+%dD%d", db.Dice, db.Base/2)
 		} else {
 			throwDB = fmt.Sprintf("-%dD%d", db.Dice, db.Base/2)
