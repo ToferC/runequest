@@ -236,6 +236,7 @@ func (c Character) String() string {
 				}
 			}
 		} else {
+			text += "\n"
 			for _, skill := range c.Skills {
 				text += fmt.Sprintf("%s\n", skill)
 			}
