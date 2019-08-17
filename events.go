@@ -1,5 +1,16 @@
 package runequest
 
+// FamilyMember tracks family history through previous character history
+type FamilyMember struct {
+	Name        string
+	Occupation  string
+	Relation    string
+	Born        int
+	Died        int
+	Surviving   bool
+	Description string
+}
+
 // Event represents a full event in previous character history
 type Event struct {
 	Year        int
