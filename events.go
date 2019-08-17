@@ -20,22 +20,22 @@ type Event struct {
 	// Character, Parent, Grandparent
 	HomelandsModifiers map[string]int
 	// Map Homeland name to modifier on d20 roll
-	ImmediateFollowEvent *Event
-	NextYearEvent        *Event
-	Results              []*EventResult
-	Slug                 string
+	Results []*EventResult
+	Slug    string
 }
 
 // EventResult is a specific die range of random results from previous
 // Character history
 type EventResult struct {
-	Range       []int
-	Description string
-	Updates     []Update
-	Lunars      int
-	Reputation  int
-	Equipment   string
-	Lethal      bool
+	Range                []int
+	Description          string
+	Updates              []Update
+	Lunars               int
+	Reputation           int
+	Equipment            string
+	Lethal               bool
+	ImmediateFollowEvent *Event
+	NextYearEvent        *Event
 }
 
 // Boon represents a random benefit from an EventResult
