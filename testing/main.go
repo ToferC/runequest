@@ -14,30 +14,47 @@ func main() {
 	c.Grandparent.Homeland = "Esrolia"
 	c.Grandparent.Occupation = "Hunter"
 
-	end := false
-	event := runequest.PersonalHistoryEvents["1583_base"]
+	end := false // tracks end of player history
 	mod := 0
+	next := "1583_base"
 
 	for !end {
 
+		event := runequest.PersonalHistoryEvents[next]
+
+		// Start history
 		result, end := runequest.DetermineHistory(c, event, mod)
 
-		last := c.History[len(c.History)-1]
-		immediate := last.Results[0].ImmediateFollowEvent
+		// Identify last EventResult
+		if len(c.History) > 0 {
+			last := c.History[len(c.History)-1]
+			next := last.Results[0].NextFollowEvent
+			immediate := last.Results[0].ImmediateFollowEvent
+			// Check for immediate followup
 
-		next := last.Results[0].NextFollowEvent
+			if immediate != "" {
 
-		if immediate != "" {
-			mod := last.Results[0].ImmediateFollowMod
-			e := runequest.PersonalHistoryEvents[immediate]
-			r, end := runequest.DetermineHistory(c, e, mod)
+				for immediate != "" {
+					// if immediate follow-up, go there
+					e := runequest.PersonalHistoryEvents[immediate]
+					mod := last.Results[0].ImmediateFollowMod
+					r, end := runequest.DetermineHistory(c, e, mod)
+
+					// Identify last EventResult
+					last := c.History[len(c.History)-1]
+					next := last.Results[0].NextFollowEvent
+
+					// Check for immediate followup
+					immediate := last.Results[0].ImmediateFollowEvent
+					fmt.Println(next)
+					fmt.Println(end, immediate, r)
+				}
+			}
+			fmt.Println(next)
 		}
 
-		e, end := runequest.PersonalHistoryEvents[follow]
-
-		if c.Grandparent.Alive {
-			r := runequest.DetermineHistory(c, e, m2)
-		}
+		// if no immediate event or after immediate event
+		fmt.Println(result, end, next)
 	}
 
 	// Character done
