@@ -54,6 +54,11 @@ type Character struct {
 	Updates          []*Update
 	CreationSteps    map[string]bool
 
+	History map[string]string
+
+	AncestorHomeland   string
+	AncestorOccupation string
+
 	Tags  []string
 	Notes string
 }

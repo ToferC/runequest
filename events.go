@@ -18,8 +18,10 @@ type Event struct {
 	Description string
 	Participant string
 	// Character, Parent, Grandparent
-	HomelandsModifiers map[string]int
+	HomelandModifiers map[string]int
 	// Map Homeland name to modifier on d20 roll
+	OccupationModifiers map[string]int
+	// Map Occupation name to modifier on d20 roll
 	Results []*EventResult
 	Slug    string
 }
@@ -29,20 +31,24 @@ type Event struct {
 type EventResult struct {
 	Range                []int
 	Description          string
-	Updates              []Update
+	Skills               []Skill
+	Passions             []Ability
 	Lunars               int
 	Reputation           int
 	Equipment            string
 	Lethal               bool
-	ImmediateFollowEvent *Event
-	NextYearEvent        *Event
+	Boon                 bool
+	RandomDeath          bool
+	ImmediateFollowEvent map[string]int // Slug
+	NextFollowEvent      map[string]int // Slug
 }
 
 // Boon represents a random benefit from an EventResult
 type Boon struct {
 	Range       []int
 	Description string
-	Updates     []Update
+	Skills      []Skill
+	Passsions   []Ability
 	Lunars      int
 	Reputation  int
 	Equipment   string
@@ -52,7 +58,8 @@ type Boon struct {
 type RandomCauseOfDeath struct {
 	Range       []int
 	Description string
-	Updates     []Update
+	Skills      []Skill
+	Passsions   []Ability
 	Lunars      int
 	Reputation  int
 	Equipment   string
