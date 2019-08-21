@@ -20,7 +20,7 @@ func main() {
 
 	for !end {
 
-		result := runequest.DetermineHistory(c, event, mod)
+		result, end := runequest.DetermineHistory(c, event, mod)
 
 		last := c.History[len(c.History)-1]
 		immediate := last.Results[0].ImmediateFollowEvent
@@ -30,10 +30,10 @@ func main() {
 		if immediate != "" {
 			mod := last.Results[0].ImmediateFollowMod
 			e := runequest.PersonalHistoryEvents[immediate]
-			r := runequest.DetermineHistory(c, e, mod)
+			r, end := runequest.DetermineHistory(c, e, mod)
 		}
 
-		e := runequest.PersonalHistoryEvents[follow]
+		e, end := runequest.PersonalHistoryEvents[follow]
 
 		if c.Grandparent.Alive {
 			r := runequest.DetermineHistory(c, e, m2)

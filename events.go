@@ -76,21 +76,21 @@ type RandomCauseOfDeath struct {
 }
 
 // DetermineHistory generates a character's lifepath history
-func DetermineHistory(c *Character, e Event, m int) string {
+func DetermineHistory(c *Character, e Event, m int) (string, bool) {
 
 	var homeland, occupation string
 
 	switch {
 	case e.Participant == "Grandparent":
 		if !c.Grandparent.Alive {
-			return "Grandparent deceased"
+			return "Grandparent deceased", false
 		}
 		homeland = c.Grandparent.Homeland
 		occupation = c.Grandparent.Occupation
 
 	case e.Participant == "Parent":
 		if !c.Parent.Alive {
-			return "Parent deceased"
+			return "Parent deceased", false
 		}
 		homeland = c.Parent.Homeland
 		occupation = c.Parent.Occupation
@@ -102,7 +102,7 @@ func DetermineHistory(c *Character, e Event, m int) string {
 
 	hlBonus, ok := e.HomelandModifiers[homeland]
 	if !ok {
-		return "didn't participate"
+		return "didn't participate", false
 	}
 	ocBonus, ok := e.OccupationModifiers[occupation]
 	if !ok {
@@ -159,7 +159,9 @@ func DetermineHistory(c *Character, e Event, m int) string {
 			e.Results = []EventResult{r}
 			c.History = append(c.History, &e)
 		}
-		return e.Name + " complete"
+		if e.End {
+			return e.Name + " complete", true
+		}
 	}
-	return "Next year"
+	return e.Name + " complete", false
 }
