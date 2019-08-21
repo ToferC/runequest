@@ -11,63 +11,32 @@ func main() {
 
 	c.Description = "Man"
 
-	grandparentHomeland := "Esrolia"
-	grandparentOccupation := "Hunter"
+	c.Grandparent.Homeland = "Esrolia"
+	c.Grandparent.Occupation = "Hunter"
 
-	for _, v := range runequest.PersonalHistoryEvents {
+	end := false
+	event := runequest.PersonalHistoryEvents["1583_base"]
+	mod := 0
 
-		hlBonus := v.HomelandModifiers[grandparentHomeland]
-		ocBonus := v.OccupationModifiers[grandparentOccupation]
+	for !end {
 
-		roll := runequest.RollDice(20, 1, hlBonus+ocBonus, 1)
+		result := runequest.DetermineHistory(c, event, mod)
 
-		if roll > 20 {
-			roll = 20
+		last := c.History[len(c.History)-1]
+		immediate := last.Results[0].ImmediateFollowEvent
+
+		next := last.Results[0].NextFollowEvent
+
+		if immediate != "" {
+			mod := last.Results[0].ImmediateFollowMod
+			e := runequest.PersonalHistoryEvents[immediate]
+			r := runequest.DetermineHistory(c, e, mod)
 		}
 
-		fmt.Println(roll)
+		e := runequest.PersonalHistoryEvents[follow]
 
-		fmt.Println(c.Skills["Dodge"])
-		fmt.Println(c.Skills["Bargain"])
-
-		for _, r := range v.Results {
-			if runequest.IsInIntArray(r.Range, roll) {
-				fmt.Println(r.Description)
-
-				c.Lunars += r.Lunars
-				c.Abilities["Reputation"].CreationBonusValue += r.Reputation
-
-				text := r.Description
-
-				for _, s := range r.Skills {
-					// Update skills
-					text += "\nSkills:\n"
-
-					c.Skills[s.Name].Updates = append(c.Skills[s.Name].Updates, s.Updates[0])
-					text += fmt.Sprintf("\n%s +%d\n", s.Name, s.Updates[0].Value)
-				}
-
-				for _, p := range r.Passions {
-					// Update skills
-					text += "\nPassions:\n"
-
-					_, ok := c.Abilities[p.Name]
-
-					if !ok {
-						c.Abilities[p.Name] = &runequest.Ability{
-							CoreString: p.CoreString,
-							UserString: p.UserString,
-							Base:       60,
-							Updates:    []*runequest.Update{},
-						}
-					}
-
-					c.Abilities[p.Name].Updates = append(c.Abilities[p.Name].Updates, p.Updates[0])
-					text += fmt.Sprintf("\n%s +%d\n", p.Name, p.Updates[0].Value)
-				}
-
-				c.History[fmt.Sprintf("%d - %s:", v.Year, v.Name)] = text
-			}
+		if c.Grandparent.Alive {
+			r := runequest.DetermineHistory(c, e, m2)
 		}
 	}
 
