@@ -10,7 +10,7 @@ type BoundSpirit struct {
 	Pow               int
 	Cha               int
 	CurrentMP         int
-	SpiritMagicSpells []Spell
+	SpiritMagicSpells map[string]Spell
 }
 
 func (b *BoundSpirit) String() string {
