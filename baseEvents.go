@@ -14,6 +14,7 @@ var PersonalHistoryEvents = map[string]Event{
 		},
 		Slug:           "1582_base",
 		FollowingEvent: "1583_base",
+		End:            false,
 		Results: []EventResult{
 			EventResult{
 				Range:       []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
@@ -48,7 +49,7 @@ var PersonalHistoryEvents = map[string]Event{
 				Reputation:           RollDice(4, 1, 0, 1),
 				ImmediateFollowEvent: "1583_civil_war",
 				ImmediateFollowMod:   0,
-				NextFollowEvent:      "1584_starving",
+				NextFollowEvent:      "1583_civil_war",
 				NextFollowMod:        0,
 			},
 			EventResult{
@@ -80,8 +81,10 @@ var PersonalHistoryEvents = map[string]Event{
 						},
 					},
 				},
-				Lunars:     RollDice(10, 1, 0, 1) * 10,
-				Reputation: RollDice(4, 1, 0, 1),
+				Lunars:          RollDice(10, 1, 0, 1) * 10,
+				Reputation:      RollDice(4, 1, 0, 1),
+				NextFollowEvent: "1583_civil_war",
+				NextFollowMod:   0,
 			},
 		},
 	},
@@ -92,6 +95,7 @@ var PersonalHistoryEvents = map[string]Event{
 		Start:       false,
 		Description: "Lots of text",
 		Participant: "Grandparent",
+		End:         true,
 		HomelandModifiers: map[string]int{
 			"Sartar":  0,
 			"Esrolia": 0,

@@ -14,47 +14,64 @@ func main() {
 	c.Grandparent.Homeland = "Esrolia"
 	c.Grandparent.Occupation = "Hunter"
 
-	end := false // tracks end of player history
 	mod := 0
-	next := "1583_base"
+	next := "1582_base"
+	end := false
 
-	for !end {
+	for {
 
 		event := runequest.PersonalHistoryEvents[next]
 
+		fmt.Println(event)
+
 		// Start history
-		result, end := runequest.DetermineHistory(c, event, mod)
+		fmt.Println("Start History")
+		result, _ := runequest.DetermineHistory(c, event, mod)
+
+		fmt.Println(result)
 
 		// Identify last EventResult
-		if len(c.History) > 0 {
-			last := c.History[len(c.History)-1]
-			next := last.Results[0].NextFollowEvent
-			immediate := last.Results[0].ImmediateFollowEvent
-			// Check for immediate followup
 
-			if immediate != "" {
+		last := c.History[len(c.History)-1]
 
-				for immediate != "" {
-					// if immediate follow-up, go there
-					e := runequest.PersonalHistoryEvents[immediate]
-					mod := last.Results[0].ImmediateFollowMod
-					r, end := runequest.DetermineHistory(c, e, mod)
+		fmt.Println("LAST: ", last.Name)
+		fmt.Println("NEXT: ", next)
 
-					// Identify last EventResult
-					last := c.History[len(c.History)-1]
-					next := last.Results[0].NextFollowEvent
+		//immediate := last.Results[0].ImmediateFollowEvent
+		// Check for immediate followup
 
-					// Check for immediate followup
-					immediate := last.Results[0].ImmediateFollowEvent
-					fmt.Println(next)
-					fmt.Println(end, immediate, r)
+		/*if immediate != "" {
+			fmt.Println("New Immediate Event")
+
+			for {
+				// if immediate follow-up, go there
+				e := runequest.PersonalHistoryEvents[immediate]
+				mod := last.Results[0].ImmediateFollowMod
+				r, end := runequest.DetermineHistory(c, e, mod)
+
+				// Identify last EventResult
+				last := c.History[len(c.History)-1]
+				next := last.Results[0].NextFollowEvent
+
+				// Check for immediate followup
+				immediate := last.Results[0].ImmediateFollowEvent
+
+				if immediate == "" {
+					break
 				}
+
+				fmt.Println(next)
+				fmt.Println(end, immediate, r)
 			}
-			fmt.Println(next)
 		}
+		*/
 
 		// if no immediate event or after immediate event
-		fmt.Println(result, end, next)
+		fmt.Println("END: ", end)
+
+		if last.End {
+			break
+		}
 	}
 
 	// Character done

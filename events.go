@@ -80,6 +80,8 @@ func DetermineHistory(c *Character, e Event, m int) (string, bool) {
 
 	var homeland, occupation string
 
+	fmt.Println(e.Participant)
+
 	switch {
 	case e.Participant == "Grandparent":
 		if !c.Grandparent.Alive {
@@ -95,7 +97,7 @@ func DetermineHistory(c *Character, e Event, m int) (string, bool) {
 		homeland = c.Parent.Homeland
 		occupation = c.Parent.Occupation
 
-	case e.Participant == "Character":
+		fmt.Println("Character")
 		homeland = c.Homeland.Name
 		occupation = c.Occupation.Name
 	}
@@ -120,8 +122,9 @@ func DetermineHistory(c *Character, e Event, m int) (string, bool) {
 	}
 
 	for _, r := range e.Results {
+
 		if IsInIntArray(r.Range, roll) {
-			fmt.Println(r.Description)
+			fmt.Println(r.Description, e.End)
 
 			c.Lunars += r.Lunars
 			c.Abilities["Reputation"].CreationBonusValue += r.Reputation
@@ -151,6 +154,8 @@ func DetermineHistory(c *Character, e Event, m int) (string, bool) {
 					}
 				}
 
+				fmt.Println(r.ImmediateFollowEvent, r.ImmediateFollowMod)
+
 				c.Abilities[p.Name].Updates = append(c.Abilities[p.Name].Updates, p.Updates[0])
 				text += fmt.Sprintf("%s +%d%%", p.Name, p.Updates[0].Value)
 			}
@@ -158,10 +163,10 @@ func DetermineHistory(c *Character, e Event, m int) (string, bool) {
 			e.Description = text
 			e.Results = []EventResult{r}
 			c.History = append(c.History, &e)
-		}
-		if e.End {
-			return e.Name + " complete", true
+			if e.End {
+				return e.Name + " Ending", true
+			}
 		}
 	}
-	return e.Name + " complete", false
+	return e.Name + " Continuing", false
 }
