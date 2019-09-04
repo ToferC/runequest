@@ -274,6 +274,14 @@ func (c Character) String() string {
 		}
 	}
 
+	if len(c.BoundSpirits) > 0 {
+		text += "\nSpirits & Matrices:\n"
+		for _, bs := range c.BoundSpirits {
+			text += bs.String()
+		}
+		text += "\n"
+	}
+
 	if len(c.MeleeAttacks) > 0 {
 		text += "\nMelee Attacks:\n"
 		for _, m := range c.MeleeAttacks {
