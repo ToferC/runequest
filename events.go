@@ -14,6 +14,15 @@ type FamilyMember struct {
 	Description string
 }
 
+type Year struct {
+	Year int
+	HomelandModifiers map[string]int
+	// Map Homeland name to modifier on d20 roll
+	OccupationModifiers map[string]int
+	// Map Occupation name to modifier on d20 roll
+	Events map[int]*Event
+}
+
 // Event represents a full event in previous character history
 type Event struct {
 	Year        int
@@ -28,7 +37,7 @@ type Event struct {
 	OccupationModifiers map[string]int
 	// Map Occupation name to modifier on d20 roll
 	Results           []EventResult
-	FollowingEvent    string
+	FollowingEventSlug    string
 	FollowingEventMod int
 	Slug              string
 }

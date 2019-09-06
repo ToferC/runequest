@@ -76,6 +76,7 @@ func loadWeapons() []*Weapon {
 			fmt.Println(err)
 			sHP = 0
 		}
+		
 		mainSkill := record[len(record)-1]
 
 		if record[1] == "melee" {
