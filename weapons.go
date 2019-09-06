@@ -14,6 +14,7 @@ type Weapon struct {
 	Name      string
 	STR       int
 	DEX       int
+	MainSkill string
 	Damage    string
 	STRDamage bool
 	Thrown    bool
@@ -70,6 +71,7 @@ func loadWeapons() []*Weapon {
 	for _, record := range data {
 
 		sHP, _ := strconv.Atoi(record[5])
+		mainSkill := record[8]
 
 		if record[1] == "melee" {
 			sSR, err := strconv.Atoi(record[2])
@@ -80,6 +82,7 @@ func loadWeapons() []*Weapon {
 			weapons = append(weapons, &Weapon{
 				Name:      record[0],
 				Type:      "Melee",
+				MainSkill: mainSkill,
 				SR:        sSR,
 				ENC:       record[4],
 				STRDamage: true,
@@ -99,6 +102,7 @@ func loadWeapons() []*Weapon {
 			weapons = append(weapons, &Weapon{
 				Name:      record[0],
 				Type:      "Ranged",
+				MainSkill: mainSkill,
 				Range:     r,
 				ENC:       record[4],
 				Damage:    record[3],
