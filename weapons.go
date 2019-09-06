@@ -72,7 +72,7 @@ func loadWeapons() []*Weapon {
 		fmt.Println(i)
 
 		sHP, _ := strconv.Atoi(record[5])
-		mainSkill := record[7]
+		mainSkill := record[len(record)-1]
 
 		if record[1] == "melee" {
 			sSR, err := strconv.Atoi(record[2])
