@@ -68,7 +68,8 @@ func loadWeapons() []*Weapon {
 
 	data, err := readCSVFromURL(url)
 
-	for _, record := range data {
+	for i, record := range data {
+		fmt.Println(i)
 
 		sHP, _ := strconv.Atoi(record[5])
 		mainSkill := record[7]
