@@ -71,7 +71,7 @@ func loadWeapons() []*Weapon {
 	for _, record := range data {
 
 		sHP, _ := strconv.Atoi(record[5])
-		mainSkill := record[8]
+		mainSkill := record[7]
 
 		if record[1] == "melee" {
 			sSR, err := strconv.Atoi(record[2])
