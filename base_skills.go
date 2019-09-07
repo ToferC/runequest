@@ -440,6 +440,11 @@ var Skills = map[string]*Skill{
 		Base:       5,
 		Category:   "Melee",
 	},
+	"Whip": &Skill{
+		CoreString: "Whip",
+		Base:       5,
+		Category:   "Melee",
+	},
 
 	// Missile Weapons
 	"Arbalest": &Skill{
