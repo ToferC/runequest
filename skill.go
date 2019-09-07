@@ -72,7 +72,7 @@ func (s *Skill) AddSkillUpdate(st string, v int) {
 
 	s.UpdateSkill()
 
-	fmt.Printf("Updated Character Skill: %s: %s", st, s.Name)
+	fmt.Printf("Updated Character Skill: %s: %s\n", st, s.Name)
 }
 
 // GenerateName sets the skill map name
