@@ -329,12 +329,10 @@ func (c Character) StatBlock() string {
 		text += "\n"
 	}
 
-	text += fmt.Sprintf("\nType: %s", c.Role)
-
 	if c.Role == "Player Character" {
-		text += fmt.Sprintf("\nHomeland: %s", c.Homeland.Name)
-		text += fmt.Sprintf("\nOccupation: %s", c.Occupation.Name)
-		text += fmt.Sprintf("\n%s of Cult: %s", c.Cult.Rank, c.Cult.Name)
+		text += fmt.Sprintf("\nHomeland: %s, ", c.Homeland.Name)
+		text += fmt.Sprintf("Occupation: %s, ", c.Occupation.Name)
+		text += fmt.Sprintf("%s of Cult: %s", c.Cult.Rank, c.Cult.Name)
 	}
 
 	if len(c.Statistics) > 0 {
@@ -347,7 +345,7 @@ func (c Character) StatBlock() string {
 	}
 
 	if len(c.Attributes) > 0 {
-		text += "\nDerived Stats: "
+		text += "\n\nDerived Stats: "
 		for k, ds := range c.Attributes {
 			if k == "DB" || k == "HP" || k == "MP" {
 				text += fmt.Sprintf("%s, ", ds)
@@ -356,20 +354,20 @@ func (c Character) StatBlock() string {
 	}
 
 	if len(c.Movement) > 0 {
-		text += "Movement:\n"
+		text += "Movement- "
 		for _, m := range c.Movement {
 			text += fmt.Sprintf("%s, ", m)
 		}
 	}
 
 	if len(c.Abilities) > 0 {
-		text += "\n\nPassions & Reputations:"
+		text += "\n\nPassions: "
 
 		text += strings.TrimRight(formatAbilityMap(c.Abilities), ",")
 	}
 
 	if c.Cult.Name != "" {
-		text += fmt.Sprintf("\n\n**Cults: %s - %s - Rune Points: %d", c.Cult.Name, c.Cult.Rank, c.Cult.NumRunePoints)
+		text += fmt.Sprintf("\n\nCults: %s - %s - Rune Points: %d", c.Cult.Name, c.Cult.Rank, c.Cult.NumRunePoints)
 	}
 
 	if len(c.ExtraCults) > 0 {
@@ -415,7 +413,7 @@ func (c Character) StatBlock() string {
 	}
 
 	if len(c.MeleeAttacks) > 0 {
-		text += "\nAttacks:\n"
+		text += "\n\nAttacks:\n"
 		for _, m := range c.MeleeAttacks {
 			text += fmt.Sprintf("%s\n", m)
 		}

@@ -215,7 +215,9 @@ func formatAbilityMap(sa map[string]*Ability) string {
 	text := ""
 
 	for _, v := range sa {
-		text += v.String() + ", "
+		if v.Total > 0 {
+			text += v.String() + ", "
+		}
 	}
 
 	return text

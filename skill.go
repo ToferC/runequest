@@ -95,7 +95,7 @@ func (s *Skill) String() string {
 
 	text := ""
 
-	text += fmt.Sprintf("%s (%d) %d%%", s.Name, s.Base, s.Total)
+	text += fmt.Sprintf("%s %d%%", s.Name, s.Total)
 
 	return text
 }
@@ -236,9 +236,9 @@ func formatSkillMap(sa map[string]*Skill) string {
 
 	for _, v := range sa {
 		if counter+1 == end {
-			text += v.Name + " " + string(v.Total)
+			text += v.String()
 		} else {
-			text += v.Name + " " + string(v.Total) + ", "
+			text += v.String() + ", "
 			counter++
 		}
 	}
@@ -251,9 +251,9 @@ func formatSkillArray(sa []*Skill) string {
 
 	for i, v := range sa {
 		if i+1 == end {
-			text += v.Name + " " + string(v.Total)
+			text += v.String()
 		} else {
-			text += v.Name + " " + string(v.Total) + ", "
+			text += v.String() + ", "
 		}
 	}
 	return text
