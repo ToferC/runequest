@@ -211,8 +211,8 @@ func (c *Character) ModifyAbility(a Ability) {
 }
 
 // Abilities is a map of the basic abilities in Runequest
-var Abilities = map[string]*Ability{
-	"Reputation": &Ability{
+var Abilities = map[string]Ability{
+	"Reputation": Ability{
 		CoreString: "Reputation",
 		Type:       "Base",
 		Value:      5,
@@ -220,34 +220,34 @@ var Abilities = map[string]*Ability{
 }
 
 // ElementalRunes is a map of Rune abilities
-var ElementalRunes = map[string]*Ability{
+var ElementalRunes = map[string]Ability{
 	// Elemental Runes
-	"Darkness": &Ability{
+	"Darkness": Ability{
 		CoreString: "Darkness",
 		Type:       "Elemental Rune",
 		Value:      0,
 	},
-	"Air": &Ability{
+	"Air": Ability{
 		CoreString: "Air",
 		Type:       "Elemental Rune",
 		Value:      0,
 	},
-	"Water": &Ability{
+	"Water": Ability{
 		CoreString: "Water",
 		Type:       "Elemental Rune",
 		Value:      0,
 	},
-	"Earth": &Ability{
+	"Earth": Ability{
 		CoreString: "Earth",
 		Type:       "Elemental Rune",
 		Value:      0,
 	},
-	"Fire/Sky": &Ability{
+	"Fire/Sky": Ability{
 		CoreString: "Fire/Sky",
 		Type:       "Elemental Rune",
 		Value:      0,
 	},
-	"Moon": &Ability{
+	"Moon": Ability{
 		CoreString: "Moon",
 		Type:       "Elemental Rune",
 		Value:      0,
@@ -255,89 +255,89 @@ var ElementalRunes = map[string]*Ability{
 }
 
 // PowerRunes is a map of Power Runes
-var PowerRunes = map[string]*Ability{
+var PowerRunes = map[string]Ability{
 	// Power Runes
-	"Man": &Ability{
+	"Man": Ability{
 		CoreString:     "Man",
 		Type:           "Form Rune",
 		OpposedAbility: "Beast",
 		Base:           0,
 	},
-	"Beast": &Ability{
+	"Beast": Ability{
 		CoreString:     "Beast",
 		Type:           "Form Rune",
 		OpposedAbility: "Man",
 		Base:           0,
 	},
-	"Fertility": &Ability{
+	"Fertility": Ability{
 		CoreString:     "Fertility",
 		Type:           "Power Rune",
 		OpposedAbility: "Death",
 		Base:           0,
 	},
-	"Death": &Ability{
+	"Death": Ability{
 		CoreString:     "Death",
 		Type:           "Power Rune",
 		OpposedAbility: "Fertility",
 		Base:           0,
 	},
-	"Harmony": &Ability{
+	"Harmony": Ability{
 		CoreString:     "Harmony",
 		Type:           "Power Rune",
 		OpposedAbility: "Disorder",
 		Base:           0,
 	},
-	"Disorder": &Ability{
+	"Disorder": Ability{
 		CoreString:     "Disorder",
 		Type:           "Power Rune",
 		OpposedAbility: "Harmony",
 		Base:           0,
 	},
-	"Truth": &Ability{
+	"Truth": Ability{
 		CoreString:     "Truth",
 		Type:           "Power Rune",
 		OpposedAbility: "Illusion",
 		Base:           0,
 	},
-	"Illusion": &Ability{
+	"Illusion": Ability{
 		CoreString:     "Illusion",
 		Type:           "Power Rune",
 		OpposedAbility: "Truth",
 		Base:           0,
 	},
-	"Stasis": &Ability{
+	"Stasis": Ability{
 		CoreString:     "Stasis",
 		Type:           "Power Rune",
 		OpposedAbility: "Movement",
 		Base:           0,
 	},
-	"Movement": &Ability{
+	"Movement": Ability{
 		CoreString:     "Movement",
 		Type:           "Power Rune",
 		OpposedAbility: "Stasis",
 		Base:           0,
 	},
-	"Chaos": &Ability{
+	"Chaos": Ability{
 		CoreString: "Chaos",
 		Type:       "Form Rune",
 		Base:       0,
 	},
-	"Dragonewt": &Ability{
+	"Dragonewt": Ability{
 		CoreString: "Dragonewt",
 		Type:       "Form Rune",
 		Base:       0,
 	},
-	"Plant": &Ability{
+	"Plant": Ability{
 		CoreString: "Plant",
 		Type:       "Form Rune",
 		Base:       0,
 	},
-	"Spirit": &Ability{
+	"Spirit": Ability{
 		CoreString: "Spirit",
 		Type:       "Form Rune",
 		Base:       0,
 	},
-	"Undeath": &Ability{
+	"Undeath": Ability{
 		CoreString: "Undeath",
 		Type:       "Form Rune",
 		Base:       0,
@@ -345,24 +345,24 @@ var PowerRunes = map[string]*Ability{
 }
 
 // ConditionRunes is a map of Power Runes
-var ConditionRunes = map[string]*Ability{
+var ConditionRunes = map[string]Ability{
 	// Condition Runes
-	"Law": &Ability{
+	"Law": Ability{
 		CoreString: "Law",
 		Type:       "Condition Rune",
 		Base:       0,
 	},
-	"Mastery": &Ability{
+	"Mastery": Ability{
 		CoreString: "Mastery",
 		Type:       "Condition Rune",
 		Base:       0,
 	},
-	"Magic": &Ability{
+	"Magic": Ability{
 		CoreString: "Magic",
 		Type:       "Condition Rune",
 		Base:       0,
 	},
-	"Infinity": &Ability{
+	"Infinity": Ability{
 		CoreString: "Infinity",
 		Type:       "Condition Rune",
 		Base:       0,

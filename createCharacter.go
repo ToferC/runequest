@@ -5,16 +5,17 @@ func NewCharacter(name string) *Character {
 	c := Character{
 		Name:           name,
 		Role:           "Player Character",
-		Statistics:     RuneQuestStats,
-		Abilities:      Abilities,
-		PowerRunes:     PowerRunes,
-		ElementalRunes: ElementalRunes,
-		ConditionRunes: ConditionRunes,
+		Statistics:     map[string]*Statistic{},
+		Abilities:      map[string]*Ability{},
+		PowerRunes:     map[string]*Ability{},
+		ElementalRunes: map[string]*Ability{},
+		ConditionRunes: map[string]*Ability{},
 		RuneSpells:     map[string]*Spell{},
 		SpiritMagic:    map[string]*Spell{},
 		Homeland:       &Homeland{},
 		Occupation:     &Occupation{},
 		Cult:           &Cult{},
+		Skills:         map[string]*Skill{},
 		LocationForm:   "Humanoids",
 		HitLocations:   LocationForms["Humanoids"],
 		HitLocationMap: SortLocations(LocationForms["Humanoid"]),
@@ -37,8 +38,30 @@ func NewCharacter(name string) *Character {
 		},
 	}
 
-	// Skills is a map of regular skills in Runequest
-	c.Skills = Skills
+	// Copy base maps for new characters
+	for k, v := range RuneQuestStats {
+		c.Statistics[k] = &v
+	}
+
+	for k, v := range Skills {
+		c.Skills[k] = &v
+	}
+
+	for k, v := range Abilities {
+		c.Abilities[k] = &v
+	}
+
+	for k, v := range ElementalRunes {
+		c.ElementalRunes[k] = &v
+	}
+
+	for k, v := range PowerRunes {
+		c.PowerRunes[k] = &v
+	}
+
+	for k, v := range ConditionRunes {
+		c.ConditionRunes[k] = &v
+	}
 
 	return &c
 }

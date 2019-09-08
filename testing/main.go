@@ -1,26 +1,19 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/toferc/runequest"
 )
 
 func main() {
 
-	x := runequest.BaseWeapons
+	c := runequest.NewCharacter("Bob")
 
-	for _, v := range x {
-		fmt.Println(v.MainSkill)
-	}
+	c.Description = "Man"
+
+	c.Grandparent.Homeland = "Esrolia"
+	c.Grandparent.Occupation = "Hunter"
 
 	/*
-		c := runequest.NewCharacter("Bob")
-
-		c.Description = "Man"
-
-		c.Grandparent.Homeland = "Esrolia"
-		c.Grandparent.Occupation = "Hunter"
 
 		mod := 0
 		next := "1582_base"

@@ -52,38 +52,38 @@ func (s *Statistic) UpdateStatistic() {
 }
 
 // RuneQuestStats is the base stats for RuneQuest
-var RuneQuestStats = map[string]*Statistic{
-	"STR": &Statistic{
+var RuneQuestStats = map[string]Statistic{
+	"STR": Statistic{
 		Name: "Strength",
 		Base: RollDice(6, 1, 0, 3),
 		Max:  21,
 	},
-	"DEX": &Statistic{
+	"DEX": Statistic{
 		Name: "Dexterity",
 		Base: RollDice(6, 1, 0, 3),
 		Max:  21,
 	},
-	"INT": &Statistic{
+	"INT": Statistic{
 		Name: "Intelligence",
 		Base: RollDice(6, 1, 6, 2),
 		Max:  21,
 	},
-	"CON": &Statistic{
+	"CON": Statistic{
 		Name: "Constitution",
 		Base: RollDice(6, 1, 6, 2),
 		Max:  21,
 	},
-	"POW": &Statistic{
+	"POW": Statistic{
 		Name: "Power",
 		Base: RollDice(6, 1, 0, 3),
 		Max:  21,
 	},
-	"SIZ": &Statistic{
+	"SIZ": Statistic{
 		Name: "Size",
 		Base: RollDice(6, 1, 6, 2),
 		Max:  21,
 	},
-	"CHA": &Statistic{
+	"CHA": Statistic{
 		Name: "Charisma",
 		Base: RollDice(6, 1, 0, 3),
 		Max:  21,
