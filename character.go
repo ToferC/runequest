@@ -352,7 +352,12 @@ func (c Character) StatBlock() string {
 				text += fmt.Sprintf("%s, ", ds)
 			}
 		}
-		text += fmt.Sprintf("%s\n", m)
+	}
+
+	if len(c.Movement) > 0 {
+		for _, m := range c.Movement {
+			text += fmt.Sprintf("%s, ", m)
+		}
 	}
 
 	if len(c.Abilities) > 0 {
