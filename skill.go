@@ -56,7 +56,7 @@ func (s *Skill) UpdateSkill() {
 // AddSkillUpdate adds an update to a skill
 func (s *Skill) AddSkillUpdate(st string, v int) {
 
-	fmt.Println("Updating " + s.Name)
+	fmt.Println(s)
 
 	t := time.Now()
 	tString := t.Format("2006-01-02 15:04:05")
