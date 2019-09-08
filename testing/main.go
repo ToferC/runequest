@@ -22,6 +22,9 @@ func main() {
 
 	fmt.Println(c.ElementalRunes)
 
+	hp := runequest.NumToArray(14)
+	fmt.Printf("\nHP: %s", runequest.PrintIntArray(hp))
+
 	/*
 
 		mod := 0

@@ -319,7 +319,7 @@ func (c Character) String() string {
 
 // StatBlock returns a summary text block
 func (c Character) StatBlock() string {
-	text := fmt.Sprintf("\n** %s **\n", c.Name)
+	text := fmt.Sprintf("\n** %s **\n\n", c.Name)
 
 	if len(c.CoreRunes) > 0 {
 		text += "Runes: "
@@ -343,7 +343,7 @@ func (c Character) StatBlock() string {
 		}
 	}
 
-	text = strings.TrimRight(text, ",")
+	text = strings.TrimSuffix(text, ",")
 
 	if len(c.Attributes) > 0 {
 		text += "\n\nDerived Stats: "
@@ -354,7 +354,10 @@ func (c Character) StatBlock() string {
 		}
 	}
 
-	text = strings.TrimRight(text, ",")
+	text = strings.TrimSuffix(text, ",")
+
+	hp := NumToArray(c.Attributes["HP"].Base)
+	fmt.Printf("\n\nHP: %s\n", printIntArray(hp))
 
 	if len(c.Movement) > 0 {
 		text += "Movement- "
@@ -366,10 +369,10 @@ func (c Character) StatBlock() string {
 	if len(c.Abilities) > 0 {
 		text += "\n\nPassions: "
 
-		text += strings.TrimRight(formatAbilityMap(c.Abilities), ",")
+		text += strings.TrimSuffix(formatAbilityMap(c.Abilities), ",")
 	}
 
-	text = strings.TrimRight(text, ",")
+	text = strings.TrimSuffix(text, ",")
 
 	if c.Cult.Name != "" {
 		text += fmt.Sprintf("\n\nCults: %s - %s - Rune Points: %d", c.Cult.Name, c.Cult.Rank, c.Cult.NumRunePoints)
@@ -385,14 +388,14 @@ func (c Character) StatBlock() string {
 
 	text += c.formatRunes()
 
-	text = strings.TrimRight(text, ",")
+	text = strings.TrimSuffix(text, ",")
 
 	topSkills := sortedSkills(c.Skills)
 
 	if len(topSkills) > 0 {
 		text += "\n\nSkills: "
 
-		text += formatSkillArray(topSkills[:9])
+		text += formatSkillArray(topSkills[:14])
 	}
 
 	if len(c.SpiritMagic) > 0 {
@@ -446,11 +449,11 @@ func (c Character) StatBlock() string {
 	if len(c.Equipment) > 0 {
 		text += "\nEquipment:\n"
 		for _, e := range c.Equipment {
-			text += strings.TrimRight(fmt.Sprintf("%s, ", e), ",")
+			text += strings.TrimSuffix(fmt.Sprintf("%s, ", e), ",")
 		}
 	}
 
-	text = strings.TrimRight(text, ",")
+	text = strings.TrimSuffix(text, ",")
 
 	return text
 }
