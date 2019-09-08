@@ -340,24 +340,19 @@ func (c Character) StatBlock() string {
 		text += "\n\nStats:\n"
 		for _, stat := range StatMap {
 			if c.Statistics[stat].Total > 0 {
-				text += fmt.Sprintf("%s (%d%%)\n", c.Statistics[stat],
-					c.Statistics[stat].Total*5)
+				text += fmt.Sprintf("%s\n", c.Statistics[stat])
 			}
 		}
 	}
 
 	if len(c.Attributes) > 0 {
 		text += "\nDerived Stats:\n"
-		for _, ds := range c.Attributes {
-			text += fmt.Sprintf("%s\n", ds)
+		for k, ds := range c.Attributes {
+			if k == "DB" || k == "HP" || k == "MP" {
+				text += fmt.Sprintf("%s, ", ds)
+			}
 		}
-	}
-
-	if len(c.Movement) > 0 {
-		text += "\nMovement:\n"
-		for _, m := range c.Movement {
-			text += fmt.Sprintf("%s\n", m)
-		}
+		text += fmt.Sprintf("%s\n", m)
 	}
 
 	if len(c.Abilities) > 0 {
@@ -379,33 +374,21 @@ func (c Character) StatBlock() string {
 	}
 
 	if len(c.ElementalRunes) > 0 {
-		text += "\n\nElemental Runes:"
+		text += "\n\nElemental Runes: "
 
-		for _, ability := range c.ElementalRunes {
-			if ability.Total != 0 {
-				text += fmt.Sprintf("\n%s", ability)
-			}
-		}
+		text += formatAbilityMap(c.ElementalRunes)
 	}
 
 	if len(c.PowerRunes) > 0 {
-		text += "\n\nPower Runes:"
+		text += "\n\nPower Runes: "
 
-		for _, ability := range c.PowerRunes {
-			if ability.Total != 0 && ability.Total != 50 {
-				text += fmt.Sprintf("\n%s", ability)
-			}
-		}
+		text += formatAbilityMap(c.PowerRunes)
 	}
 
 	if len(c.ConditionRunes) > 0 {
 		text += "\n\nCondition Runes:"
 
-		for _, ability := range c.ConditionRunes {
-			if ability.Total != 0 {
-				text += fmt.Sprintf("\n%s", ability)
-			}
-		}
+		text += formatAbilityMap(c.ConditionRunes)
 	}
 
 	topSkills := sortedSkills(c.Skills)
@@ -413,7 +396,7 @@ func (c Character) StatBlock() string {
 	if len(topSkills) > 0 {
 		text += "\n\nSkills: "
 
-		text += formatSkillArray(topSkills)
+		text += formatSkillArray(topSkills[:9])
 	}
 
 	if len(c.SpiritMagic) > 0 {

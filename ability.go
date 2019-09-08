@@ -210,6 +210,24 @@ func (c *Character) ModifyAbility(a Ability) {
 	a.UpdateAbility()
 }
 
+func formatAbilityMap(sa map[string]*Ability) string {
+	text := ""
+	end := len(sa)
+	counter := 0
+
+	for _, v := range sa {
+		if v.Total > 0 {
+			if counter+1 == end {
+				text += v.String()
+			} else {
+				text += v.String() + ", "
+				counter++
+			}
+		}
+	}
+	return text
+}
+
 // Abilities is a map of the basic abilities in Runequest
 var Abilities = map[string]*Ability{
 	"Reputation": &Ability{
