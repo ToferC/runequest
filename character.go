@@ -364,7 +364,7 @@ func (c Character) StatBlock() string {
 	}
 
 	hp := NumToArray(c.Attributes["HP"].Base)
-	text += fmt.Sprintf("\n\nHP: %s", printIntArray(hp))
+	text += fmt.Sprintf("\n\nHP: -1 0 %s", printIntArray(hp))
 
 	if len(c.Abilities) > 0 {
 		text += "\n\nPassions: "
