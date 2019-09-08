@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/toferc/runequest"
 )
 
@@ -12,6 +14,13 @@ func main() {
 
 	c.Grandparent.Homeland = "Esrolia"
 	c.Grandparent.Occupation = "Hunter"
+
+	fmt.Println(c.Skills)
+	fmt.Println(c.Statistics)
+	fmt.Println(c.Abilities)
+	fmt.Println(c.PowerRunes)
+
+	fmt.Println(c.ElementalRunes)
 
 	/*
 
