@@ -415,7 +415,7 @@ func (c Character) StatBlock() string {
 	}
 
 	if len(c.MeleeAttacks) > 0 {
-		text += "\Attacks:\n"
+		text += "\nAttacks:\n"
 		for _, m := range c.MeleeAttacks {
 			text += fmt.Sprintf("%s\n", m)
 		}
