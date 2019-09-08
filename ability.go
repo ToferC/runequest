@@ -2,6 +2,7 @@ package runequest
 
 import (
 	"fmt"
+	"strings"
 )
 
 // Ability represents any non-Ability % ability in Runequest
@@ -212,19 +213,23 @@ func (c *Character) ModifyAbility(a Ability) {
 
 func formatAbilityMap(sa map[string]*Ability) string {
 	text := ""
-	end := len(sa)
-	counter := 0
 
 	for _, v := range sa {
-		if v.Total > 0 {
-			if counter+1 == end {
-				text += v.String()
-			} else {
-				text += v.String() + ", "
-				counter++
-			}
-		}
+		text += v.String() + ", "
 	}
+
+	return text
+}
+
+func (c *Character) formatRunes() string {
+	text := ""
+
+	text += formatAbilityMap(c.ElementalRunes)
+
+	text += formatAbilityMap(c.PowerRunes)
+
+	text += strings.TrimRight(formatAbilityMap(c.ConditionRunes), ",")
+
 	return text
 }
 

@@ -3,6 +3,7 @@ package runequest
 import (
 	"fmt"
 	"sort"
+	"strings"
 )
 
 // Character represents a generic RPG character
@@ -340,13 +341,13 @@ func (c Character) StatBlock() string {
 		text += "\n\nStats:\n"
 		for _, stat := range StatMap {
 			if c.Statistics[stat].Total > 0 {
-				text += fmt.Sprintf("%s\n", c.Statistics[stat])
+				text += fmt.Sprintf("%s: %d, ", stat, c.Statistics[stat].Total)
 			}
 		}
 	}
 
 	if len(c.Attributes) > 0 {
-		text += "\nDerived Stats:\n"
+		text += "\nDerived Stats: "
 		for k, ds := range c.Attributes {
 			if k == "DB" || k == "HP" || k == "MP" {
 				text += fmt.Sprintf("%s, ", ds)
@@ -355,21 +356,20 @@ func (c Character) StatBlock() string {
 	}
 
 	if len(c.Movement) > 0 {
+		text += "Movement:\n"
 		for _, m := range c.Movement {
 			text += fmt.Sprintf("%s, ", m)
 		}
 	}
 
 	if len(c.Abilities) > 0 {
-		text += "\nPassions & Reputations:"
+		text += "\n\nPassions & Reputations:"
 
-		for _, ability := range c.Abilities {
-			text += fmt.Sprintf("\n%s", ability)
-		}
+		text += strings.TrimRight(formatAbilityMap(c.Abilities), ",")
 	}
 
 	if c.Cult.Name != "" {
-		text += fmt.Sprintf("\n\n**Cults:\n%s - %s - Rune Points: %d", c.Cult.Name, c.Cult.Rank, c.Cult.NumRunePoints)
+		text += fmt.Sprintf("\n\n**Cults: %s - %s - Rune Points: %d", c.Cult.Name, c.Cult.Rank, c.Cult.NumRunePoints)
 	}
 
 	if len(c.ExtraCults) > 0 {
@@ -378,23 +378,9 @@ func (c Character) StatBlock() string {
 		}
 	}
 
-	if len(c.ElementalRunes) > 0 {
-		text += "\n\nElemental Runes: "
+	text += "\n\nRunes: "
 
-		text += formatAbilityMap(c.ElementalRunes)
-	}
-
-	if len(c.PowerRunes) > 0 {
-		text += "\n\nPower Runes: "
-
-		text += formatAbilityMap(c.PowerRunes)
-	}
-
-	if len(c.ConditionRunes) > 0 {
-		text += "\n\nCondition Runes:"
-
-		text += formatAbilityMap(c.ConditionRunes)
-	}
+	text += c.formatRunes()
 
 	topSkills := sortedSkills(c.Skills)
 
@@ -429,14 +415,13 @@ func (c Character) StatBlock() string {
 	}
 
 	if len(c.MeleeAttacks) > 0 {
-		text += "\nMelee Attacks:\n"
+		text += "\Attacks:\n"
 		for _, m := range c.MeleeAttacks {
 			text += fmt.Sprintf("%s\n", m)
 		}
 	}
 
 	if len(c.RangedAttacks) > 0 {
-		text += "\nRanged Attacks:\n"
 		for _, r := range c.RangedAttacks {
 			text += fmt.Sprintf("%s\n", r)
 		}
@@ -456,7 +441,7 @@ func (c Character) StatBlock() string {
 	if len(c.Equipment) > 0 {
 		text += "\nEquipment:\n"
 		for _, e := range c.Equipment {
-			text += fmt.Sprintf("%s\n", e)
+			text += strings.TrimRight(fmt.Sprintf("%s, ", e), ",")
 		}
 	}
 

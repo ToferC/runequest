@@ -236,9 +236,9 @@ func formatSkillMap(sa map[string]*Skill) string {
 
 	for _, v := range sa {
 		if counter+1 == end {
-			text += v.String()
+			text += v.Name + " " + string(v.Total)
 		} else {
-			text += v.String() + ", "
+			text += v.Name + " " + string(v.Total) + ", "
 			counter++
 		}
 	}
@@ -251,9 +251,9 @@ func formatSkillArray(sa []*Skill) string {
 
 	for i, v := range sa {
 		if i+1 == end {
-			text += v.String()
+			text += v.Name + " " + string(v.Total)
 		} else {
-			text += v.String() + ", "
+			text += v.Name + " " + string(v.Total) + ", "
 		}
 	}
 	return text
