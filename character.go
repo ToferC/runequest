@@ -356,15 +356,15 @@ func (c Character) StatBlock() string {
 
 	text = strings.TrimSuffix(text, ",")
 
-	hp := NumToArray(c.Attributes["HP"].Base)
-	fmt.Printf("\n\nHP: %s\n", printIntArray(hp))
-
 	if len(c.Movement) > 0 {
 		text += "Movement- "
 		for _, m := range c.Movement {
 			text += fmt.Sprintf("%s, ", m)
 		}
 	}
+
+	hp := NumToArray(c.Attributes["HP"].Base)
+	text += fmt.Sprintf("\n\nHP: %s", printIntArray(hp))
 
 	if len(c.Abilities) > 0 {
 		text += "\n\nPassions: "
