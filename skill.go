@@ -56,26 +56,29 @@ func (s *Skill) UpdateSkill() {
 // AddSkillUpdate adds an update to a skill
 func (s *Skill) AddSkillUpdate(st string, v int) {
 
-	fmt.Println(s)
+	if s != nil {
+		t := time.Now()
+		tString := t.Format("2006-01-02 15:04:05")
 
-	t := time.Now()
-	tString := t.Format("2006-01-02 15:04:05")
+		update := &Update{
+			Date:  tString,
+			Event: st,
+			Value: v,
+		}
 
-	update := &Update{
-		Date:  tString,
-		Event: st,
-		Value: v,
+		if s.Updates == nil {
+			s.Updates = []*Update{}
+		}
+
+		s.Updates = append(s.Updates, update)
+
+		s.UpdateSkill()
+
+		fmt.Printf("Updated Character Skill: %s: %s\n", st, s.Name)
+	} else {
+		fmt.Println("Error - skill doesn't exist")
 	}
 
-	if s.Updates == nil {
-		s.Updates = []*Update{}
-	}
-
-	s.Updates = append(s.Updates, update)
-
-	s.UpdateSkill()
-
-	fmt.Printf("Updated Character Skill: %s: %s\n", st, s.Name)
 }
 
 // GenerateName sets the skill map name
