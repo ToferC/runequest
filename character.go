@@ -392,10 +392,15 @@ func (c Character) StatBlock() string {
 
 	topSkills := sortedSkills(c.Skills)
 
-	if len(topSkills) > 0 {
+	ts := len(topSkills)
+	if ts > 14 {
+		ts = 14
+	}
+
+	if ts > 0 {
 		text += "\n\nSkills: "
 
-		text += formatSkillArray(topSkills[:14])
+		text += formatSkillArray(topSkills[:ts])
 	}
 
 	if len(c.SpiritMagic) > 0 {
