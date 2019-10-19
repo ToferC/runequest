@@ -39,11 +39,19 @@ func (a *Ability) UpdateAbility() {
 
 	updates := 0
 
+	if a.Max == 0 {
+		a.Max = 100
+	}
+
 	for _, u := range a.Updates {
 		updates += u.Value
 	}
 
 	a.Total = a.Base + a.HomelandValue + a.OccupationValue + a.CultValue + a.CreationBonusValue + a.InPlayXPValue + a.Value + updates
+
+	if a.Total > a.Max {
+		a.Total = a.Max
+	}
 }
 
 // generateName sets the ability map name
